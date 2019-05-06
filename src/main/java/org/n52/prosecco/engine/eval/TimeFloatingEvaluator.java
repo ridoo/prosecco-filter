@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.n52.prosecco.engine.filter.FilterContext;
@@ -66,7 +65,7 @@ public final class TimeFloatingEvaluator implements FilterContextEvaluator<Times
         List<ValueRestriction> restrictions = policy.getValueRestriction();
         boolean allowed = policy.isAllowed();
         return restrictions.stream()
-                           .filter(matchValueRestriction())
+                           .filter(this::matchesValueRestriction)
                            .map(ValueRestriction::getValues)
                            .map(adjustIfRestricted(value, allowed))
                            .flatMap(Collection::stream)
@@ -75,11 +74,10 @@ public final class TimeFloatingEvaluator implements FilterContextEvaluator<Times
                            .collect(Collectors.toSet());
     }
 
-    private Predicate<ValueRestriction> matchValueRestriction() {
-        return restriction -> {
-            String restrictionName = restriction.getName();
-            return restrictionName.equalsIgnoreCase(parameter);
-        };
+
+    private boolean matchesValueRestriction(ValueRestriction restriction) {
+        String restrictionName = restriction.getName();
+        return restrictionName.equalsIgnoreCase(parameter);
     }
 
     private Function<Set<String>, Set<Optional<Timespan>>> adjustIfRestricted(Timespan value, boolean allowed) {

@@ -27,7 +27,7 @@ public final class ThematicEvaluator implements FilterContextEvaluator<String> {
 
     @Override
     public Set<String> evaluate(Set<String> values, FilterContext context) {
-        // case empty query: apply rule on all available values
+        // TODO case empty query: apply rule on all available values
         return evaluateThematic(values, context);
     }
 
@@ -74,15 +74,15 @@ public final class ThematicEvaluator implements FilterContextEvaluator<String> {
 
     private boolean matchesThematicRestriction(String value, List<Policy> policies) {
         return policies.stream()
-                       .map(policy -> policy.getValueRestriction())
+                       .map(Policy::getValueRestriction)
                        .flatMap(Collection::stream)
                        .filter(this::matchesValueRestriction)
                        .anyMatch(matchesValue(value));
     }
 
     private boolean matchesValueRestriction(ValueRestriction restriction) {
-        return restriction.getName()
-                          .equalsIgnoreCase(parameter);
+        String restrictionName = restriction.getName();
+        return restrictionName.equalsIgnoreCase(parameter);
     }
 
     private Predicate< ? super ValueRestriction> matchesValue(String value) {
