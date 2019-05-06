@@ -1,5 +1,7 @@
 
-package org.n52.prosecco.engine.policy;
+package org.n52.prosecco.policy;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -8,12 +10,14 @@ import java.io.IOException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.n52.prosecco.policy.Effect;
+import org.n52.prosecco.policy.PolicyConfig;
+import org.n52.prosecco.policy.PolicyConfigException;
+import org.n52.prosecco.policy.PolicyReader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class PolicyReaderTest {
 

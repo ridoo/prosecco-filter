@@ -1,5 +1,5 @@
 
-package org.n52.prosecco.engine.eval;
+package org.n52.prosecco.filter;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,19 +8,19 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import org.n52.prosecco.engine.filter.FilterContext;
-import org.n52.prosecco.engine.policy.Effect;
-import org.n52.prosecco.engine.policy.Policy;
-import org.n52.prosecco.engine.policy.PolicyConfig;
-import org.n52.prosecco.engine.policy.Rule;
-import org.n52.prosecco.engine.policy.ValueRestriction;
+import org.n52.prosecco.policy.Effect;
+import org.n52.prosecco.policy.Policy;
+import org.n52.prosecco.policy.PolicyConfig;
+import org.n52.prosecco.policy.Rule;
+import org.n52.prosecco.policy.ValueRestriction;
+import org.n52.prosecco.web.request.FilterContext;
 
-public final class ThematicEvaluator implements FilterContextEvaluator<String> {
+public final class ThematicFilter implements FilterContextFilter<String> {
 
     private final String parameter;
     private final PolicyConfig config;
 
-    public ThematicEvaluator(String parameter, PolicyConfig config) {
+    public ThematicFilter(String parameter, PolicyConfig config) {
         this.parameter = parameter;
         this.config = config;
     }

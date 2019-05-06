@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.n52.prosecco.engine.filter.FilterContext;
+import org.n52.prosecco.web.request.FilterContext;
 import org.n52.prosecco.web.sos.FilterRequestException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

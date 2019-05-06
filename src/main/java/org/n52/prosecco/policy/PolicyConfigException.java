@@ -1,4 +1,4 @@
-package org.n52.prosecco.engine.policy;
+package org.n52.prosecco.policy;
 
 public class PolicyConfigException extends Exception {
 

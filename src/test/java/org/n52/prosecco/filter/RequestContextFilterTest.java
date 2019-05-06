@@ -1,5 +1,5 @@
 
-package org.n52.prosecco.engine.eval;
+package org.n52.prosecco.filter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,24 +11,25 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
-import org.n52.prosecco.engine.filter.FilterContext;
-import org.n52.prosecco.engine.filter.FilterContext.FilterContextBuilder;
-import org.n52.prosecco.engine.filter.Timespan;
-import org.n52.prosecco.engine.filter.TimespanRelation;
-import org.n52.prosecco.engine.policy.Policy;
-import org.n52.prosecco.engine.policy.PolicyConfig;
-import org.n52.prosecco.engine.policy.Rule;
-import org.n52.prosecco.engine.policy.ValueRestriction;
+import org.n52.prosecco.filter.RequestContextFilter;
+import org.n52.prosecco.policy.Policy;
+import org.n52.prosecco.policy.PolicyConfig;
+import org.n52.prosecco.policy.Rule;
+import org.n52.prosecco.policy.ValueRestriction;
 import org.n52.prosecco.web.ServiceParameters;
+import org.n52.prosecco.web.request.FilterContext;
+import org.n52.prosecco.web.request.FilterContext.FilterContextBuilder;
+import org.n52.prosecco.web.request.Timespan;
+import org.n52.prosecco.web.request.TimespanRelation;
 
-public final class RequestContextEvaluatorTest {
+public final class RequestContextFilterTest {
 
     // TODO test with empty parameters --> serviceParameters
 
     @Test
     public void given_allowingValueRestriction_when_contextWithAllowedValues_then_allowedValuesKept() {
         PolicyConfig config = createSimplePolicyConfig("allow", ValueRestriction.of("phenomenon", "value1", "value2"));
-        RequestContextEvaluator evaluator = new RequestContextEvaluator(config);
+        RequestContextFilter evaluator = new RequestContextFilter(config);
 
         FilterContext initialContext = FilterContextBuilder.of("role")
                                                            .withPhenomena("value1", "value2")
@@ -41,7 +42,7 @@ public final class RequestContextEvaluatorTest {
     @Test
     public void given_denyingValueRestriction_when_contextWithAllowedValues_then_deniedValuesRemoved() {
         PolicyConfig config = createSimplePolicyConfig("deny", ValueRestriction.of("phenomenon", "value1", "value2"));
-        RequestContextEvaluator evaluator = new RequestContextEvaluator(config);
+        RequestContextFilter evaluator = new RequestContextFilter(config);
 
         FilterContext initialContext = FilterContextBuilder.of("role")
                                                            .withPhenomena("value1", "value2")
@@ -54,7 +55,7 @@ public final class RequestContextEvaluatorTest {
     @Test
     public void given_simpleConfig_when_contextWithHasUnconfiguredValues_then_unconfiguredValuesRemoved() {
         PolicyConfig config = createSimplePolicyConfig("allow", ValueRestriction.of("phenomenon", "value1"));
-        RequestContextEvaluator evaluator = new RequestContextEvaluator(config);
+        RequestContextFilter evaluator = new RequestContextFilter(config);
 
         FilterContext initialContext = FilterContextBuilder.of("role")
                                                            .withPhenomena("value1", "value2")
@@ -89,7 +90,7 @@ public final class RequestContextEvaluatorTest {
         List<Rule> rules = Collections.singletonList(rule);
 
         PolicyConfig config = new PolicyConfig(policies, rules);
-        RequestContextEvaluator evaluator = new RequestContextEvaluator(config);
+        RequestContextFilter evaluator = new RequestContextFilter(config);
 
         FilterContext initialContext = FilterContextBuilder.of("role")
                                                            .withPhenomena("value1", "restrictedValue")
@@ -112,7 +113,7 @@ public final class RequestContextEvaluatorTest {
         List<Rule> rules = Collections.singletonList(rule);
 
         PolicyConfig config = new PolicyConfig(policies, rules);
-        RequestContextEvaluator evaluator = new RequestContextEvaluator(config);
+        RequestContextFilter evaluator = new RequestContextFilter(config);
 
         // simulate an empty request and having cached service parameters 
         ServiceParameters serviceParameters = new ServiceParameters().updatePhenomena("value1", "value2", "restricted");
@@ -133,7 +134,7 @@ public final class RequestContextEvaluatorTest {
         Rule rule = Rule.of("rule1", roles, "allowing-policy", "denying-policy");
 
         PolicyConfig config = new PolicyConfig(denyingPolicy, rule);
-        RequestContextEvaluator evaluator = new RequestContextEvaluator(config);
+        RequestContextFilter evaluator = new RequestContextFilter(config);
 
         Instant end = Instant.now();
         Instant start = end.minus(4, ChronoUnit.DAYS);

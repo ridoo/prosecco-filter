@@ -1,4 +1,4 @@
-package org.n52.prosecco.filter;
+package org.n52.prosecco.web.request;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -6,7 +6,6 @@ import java.time.Instant;
 import java.time.LocalDate;
 
 import org.junit.Test;
-import org.n52.prosecco.engine.filter.Timespan;
 
 public class TimespanTest {
 

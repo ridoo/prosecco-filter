@@ -1,18 +1,18 @@
 
 package org.n52.prosecco.web.sos;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
-import org.n52.prosecco.engine.eval.RequestContextEvaluator;
-import org.n52.prosecco.engine.policy.Policy;
-import org.n52.prosecco.engine.policy.PolicyConfig;
-import org.n52.prosecco.engine.policy.Rule;
-import org.n52.prosecco.engine.policy.ValueRestriction;
+import org.n52.prosecco.filter.RequestContextFilter;
+import org.n52.prosecco.policy.Policy;
+import org.n52.prosecco.policy.PolicyConfig;
+import org.n52.prosecco.policy.Rule;
+import org.n52.prosecco.policy.ValueRestriction;
 import org.springframework.mock.web.MockHttpServletRequest;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class SosFilterGetRequestServiceTest {
 
@@ -23,7 +23,7 @@ public class SosFilterGetRequestServiceTest {
         request.addParameter("other", "x,y");
         request.addParameter("other", "z");
 
-        RequestContextEvaluator evaluator = new RequestContextEvaluator(new PolicyConfig());
+        RequestContextFilter evaluator = new RequestContextFilter(new PolicyConfig());
         SosFilterRequestService service = new SosFilterGetRequestService(evaluator);
         String queryString = service.filter(request);
 
@@ -37,7 +37,7 @@ public class SosFilterGetRequestServiceTest {
         List<Policy> policies = Arrays.asList(Policy.of("policy1", valueRestriction));
         PolicyConfig policyConfig = new PolicyConfig(policies, Rule.of("foo1", "role", "policy1"));
 
-        RequestContextEvaluator evaluator = new RequestContextEvaluator(policyConfig);
+        RequestContextFilter evaluator = new RequestContextFilter(policyConfig);
         SosFilterRequestService service = new SosFilterGetRequestService(evaluator);
         MockHttpServletRequest request = createServletRequest("GetCapabilities");
         String queryString = service.filter(request);

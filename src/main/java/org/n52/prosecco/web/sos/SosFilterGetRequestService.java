@@ -10,17 +10,17 @@ import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.n52.prosecco.engine.eval.RequestContextEvaluator;
-import org.n52.prosecco.engine.filter.FilterContext;
-import org.n52.prosecco.engine.filter.Timespan;
+import org.n52.prosecco.filter.RequestContextFilter;
+import org.n52.prosecco.web.request.FilterContext;
+import org.n52.prosecco.web.request.Timespan;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SosFilterGetRequestService extends SosFilterRequestService {
+public final class SosFilterGetRequestService extends SosFilterRequestService {
 
-    private final RequestContextEvaluator requestContextEvaluator;
+    private final RequestContextFilter requestContextEvaluator;
 
-    public SosFilterGetRequestService(RequestContextEvaluator requestContextEvaluator) {
+    public SosFilterGetRequestService(RequestContextFilter requestContextEvaluator) {
         this.requestContextEvaluator = requestContextEvaluator;
     }
 

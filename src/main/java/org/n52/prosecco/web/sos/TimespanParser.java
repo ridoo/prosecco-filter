@@ -1,5 +1,5 @@
 
-package org.n52.prosecco.engine.filter;
+package org.n52.prosecco.web.sos;
 
 import java.time.DateTimeException;
 import java.time.Instant;
@@ -13,6 +13,9 @@ import java.time.temporal.TemporalAmount;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import org.n52.prosecco.web.request.Timespan;
+import org.n52.prosecco.web.request.TimespanRelation;
 
 public final class TimespanParser {
 

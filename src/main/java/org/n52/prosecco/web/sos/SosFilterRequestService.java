@@ -14,10 +14,9 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.n52.prosecco.engine.filter.FilterContext;
-import org.n52.prosecco.engine.filter.Timespan;
-import org.n52.prosecco.engine.filter.TimespanParser;
 import org.n52.prosecco.web.FilterRequestService;
+import org.n52.prosecco.web.request.FilterContext;
+import org.n52.prosecco.web.request.Timespan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

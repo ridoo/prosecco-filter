@@ -7,19 +7,19 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.n52.prosecco.engine.eval.RequestContextEvaluator;
+import org.n52.prosecco.filter.RequestContextFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SosFilterPostRequestService extends SosFilterRequestService {
+public final class SosFilterPostRequestService extends SosFilterRequestService {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(SosFilterPostRequestService.class);
     
-    private final RequestContextEvaluator requestContextEvaluator;
+    private final RequestContextFilter requestContextEvaluator;
     
-    public SosFilterPostRequestService(RequestContextEvaluator requestContextEvaluator) {
+    public SosFilterPostRequestService(RequestContextFilter requestContextEvaluator) {
         this.requestContextEvaluator = requestContextEvaluator;
     }
 

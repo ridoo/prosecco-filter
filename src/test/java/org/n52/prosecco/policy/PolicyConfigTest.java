@@ -1,5 +1,7 @@
 
-package org.n52.prosecco.engine.policy;
+package org.n52.prosecco.policy;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -7,8 +9,10 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.n52.prosecco.policy.Policy;
+import org.n52.prosecco.policy.PolicyConfig;
+import org.n52.prosecco.policy.PolicyConfigException;
+import org.n52.prosecco.policy.Rule;
 
 public class PolicyConfigTest {
 

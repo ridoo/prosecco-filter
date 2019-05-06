@@ -1,18 +1,18 @@
 
-package org.n52.prosecco.engine.eval;
+package org.n52.prosecco.filter;
 
 import java.util.Set;
 
-import org.n52.prosecco.engine.filter.FilterContext;
-import org.n52.prosecco.engine.filter.FilterContext.FilterContextBuilder;
-import org.n52.prosecco.engine.filter.Timespan;
-import org.n52.prosecco.engine.policy.PolicyConfig;
+import org.n52.prosecco.policy.PolicyConfig;
+import org.n52.prosecco.web.request.FilterContext;
+import org.n52.prosecco.web.request.FilterContext.FilterContextBuilder;
+import org.n52.prosecco.web.request.Timespan;
 
-public class RequestContextEvaluator {
+public class RequestContextFilter {
 
     private final PolicyConfig config;
 
-    public RequestContextEvaluator(PolicyConfig config) {
+    public RequestContextFilter(PolicyConfig config) {
         this.config = config;
     }
 
@@ -37,7 +37,7 @@ public class RequestContextEvaluator {
     }
 
     private Set<String> evaluatePhenomena(FilterContext context) {
-        ThematicEvaluator evaluator = new ThematicEvaluator("phenomenon", config);
+        ThematicFilter evaluator = new ThematicFilter("phenomenon", config);
         Set<String> values = !context.hasPhenomena()
                 ? context.getServiceParameters().getPhenomena()
                 : context.getPhenomena();
@@ -45,7 +45,7 @@ public class RequestContextEvaluator {
     }
 
     private Set<String> evaluateOfferings(FilterContext context) {
-        ThematicEvaluator evaluator = new ThematicEvaluator("offering", config);
+        ThematicFilter evaluator = new ThematicFilter("offering", config);
         Set<String> values = !context.hasOfferings()
                 ? context.getServiceParameters().getOfferings()
                 : context.getOfferings();
@@ -53,7 +53,7 @@ public class RequestContextEvaluator {
     }
 
     private Set<String> evaluateProcedures(FilterContext context) {
-        ThematicEvaluator evaluator = new ThematicEvaluator("procedure", config);
+        ThematicFilter evaluator = new ThematicFilter("procedure", config);
         Set<String> values = !context.hasProcedures()
                 ? context.getServiceParameters().getProcedures()
                 : context.getProcedures();
@@ -61,7 +61,7 @@ public class RequestContextEvaluator {
     }
 
     private Set<String> evaluateFeatures(FilterContext context) {
-        ThematicEvaluator evaluator = new ThematicEvaluator("feature", config);
+        ThematicFilter evaluator = new ThematicFilter("feature", config);
         Set<String> values = !context.hasFeatures()
                 ? context.getServiceParameters().getFeatures()
                 : context.getFeatures();
@@ -75,7 +75,7 @@ public class RequestContextEvaluator {
     }
 
     private Set<Timespan> evaluateTimeFloating(String string, Set<Timespan> timespans, FilterContext context) {
-        TimeFloatingEvaluator evaluator = new TimeFloatingEvaluator("timespan", config);
+        TimeFloatingFilter evaluator = new TimeFloatingFilter("timespan", config);
         return evaluator.evaluate(timespans, context);
     }
 

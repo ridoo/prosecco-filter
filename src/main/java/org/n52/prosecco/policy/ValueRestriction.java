@@ -1,4 +1,4 @@
-package org.n52.prosecco.engine.policy;
+package org.n52.prosecco.policy;
 
 import java.util.Collection;
 import java.util.Collections;

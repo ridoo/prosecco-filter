@@ -3,9 +3,9 @@ package org.n52.prosecco;
 
 import java.io.IOException;
 
-import org.n52.prosecco.engine.eval.RequestContextEvaluator;
-import org.n52.prosecco.engine.policy.PolicyConfigException;
-import org.n52.prosecco.engine.policy.PolicyReader;
+import org.n52.prosecco.filter.RequestContextFilter;
+import org.n52.prosecco.policy.PolicyConfigException;
+import org.n52.prosecco.policy.PolicyReader;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,9 +22,9 @@ public class ProseccoApplication {
     }
 
     @Bean
-    public RequestContextEvaluator getPolicyReader(@Value("${prosecco.config.policy}") Resource configFile) throws PolicyConfigException, IOException {
+    public RequestContextFilter getPolicyReader(@Value("${prosecco.config.policy}") Resource configFile) throws PolicyConfigException, IOException {
         PolicyReader policyReader = new PolicyReader(configFile.getFile());
-        return new RequestContextEvaluator(policyReader.readConfig());
+        return new RequestContextFilter(policyReader.readConfig());
     }
 
 }

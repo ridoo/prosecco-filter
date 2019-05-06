@@ -1,8 +1,13 @@
-package org.n52.prosecco.engine.policy;
+package org.n52.prosecco.policy;
 
 import java.io.IOException;
 
 import org.junit.Test;
+import org.n52.prosecco.policy.Policy;
+import org.n52.prosecco.policy.PolicyConfig;
+import org.n52.prosecco.policy.PolicyConfigException;
+import org.n52.prosecco.policy.PolicyValidator;
+import org.n52.prosecco.policy.Rule;
 
 public class PolicyValidatorTest {
 

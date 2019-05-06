@@ -1,5 +1,5 @@
 
-package org.n52.prosecco.engine.policy;
+package org.n52.prosecco.policy;
 
 import java.io.File;
 import java.io.IOException;

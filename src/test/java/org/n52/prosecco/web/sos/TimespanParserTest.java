@@ -1,5 +1,5 @@
 
-package org.n52.prosecco.filter;
+package org.n52.prosecco.web.sos;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -9,10 +9,8 @@ import java.time.Period;
 import java.time.temporal.ChronoUnit;
 
 import org.junit.Test;
-import org.n52.prosecco.engine.filter.Timespan;
-import org.n52.prosecco.engine.filter.TimespanParser;
-import org.n52.prosecco.engine.filter.TimespanRelation;
-import org.n52.prosecco.web.sos.FilterRequestException;
+import org.n52.prosecco.web.request.Timespan;
+import org.n52.prosecco.web.request.TimespanRelation;
 
 public class TimespanParserTest {
 

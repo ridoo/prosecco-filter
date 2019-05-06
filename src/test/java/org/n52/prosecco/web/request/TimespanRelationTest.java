@@ -1,9 +1,8 @@
-package org.n52.prosecco.filter;
-
-import org.junit.Test;
-import org.n52.prosecco.engine.filter.TimespanRelation;
+package org.n52.prosecco.web.request;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.Test;
 
 public class TimespanRelationTest {
     

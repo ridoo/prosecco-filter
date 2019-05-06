@@ -1,5 +1,5 @@
 
-package org.n52.prosecco.engine.eval;
+package org.n52.prosecco.filter;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -9,21 +9,21 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import org.n52.prosecco.engine.filter.FilterContext;
-import org.n52.prosecco.engine.filter.Timespan;
-import org.n52.prosecco.engine.filter.TimespanParser;
-import org.n52.prosecco.engine.policy.Policy;
-import org.n52.prosecco.engine.policy.PolicyConfig;
-import org.n52.prosecco.engine.policy.Rule;
-import org.n52.prosecco.engine.policy.ValueRestriction;
+import org.n52.prosecco.policy.Policy;
+import org.n52.prosecco.policy.PolicyConfig;
+import org.n52.prosecco.policy.Rule;
+import org.n52.prosecco.policy.ValueRestriction;
+import org.n52.prosecco.web.request.FilterContext;
+import org.n52.prosecco.web.request.Timespan;
+import org.n52.prosecco.web.sos.TimespanParser;
 
-public final class TimeFloatingEvaluator implements FilterContextEvaluator<Timespan> {
+public final class TimeFloatingFilter implements FilterContextFilter<Timespan> {
 
     private final String parameter;
 
     private final PolicyConfig config;
 
-    public TimeFloatingEvaluator(String parameter, PolicyConfig config) {
+    public TimeFloatingFilter(String parameter, PolicyConfig config) {
         this.parameter = parameter;
         this.config = config;
     }
