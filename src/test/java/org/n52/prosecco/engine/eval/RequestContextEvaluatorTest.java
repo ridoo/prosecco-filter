@@ -50,6 +50,19 @@ public final class RequestContextEvaluatorTest {
         FilterContext evaluatedContext = evaluator.evaluate(initialContext);
         assertThat(evaluatedContext.getPhenomena()).doesNotContain("value1", "value2");
     }
+    
+    @Test
+    public void given_simpleConfig_when_contextWithHasUnconfiguredValues_then_unconfiguredValuesRemoved() {
+        PolicyConfig config = createSimplePolicyConfig("allow", ValueRestriction.of("phenomenon", "value1"));
+        RequestContextEvaluator evaluator = new RequestContextEvaluator(config);
+
+        FilterContext initialContext = FilterContextBuilder.of("role")
+                                                           .withPhenomena("value1", "value2")
+                                                           .build();
+
+        FilterContext evaluatedContext = evaluator.evaluate(initialContext);
+        assertThat(evaluatedContext.getPhenomena()).containsExactly("value1");
+    }
 
     private PolicyConfig createSimplePolicyConfig(String effect, ValueRestriction... valueRestrictions) {
         Policy policy = Policy.of("policy1", effect, valueRestrictions);

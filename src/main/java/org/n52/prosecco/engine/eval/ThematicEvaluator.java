@@ -1,6 +1,7 @@
 
 package org.n52.prosecco.engine.eval;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -44,23 +45,31 @@ public final class ThematicEvaluator implements FilterContextEvaluator<String> {
     private Set<String> applyPolicies(Rule rule, Set<String> values) {
         List<Policy> allowingPolicies = config.getReferencedPolicies(rule, Effect.ALLOW);
         List<Policy> denyingPolicies = config.getReferencedPolicies(rule, Effect.DENY);
+        List<Policy> allPolicies = new ArrayList<>();
+        allPolicies.addAll(allowingPolicies);
+        allPolicies.addAll(denyingPolicies);
         return values.stream()
-                     .filter(matchesPolicy(allowingPolicies, denyingPolicies))
+                     .filter(deniedByDefault(allPolicies))
+                     .filter(policyConfiguration(allowingPolicies, denyingPolicies))
                      .collect(Collectors.toSet());
     }
 
-    private Predicate< ? super String> matchesPolicy(List<Policy> allowingPolicies, List<Policy> denyingPolicies) {
-        return value -> isAllowed(value, allowingPolicies)
-                || !isDenied(value, denyingPolicies);
+    private Predicate< ? super String> deniedByDefault(List<Policy> allPolicies) {
+        return value -> allPolicies.stream()
+                                   .map(Policy::getValueRestriction)
+                                   .flatMap(Collection::stream)
+                                   .map(ValueRestriction::getValues)
+                                   .flatMap(Collection::stream)
+                                   .anyMatch(v -> v.equalsIgnoreCase(value));
     }
 
-    private boolean isAllowed(String value, List<Policy> allowingPolicies) {
-        return matchesThematicRestriction(value, allowingPolicies);
-    }
-
-    private boolean isDenied(String value, List<Policy> denyingPolicies) {
-        // TODO value not explicitly denied will be allowed
-        return matchesThematicRestriction(value, denyingPolicies);
+    private Predicate< ? super String> policyConfiguration(List<Policy> allowingPolicies,
+                                                           List<Policy> denyingPolicies) {
+        return value -> {
+            boolean allowed = matchesThematicRestriction(value, allowingPolicies);
+            boolean denied = !matchesThematicRestriction(value, denyingPolicies);
+            return allowed || denied;
+        };
     }
 
     private boolean matchesThematicRestriction(String value, List<Policy> policies) {
