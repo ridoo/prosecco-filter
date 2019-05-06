@@ -6,7 +6,9 @@ import org.springframework.stereotype.Component;
 @Component
 public final class SosFilterResponseService {
 
-    public ResponseEntity< ? > filter(ResponseEntity< ? > response) {
+    public ResponseEntity<String> filter(ResponseEntity<String> response) {
+        
+        
         
         // TODO perform Capabilities filtering
         

@@ -54,7 +54,7 @@ public final class SosFilteringRequestController extends ForwardingRequestContro
             HttpEntity< ? > entity = createRequestEntity(request);
             URI uri = createTargetURI(request, queryString);
             
-            ResponseEntity< ? > response = performRequest(uri, entity, method);
+            ResponseEntity<String> response = performRequest(uri, entity, method);
             return responseService.filter(response);
         } catch (FilterException e) {
             LOGGER.debug("Could not filter request!", e);

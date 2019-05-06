@@ -49,7 +49,7 @@ public abstract class ForwardingRequestController {
         return new RestTemplate(new HttpComponentsClientHttpRequestFactory(clientBuilder));
     }
 
-    protected ResponseEntity< ? > performRequest(URI uri,
+    protected ResponseEntity<String> performRequest(URI uri,
                                                  HttpEntity< ? > entity,
                                                  HttpMethod method)
             throws URISyntaxException {
