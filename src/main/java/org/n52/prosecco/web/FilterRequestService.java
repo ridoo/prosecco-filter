@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.n52.prosecco.web.request.FilterContext;
 import org.n52.prosecco.web.sos.FilterRequestException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,9 +17,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public interface FilterRequestService {
 
     /**
-     * Filters the contetnt of a given request according configured rules. The content may be KVP query
-     * parameters from a GET request or a simple POST payload. The filtered result may have to be encoded for
-     * further use (if needed).
+     * Filters the content of an HTTP GET request according configured rules. The filtered result may have to
+     * be encoded for further use (if needed).
      * 
      * @param request
      *        the request to filter
@@ -28,20 +26,18 @@ public interface FilterRequestService {
      * @throws FilterRequestException
      *         when request is invalid
      */
-    String filter(HttpServletRequest request) throws FilterRequestException;
+    String filterGET(HttpServletRequest request) throws FilterRequestException;
 
     /**
-     * Creates a {@link FilterContext} from the given request and roles.
+     * Filters the content of an HTTP POST request according configured rules.
      * 
-     * @param roles
-     *        the roles
      * @param request
-     *        the actual request
-     * @return a filter context containing all relevant values
+     *        the request to filter
+     * @return the filtered request content
      * @throws FilterRequestException
      *         when request is invalid
      */
-    FilterContext createFilterContext(Set<String> roles, HttpServletRequest request) throws FilterRequestException;
+    String filterPOST(HttpServletRequest request) throws FilterRequestException;
 
     /**
      * @return all roles of the current authenticaion context
@@ -53,7 +49,9 @@ public interface FilterRequestService {
             return Collections.emptySet();
         } else {
             Collection< ? extends GrantedAuthority> authorities = authentication.getAuthorities();
-            return authorities.stream().map(a -> a.getAuthority()).collect(Collectors.toSet());
+            return authorities.stream()
+                              .map(a -> a.getAuthority())
+                              .collect(Collectors.toSet());
         }
     }
 

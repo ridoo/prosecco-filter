@@ -68,7 +68,7 @@ public abstract class ForwardingRequestController {
         LOGGER.trace("R E S P O N S E   info:");
         LOGGER.trace("headers         : {}", response.getHeaders());
         LOGGER.trace("StatusCode      : {}", response.getStatusCode());
-        LOGGER.trace("body            : {}", response.getBody().toString());
+        LOGGER.trace("body            : {}", response.getBody());
         
         return response;
     }

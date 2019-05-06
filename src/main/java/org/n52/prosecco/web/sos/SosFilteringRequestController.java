@@ -9,6 +9,7 @@ import java.net.URISyntaxException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.n52.prosecco.web.FilterRequestService;
 import org.n52.prosecco.web.ForwardingRequestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,29 +30,23 @@ public final class SosFilteringRequestController extends ForwardingRequestContro
 
     private static final String PATH_PREFIX = "/sos";
 
-    private final SosFilterGetRequestService filterGetService;
-
-    private final SosFilterPostRequestService filterPostService;
+    private final SosFilterRequestService filterService;
 
     SosFilteringRequestController(@Value("${prosecco.target.url}") URI endpoint,
                                   @Value("${prosecco.servlet.context-path}") String contextPath,
-                                  SosFilterGetRequestService filterGetService,
-                                  SosFilterPostRequestService filterPostService) {
+                                  SosFilterRequestService filterService) {
         super(endpoint, contextPath, PATH_PREFIX);
-        this.filterGetService = filterGetService;
-        this.filterPostService = filterPostService;
-//        this.parameterCache = performCacheUpdate();
+        this.filterService = filterService;
+        // this.parameterCache = performCacheUpdate();
     }
 
     @ResponseBody
     @RequestMapping(value = PATH_PREFIX + "/**", method = GET)
-    public ResponseEntity< ? > filterGet(HttpServletRequest request,
-                                         HttpMethod method)
-            throws URISyntaxException {
+    public ResponseEntity< ? > filterGet(HttpServletRequest request, HttpMethod method) throws URISyntaxException {
         LOGGER.debug("Filter GET request on: {}", PATH_PREFIX);
         try {
             LOGGER.trace("O R I G I N A L   query: {}", request.getQueryString());
-            String queryString = filterGetService.filter(request);
+            String queryString = filterService.filterGET(request);
             HttpEntity< ? > entity = createRequestEntity(request);
             URI uri = createTargetURI(request, queryString);
             return performRequest(uri, entity, method);
@@ -66,16 +61,14 @@ public final class SosFilteringRequestController extends ForwardingRequestContro
 
     @ResponseBody
     @RequestMapping(value = PATH_PREFIX + "/**", method = POST)
-    public ResponseEntity< ? > filterPost(HttpServletRequest request,
-                                          HttpMethod method)
-            throws URISyntaxException {
+    public ResponseEntity< ? > filterPost(HttpServletRequest request, HttpMethod method) throws URISyntaxException {
         LOGGER.debug("Filter POST request on: {}", PATH_PREFIX);
         try {
             if (LOGGER.isTraceEnabled()) {
-                String body = filterPostService.readRequestBody(request);
-                LOGGER.trace("O R I G I N A L   entity: {}", body);
+//                String body = filterService.readRequestBody(request);
+//                LOGGER.trace("O R I G I N A L   entity: {}", body);
             }
-            String body = filterPostService.filter(request);
+            String body = filterService.filterPOST(request);
             URI uri = createTargetURI(request);
             HttpEntity< ? > entity = createRequestEntity(body, request);
             return performRequest(uri, entity, method);

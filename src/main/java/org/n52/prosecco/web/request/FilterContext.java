@@ -112,7 +112,7 @@ public final class FilterContext {
                     ? items.collect(Collectors.toSet())
                     : Collections.emptySet();
         }
-
+        
         public FilterContext build() {
             return new FilterContext(roles,
                                      remainingQuery,
@@ -144,9 +144,14 @@ public final class FilterContext {
 
     // TODO spatial
 
+    public static FilterContext empty() {
+        return of(Collections.emptySet()).build();
+    }
+
     public static FilterContextBuilder of(Set<String> roles) {
         return new FilterContextBuilder(roles);
     }
+
 
     private FilterContext(Set<String> roles,
                           Map<String, String[]> remainingQuery,

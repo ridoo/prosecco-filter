@@ -14,7 +14,7 @@ import org.n52.prosecco.policy.Rule;
 import org.n52.prosecco.policy.ValueRestriction;
 import org.springframework.mock.web.MockHttpServletRequest;
 
-public class SosFilterGetRequestServiceTest {
+public class SosFilterRequestServiceTest {
 
     @Test
     public void given_requestWithNonFilterableParameters_when_filterRequest_then_nonFilterableParametersRemain()
@@ -24,8 +24,8 @@ public class SosFilterGetRequestServiceTest {
         request.addParameter("other", "z");
 
         RequestContextFilter evaluator = new RequestContextFilter(new PolicyConfig());
-        SosFilterRequestService service = new SosFilterGetRequestService(evaluator);
-        String queryString = service.filter(request);
+        SosFilterRequestService service = new SosFilterRequestService(evaluator);
+        String queryString = service.filterGET(request);
 
         assertThat(queryString.split("&")).containsExactly("other=x,y,z");
     }
@@ -38,16 +38,17 @@ public class SosFilterGetRequestServiceTest {
         PolicyConfig policyConfig = new PolicyConfig(policies, Rule.of("foo1", "role", "policy1"));
 
         RequestContextFilter evaluator = new RequestContextFilter(policyConfig);
-        SosFilterRequestService service = new SosFilterGetRequestService(evaluator);
+        SosFilterRequestService service = new SosFilterRequestService(evaluator);
         MockHttpServletRequest request = createServletRequest("GetCapabilities");
-        String queryString = service.filter(request);
+        String queryString = service.filterGET(request);
 
-        assertThat(queryString).contains("GetCapabilities").doesNotContain("phenomonon");
+        assertThat(queryString).contains("GetCapabilities")
+                               .doesNotContain("phenomonon");
     }
 
     private MockHttpServletRequest createServletRequest(String operation) {
         MockHttpServletRequest servletRequest = new MockHttpServletRequest();
-        if (!"GetCapabilities".equalsIgnoreCase(operation)) {
+        if ( !"GetCapabilities".equalsIgnoreCase(operation)) {
             servletRequest.addParameter("service", "SOS");
         }
         servletRequest.addParameter("version", "2.0.0");

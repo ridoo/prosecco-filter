@@ -8,12 +8,11 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 
 import org.n52.prosecco.filter.RequestContextFilter;
+import org.n52.prosecco.web.request.FilterContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
-@Component
-public final class SosFilterPostRequestService extends SosFilterRequestService {
+public final class SosFilterPostRequestService {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(SosFilterPostRequestService.class);
     
@@ -23,8 +22,7 @@ public final class SosFilterPostRequestService extends SosFilterRequestService {
         this.requestContextEvaluator = requestContextEvaluator;
     }
 
-    public String filter(HttpServletRequest request) throws FilterRequestException {
-        
+    public String filter(HttpServletRequest request, FilterContext context) throws FilterRequestException {
         return readRequestBody(request);
     }
 

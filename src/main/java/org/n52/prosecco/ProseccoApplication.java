@@ -22,10 +22,10 @@ public class ProseccoApplication {
     }
 
     @Bean
-    public RequestContextFilter getPolicyReader(@Value("${prosecco.config.policy}") Resource configFile) throws PolicyConfigException, IOException {
+    public RequestContextFilter getPolicyReader(@Value("${prosecco.config.policy}") Resource configFile)
+            throws PolicyConfigException, IOException {
         PolicyReader policyReader = new PolicyReader(configFile.getFile());
         return new RequestContextFilter(policyReader.readConfig());
     }
 
 }
-

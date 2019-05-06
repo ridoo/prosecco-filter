@@ -13,10 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.n52.prosecco.filter.RequestContextFilter;
 import org.n52.prosecco.web.request.FilterContext;
 import org.n52.prosecco.web.request.Timespan;
-import org.springframework.stereotype.Component;
 
-@Component
-public final class SosFilterGetRequestService extends SosFilterRequestService {
+public final class SosFilterGetRequestService {
 
     private final RequestContextFilter requestContextEvaluator;
 
@@ -24,13 +22,11 @@ public final class SosFilterGetRequestService extends SosFilterRequestService {
         this.requestContextEvaluator = requestContextEvaluator;
     }
 
-    @Override
-    public String filter(HttpServletRequest request) throws FilterRequestException {
+    public String filter(HttpServletRequest request, FilterContext context) throws FilterRequestException {
         String operation = request.getParameter("request");
-        FilterContext requestContext = createFilterContext(getRoles(), request);
         return !"GetCapabilities".equalsIgnoreCase(operation)
-                ? createQueryString(requestContextEvaluator.evaluate(requestContext))
-                : createQueryString(requestContext);
+                ? createQueryString(requestContextEvaluator.evaluate(context))
+                : createQueryString(context);
     }
 
     private String createQueryString(FilterContext context) {
