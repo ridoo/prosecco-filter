@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 
 import org.n52.prosecco.filter.RequestContextFilter;
+import org.n52.prosecco.web.FilterException;
 import org.n52.prosecco.web.request.FilterContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,7 @@ public final class SosFilterPostRequestService {
         this.requestContextEvaluator = requestContextEvaluator;
     }
 
-    public String filter(HttpServletRequest request, FilterContext context) throws FilterRequestException {
+    public String filter(HttpServletRequest request, FilterContext context) throws FilterException {
         return readRequestBody(request);
     }
 

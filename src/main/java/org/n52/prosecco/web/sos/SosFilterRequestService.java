@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 
 import org.n52.prosecco.filter.RequestContextFilter;
+import org.n52.prosecco.web.FilterException;
 import org.n52.prosecco.web.FilterRequestService;
 import org.n52.prosecco.web.request.FilterContext;
 import org.n52.prosecco.web.request.Timespan;
@@ -37,13 +38,13 @@ public final class SosFilterRequestService implements FilterRequestService {
     }
 
     @Override
-    public String filterGET(HttpServletRequest request) throws FilterRequestException {
+    public String filterGET(HttpServletRequest request) throws FilterException {
         FilterContext context = createFilterContext(request, getRoles());
         return filterGetService.filter(request, context);
     }
 
     @Override
-    public String filterPOST(HttpServletRequest request) throws FilterRequestException {
+    public String filterPOST(HttpServletRequest request) throws FilterException {
         FilterContext context = createFilterContext(request, getRoles());
         return filterPostService.filter(request, context);
     }
@@ -56,11 +57,11 @@ public final class SosFilterRequestService implements FilterRequestService {
      * @param roles
      *        the roles
      * @return a filter context containing all relevant values
-     * @throws FilterRequestException
+     * @throws FilterException
      *         when request is invalid
      */
     private FilterContext createFilterContext(HttpServletRequest request, Set<String> roles)
-            throws FilterRequestException {
+            throws FilterException {
         String temporalFilter = request.getParameter(TIMESPAN.filterName);
         Timespan timespan = parseTimespan(temporalFilter);
         Map<String, String[]> valuesByParameter = request.getParameterMap();
@@ -75,12 +76,12 @@ public final class SosFilterRequestService implements FilterRequestService {
                             .build();
     }
 
-    private Timespan parseTimespan(String temporalFilter) throws FilterRequestException {
+    private Timespan parseTimespan(String temporalFilter) throws FilterException {
         try {
             return new TimespanParser().parsePhenomenonTime(temporalFilter);
         } catch (IllegalArgumentException | DateTimeException e) {
             LOGGER.error("Could not parse temporal filter: {}", temporalFilter, e);
-            throw new FilterRequestException("Invalid temporal filter: " + temporalFilter);
+            throw new FilterException("Invalid temporal filter: " + temporalFilter);
         }
     }
 

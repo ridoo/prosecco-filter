@@ -12,13 +12,14 @@ import org.n52.prosecco.policy.Policy;
 import org.n52.prosecco.policy.PolicyConfig;
 import org.n52.prosecco.policy.Rule;
 import org.n52.prosecco.policy.ValueRestriction;
+import org.n52.prosecco.web.FilterException;
 import org.springframework.mock.web.MockHttpServletRequest;
 
 public class SosFilterRequestServiceTest {
 
     @Test
     public void given_requestWithNonFilterableParameters_when_filterRequest_then_nonFilterableParametersRemain()
-            throws FilterRequestException {
+            throws FilterException {
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.addParameter("other", "x,y");
         request.addParameter("other", "z");
@@ -32,7 +33,7 @@ public class SosFilterRequestServiceTest {
 
     @Test
     public void given_policyConfig_when_requestGetCapabilities_then_noFilteringTakesPlace()
-            throws FilterRequestException {
+            throws FilterException {
         ValueRestriction valueRestriction = ValueRestriction.of("phenomenon", "allow", "value1");
         List<Policy> policies = Arrays.asList(Policy.of("policy1", valueRestriction));
         PolicyConfig policyConfig = new PolicyConfig(policies, Rule.of("foo1", "role", "policy1"));

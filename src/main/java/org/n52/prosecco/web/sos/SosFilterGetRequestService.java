@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 import javax.servlet.http.HttpServletRequest;
 
 import org.n52.prosecco.filter.RequestContextFilter;
+import org.n52.prosecco.web.FilterException;
 import org.n52.prosecco.web.request.FilterContext;
 import org.n52.prosecco.web.request.Timespan;
 
@@ -22,7 +23,7 @@ public final class SosFilterGetRequestService {
         this.requestContextEvaluator = requestContextEvaluator;
     }
 
-    public String filter(HttpServletRequest request, FilterContext context) throws FilterRequestException {
+    public String filter(HttpServletRequest request, FilterContext context) throws FilterException {
         String operation = request.getParameter("request");
         return !"GetCapabilities".equalsIgnoreCase(operation)
                 ? createQueryString(requestContextEvaluator.evaluate(context))

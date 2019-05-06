@@ -9,6 +9,7 @@ import java.net.URISyntaxException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.n52.prosecco.web.FilterException;
 import org.n52.prosecco.web.ForwardingRequestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +56,7 @@ public final class SosFilteringRequestController extends ForwardingRequestContro
             
             ResponseEntity< ? > response = performRequest(uri, entity, method);
             return responseService.filter(response);
-        } catch (FilterRequestException e) {
+        } catch (FilterException e) {
             LOGGER.debug("Could not filter request!", e);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         } catch (Throwable e) {
@@ -79,7 +80,7 @@ public final class SosFilteringRequestController extends ForwardingRequestContro
             
             ResponseEntity< ? > response = performRequest(uri, entity, method);
             return responseService.filter(response);
-        } catch (FilterRequestException e) {
+        } catch (FilterException e) {
             LOGGER.debug("Could not filter request!", e);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         } catch (Throwable e) {
