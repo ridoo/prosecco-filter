@@ -1,5 +1,5 @@
 
-package org.n52.prosecco.engine.policy;
+package org.n52.prosecco.engine.eval;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,6 +15,10 @@ import org.n52.prosecco.engine.filter.FilterContext;
 import org.n52.prosecco.engine.filter.FilterContext.FilterContextBuilder;
 import org.n52.prosecco.engine.filter.Timespan;
 import org.n52.prosecco.engine.filter.TimespanRelation;
+import org.n52.prosecco.engine.policy.Policy;
+import org.n52.prosecco.engine.policy.PolicyConfig;
+import org.n52.prosecco.engine.policy.Rule;
+import org.n52.prosecco.engine.policy.ValueRestriction;
 import org.n52.prosecco.web.ServiceParameters;
 
 public final class RequestContextEvaluatorTest {

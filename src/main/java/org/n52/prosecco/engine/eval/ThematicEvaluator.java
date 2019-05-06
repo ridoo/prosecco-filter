@@ -1,5 +1,5 @@
 
-package org.n52.prosecco.engine.policy;
+package org.n52.prosecco.engine.eval;
 
 import java.util.Collection;
 import java.util.List;
@@ -8,6 +8,11 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.n52.prosecco.engine.filter.FilterContext;
+import org.n52.prosecco.engine.policy.Effect;
+import org.n52.prosecco.engine.policy.Policy;
+import org.n52.prosecco.engine.policy.PolicyConfig;
+import org.n52.prosecco.engine.policy.Rule;
+import org.n52.prosecco.engine.policy.ValueRestriction;
 
 public final class ThematicEvaluator implements FilterContextEvaluator<String> {
 

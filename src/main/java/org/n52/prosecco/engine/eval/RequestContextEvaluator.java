@@ -1,12 +1,12 @@
 
-package org.n52.prosecco.engine.policy;
+package org.n52.prosecco.engine.eval;
 
-import java.util.Collection;
 import java.util.Set;
 
 import org.n52.prosecco.engine.filter.FilterContext;
 import org.n52.prosecco.engine.filter.FilterContext.FilterContextBuilder;
 import org.n52.prosecco.engine.filter.Timespan;
+import org.n52.prosecco.engine.policy.PolicyConfig;
 
 public class RequestContextEvaluator {
 
@@ -77,10 +77,6 @@ public class RequestContextEvaluator {
     private Set<Timespan> evaluateTimeFloating(String string, Set<Timespan> timespans, FilterContext context) {
         TimeFloatingEvaluator evaluator = new TimeFloatingEvaluator("timespan", config);
         return evaluator.evaluate(timespans, context);
-    }
-
-    private Collection<Rule> getRelevantRules(FilterContext context) {
-        return config.getRulesForRole(context.getRoles());
     }
 
 };

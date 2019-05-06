@@ -3,9 +3,9 @@ package org.n52.prosecco;
 
 import java.io.IOException;
 
+import org.n52.prosecco.engine.eval.RequestContextEvaluator;
 import org.n52.prosecco.engine.policy.PolicyConfigException;
 import org.n52.prosecco.engine.policy.PolicyReader;
-import org.n52.prosecco.engine.policy.RequestContextEvaluator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

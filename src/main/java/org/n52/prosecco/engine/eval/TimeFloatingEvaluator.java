@@ -1,7 +1,6 @@
 
-package org.n52.prosecco.engine.policy;
+package org.n52.prosecco.engine.eval;
 
-import java.time.temporal.TemporalAccessor;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -14,13 +13,12 @@ import java.util.stream.Collectors;
 import org.n52.prosecco.engine.filter.FilterContext;
 import org.n52.prosecco.engine.filter.Timespan;
 import org.n52.prosecco.engine.filter.TimespanParser;
-import org.n52.prosecco.engine.filter.TimespanRelation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.n52.prosecco.engine.policy.Policy;
+import org.n52.prosecco.engine.policy.PolicyConfig;
+import org.n52.prosecco.engine.policy.Rule;
+import org.n52.prosecco.engine.policy.ValueRestriction;
 
 public final class TimeFloatingEvaluator implements FilterContextEvaluator<Timespan> {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(TimeFloatingEvaluator.class);
 
     private final String parameter;
 

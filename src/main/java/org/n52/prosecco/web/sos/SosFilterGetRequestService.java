@@ -10,9 +10,9 @@ import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.n52.prosecco.engine.eval.RequestContextEvaluator;
 import org.n52.prosecco.engine.filter.FilterContext;
 import org.n52.prosecco.engine.filter.Timespan;
-import org.n52.prosecco.engine.policy.RequestContextEvaluator;
 import org.springframework.stereotype.Component;
 
 @Component
