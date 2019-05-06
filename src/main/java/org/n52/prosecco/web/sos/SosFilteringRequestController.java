@@ -9,7 +9,6 @@ import java.net.URISyntaxException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.n52.prosecco.web.FilterRequestService;
 import org.n52.prosecco.web.ForwardingRequestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,13 +29,17 @@ public final class SosFilteringRequestController extends ForwardingRequestContro
 
     private static final String PATH_PREFIX = "/sos";
 
-    private final SosFilterRequestService filterService;
+    private final SosFilterRequestService requestService;
+    
+    private final SosFilterResponseService responseService;
 
     SosFilteringRequestController(@Value("${prosecco.target.url}") URI endpoint,
                                   @Value("${prosecco.servlet.context-path}") String contextPath,
-                                  SosFilterRequestService filterService) {
+                                  SosFilterRequestService requestService,
+                                  SosFilterResponseService responseService) {
         super(endpoint, contextPath, PATH_PREFIX);
-        this.filterService = filterService;
+        this.requestService = requestService;
+        this.responseService = responseService;
         // this.parameterCache = performCacheUpdate();
     }
 
@@ -46,10 +49,12 @@ public final class SosFilteringRequestController extends ForwardingRequestContro
         LOGGER.debug("Filter GET request on: {}", PATH_PREFIX);
         try {
             LOGGER.trace("O R I G I N A L   query: {}", request.getQueryString());
-            String queryString = filterService.filterGET(request);
+            String queryString = requestService.filterGET(request);
             HttpEntity< ? > entity = createRequestEntity(request);
             URI uri = createTargetURI(request, queryString);
-            return performRequest(uri, entity, method);
+            
+            ResponseEntity< ? > response = performRequest(uri, entity, method);
+            return responseService.filter(response);
         } catch (FilterRequestException e) {
             LOGGER.debug("Could not filter request!", e);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
@@ -65,13 +70,15 @@ public final class SosFilteringRequestController extends ForwardingRequestContro
         LOGGER.debug("Filter POST request on: {}", PATH_PREFIX);
         try {
             if (LOGGER.isTraceEnabled()) {
-//                String body = filterService.readRequestBody(request);
+//                String body = requestService.readRequestBody(request);
 //                LOGGER.trace("O R I G I N A L   entity: {}", body);
             }
-            String body = filterService.filterPOST(request);
+            String body = requestService.filterPOST(request);
             URI uri = createTargetURI(request);
             HttpEntity< ? > entity = createRequestEntity(body, request);
-            return performRequest(uri, entity, method);
+            
+            ResponseEntity< ? > response = performRequest(uri, entity, method);
+            return responseService.filter(response);
         } catch (FilterRequestException e) {
             LOGGER.debug("Could not filter request!", e);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
