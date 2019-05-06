@@ -4,8 +4,11 @@ package org.n52.prosecco.web.sos;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -71,14 +74,14 @@ public final class SosFilteringRequestController extends ForwardingRequestContro
         LOGGER.debug("Filter POST request on: {}", PATH_PREFIX);
         try {
             if (LOGGER.isTraceEnabled()) {
-//                String body = requestService.readRequestBody(request);
-//                LOGGER.trace("O R I G I N A L   entity: {}", body);
+                String body = readRequestBody(request);
+                LOGGER.trace("O R I G I N A L   entity: {}", body);
             }
             String body = requestService.filterPOST(request);
-            URI uri = createTargetURI(request);
             HttpEntity< ? > entity = createRequestEntity(body, request);
-            
-            ResponseEntity< ? > response = performRequest(uri, entity, method);
+            URI uri = createTargetURI(request);
+
+            ResponseEntity<String> response = performRequest(uri, entity, method);
             return responseService.filter(response);
         } catch (FilterException e) {
             LOGGER.debug("Could not filter request!", e);
@@ -88,5 +91,12 @@ public final class SosFilteringRequestController extends ForwardingRequestContro
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
+    
+    private String readRequestBody(HttpServletRequest request) throws IOException {
+        try (BufferedReader reader = request.getReader()) {
+            return reader.lines().collect(Collectors.joining());
+        }
+    }
+
 
 }
