@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.n52.prosecco.filter.RequestContextFilter;
+import org.n52.prosecco.filter.RequestFilterEngine;
 import org.n52.prosecco.web.FilterException;
 import org.n52.prosecco.web.FilterRequestService;
 import org.n52.prosecco.web.request.FilterContext;
@@ -32,9 +32,9 @@ public final class SosFilterRequestService implements FilterRequestService {
 
     private final SosFilterPostRequestService filterPostService;
 
-    public SosFilterRequestService(RequestContextFilter requestContextEvaluator) {
-        this.filterGetService = new SosFilterGetRequestService(requestContextEvaluator);
-        this.filterPostService = new SosFilterPostRequestService(requestContextEvaluator);
+    public SosFilterRequestService(RequestFilterEngine filterEngine) {
+        this.filterGetService = new SosFilterGetRequestService(filterEngine);
+        this.filterPostService = new SosFilterPostRequestService(filterEngine);
     }
 
     @Override

@@ -17,7 +17,7 @@ import org.n52.prosecco.web.request.FilterContext;
 import org.n52.prosecco.web.request.Timespan;
 import org.n52.prosecco.web.sos.TimespanParser;
 
-public final class TimeFloatingFilter implements FilterContextFilter<Timespan> {
+final class TimeFloatingFilter implements FilterContextFilter<Timespan> {
 
     private final String parameter;
 

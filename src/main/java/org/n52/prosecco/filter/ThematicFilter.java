@@ -15,7 +15,7 @@ import org.n52.prosecco.policy.Rule;
 import org.n52.prosecco.policy.ValueRestriction;
 import org.n52.prosecco.web.request.FilterContext;
 
-public final class ThematicFilter implements FilterContextFilter<String> {
+final class ThematicFilter implements FilterContextFilter<String> {
 
     private final String parameter;
     private final PolicyConfig config;
@@ -27,7 +27,6 @@ public final class ThematicFilter implements FilterContextFilter<String> {
 
     @Override
     public Set<String> evaluate(Set<String> values, FilterContext context) {
-        // TODO case empty query: apply rule on all available values
         return evaluateThematic(values, context);
     }
 

@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
-import org.n52.prosecco.filter.RequestContextFilter;
+import org.n52.prosecco.filter.RequestFilterEngine;
 import org.n52.prosecco.policy.Policy;
 import org.n52.prosecco.policy.PolicyConfig;
 import org.n52.prosecco.policy.Rule;
@@ -24,8 +24,8 @@ public class SosFilterRequestServiceTest {
         request.addParameter("other", "x,y");
         request.addParameter("other", "z");
 
-        RequestContextFilter evaluator = new RequestContextFilter(new PolicyConfig());
-        SosFilterRequestService service = new SosFilterRequestService(evaluator);
+        RequestFilterEngine engine = new RequestFilterEngine(new PolicyConfig());
+        SosFilterRequestService service = new SosFilterRequestService(engine);
         String queryString = service.filterGET(request);
 
         assertThat(queryString.split("&")).containsExactly("other=x,y,z");
@@ -38,8 +38,8 @@ public class SosFilterRequestServiceTest {
         List<Policy> policies = Arrays.asList(Policy.of("policy1", valueRestriction));
         PolicyConfig policyConfig = new PolicyConfig(policies, Rule.of("foo1", "role", "policy1"));
 
-        RequestContextFilter evaluator = new RequestContextFilter(policyConfig);
-        SosFilterRequestService service = new SosFilterRequestService(evaluator);
+        RequestFilterEngine engine = new RequestFilterEngine(policyConfig);
+        SosFilterRequestService service = new SosFilterRequestService(engine);
         MockHttpServletRequest request = createServletRequest("GetCapabilities");
         String queryString = service.filterGET(request);
 

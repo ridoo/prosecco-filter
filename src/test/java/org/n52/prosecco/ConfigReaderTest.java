@@ -1,5 +1,5 @@
 
-package org.n52.prosecco.policy;
+package org.n52.prosecco;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,16 +10,16 @@ import java.io.IOException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.n52.prosecco.ConfigReader;
+import org.n52.prosecco.ConfigurationException;
 import org.n52.prosecco.policy.Effect;
 import org.n52.prosecco.policy.PolicyConfig;
-import org.n52.prosecco.policy.PolicyConfigException;
-import org.n52.prosecco.policy.PolicyReader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-public class PolicyReaderTest {
+public class ConfigReaderTest {
 
     @Rule
     public TemporaryFolder tempFolder = new TemporaryFolder();
@@ -28,48 +28,51 @@ public class PolicyReaderTest {
 
     @Test(expected = NullPointerException.class)
     public void exceptionWhenNullConfigFile() {
-        new PolicyReader(null);
+        new ConfigReader(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void exceptionWhenMissingConfigFile() {
         File configFile = new File("does not exist");
-        new PolicyReader(configFile);
+        new ConfigReader(configFile);
     }
 
-    @Test(expected = PolicyConfigException.class)
-    public void exceptionWhenInvalidConfigFile() throws IOException, PolicyConfigException {
+    @Test(expected = ConfigurationException.class)
+    public void exceptionWhenInvalidConfigFile() throws IOException, ConfigurationException {
         File configFile = writeTempFile("not json content");
-        new PolicyReader(configFile).readConfig();
+        new ConfigReader(configFile).readConfig(PolicyConfig.class);
     }
 
     @Test
-    public void emptyPoliciesWhenEmptyConfigFile() throws IOException, PolicyConfigException {
+    public void emptyPoliciesWhenEmptyConfigFile() throws IOException, ConfigurationException {
         ObjectNode root = om.createObjectNode();
         File configFile = writeTempFile(root);
-        PolicyConfig config = new PolicyReader(configFile).readConfig();
+        ConfigReader configReader = new ConfigReader(configFile);
+        PolicyConfig config = configReader.readConfig(PolicyConfig.class);
         assertThat(config.hasPolicies()).isFalse();
     }
 
     @Test
-    public void emptyPoliciesWhenEmptyPoliciesNode() throws IOException, PolicyConfigException {
+    public void emptyPoliciesWhenEmptyPoliciesNode() throws IOException, ConfigurationException {
         ObjectNode root = om.createObjectNode();
         root.putArray("policies");
 
         File configFile = writeTempFile(root);
-        PolicyConfig config = new PolicyReader(configFile).readConfig();
+        ConfigReader configReader = new ConfigReader(configFile);
+        PolicyConfig config = configReader.readConfig(PolicyConfig.class);
         assertThat(config.hasPolicies()).isFalse();
     }
 
     @Test
-    public void parsingSinglePolicyUsingDefaultEffect() throws IOException, PolicyConfigException {
+    public void parsingSinglePolicyUsingDefaultEffect() throws IOException, ConfigurationException {
         ObjectNode root = om.createObjectNode();
         ArrayNode policies = root.putArray("policies");
         ObjectNode expected = policies.addObject()
                                       .put("name", "policy1");
 
         File configFile = writeTempFile(root);
-        PolicyConfig config = new PolicyReader(configFile).readConfig();
+        ConfigReader configReader = new ConfigReader(configFile);
+        PolicyConfig config = configReader.readConfig(PolicyConfig.class);
         assertThat(config.getPolicies()).hasSize(1);
 
         assertThat(config.getPolicies().get(0)).satisfies(p -> {
@@ -80,12 +83,13 @@ public class PolicyReaderTest {
     }
 
     @Test
-    public void emptyRulesWhenEmptyRulesNode() throws IOException, PolicyConfigException {
+    public void emptyRulesWhenEmptyRulesNode() throws IOException, ConfigurationException {
         ObjectNode root = om.createObjectNode();
         root.putArray("rules");
 
         File configFile = writeTempFile(root);
-        PolicyConfig config = new PolicyReader(configFile).readConfig();
+        ConfigReader configReader = new ConfigReader(configFile);
+        PolicyConfig config = configReader.readConfig(PolicyConfig.class);
         assertThat(config.hasRules()).isFalse();
     }
 

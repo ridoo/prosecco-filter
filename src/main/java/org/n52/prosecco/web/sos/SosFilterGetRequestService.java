@@ -10,23 +10,23 @@ import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.n52.prosecco.filter.RequestContextFilter;
+import org.n52.prosecco.filter.RequestFilterEngine;
 import org.n52.prosecco.web.FilterException;
 import org.n52.prosecco.web.request.FilterContext;
 import org.n52.prosecco.web.request.Timespan;
 
 public final class SosFilterGetRequestService {
 
-    private final RequestContextFilter requestContextEvaluator;
+    private final RequestFilterEngine filterEngine;
 
-    public SosFilterGetRequestService(RequestContextFilter requestContextEvaluator) {
-        this.requestContextEvaluator = requestContextEvaluator;
+    public SosFilterGetRequestService(RequestFilterEngine filterEngine) {
+        this.filterEngine = filterEngine;
     }
 
     public String filter(HttpServletRequest request, FilterContext context) throws FilterException {
         String operation = request.getParameter("request");
         return !"GetCapabilities".equalsIgnoreCase(operation)
-                ? createQueryString(requestContextEvaluator.evaluate(context))
+                ? createQueryString(filterEngine.evaluate(context))
                 : createQueryString(context);
     }
 

@@ -9,16 +9,13 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
-import org.n52.prosecco.policy.Policy;
-import org.n52.prosecco.policy.PolicyConfig;
-import org.n52.prosecco.policy.PolicyConfigException;
-import org.n52.prosecco.policy.Rule;
+import org.n52.prosecco.ConfigurationException;
 
 public class PolicyConfigTest {
 
     @Test
     public void when_ruleReferencesKnownPolicy_when_getViaPoliciesViaRule_then_allPoliciesFound() throws IOException,
-            PolicyConfigException {
+            ConfigurationException {
         List<Policy> policies = Arrays.asList(Policy.of("policy1"),
                                               Policy.of("policy2"),
                                               Policy.of("policy3"));
@@ -31,7 +28,7 @@ public class PolicyConfigTest {
 
     @Test
     public void when_roleReferencedInMultipleRules_when_getRulesViaRole_then_allRulesFound() throws IOException,
-            PolicyConfigException {
+            ConfigurationException {
         List<Rule> rules = Arrays.asList(Rule.of("foo1", "role", "policy1", "policy2"),
                                          Rule.of("foo2", "role"),
                                          Rule.of("foo3", "other-role"));

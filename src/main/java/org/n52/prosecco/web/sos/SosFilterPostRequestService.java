@@ -7,20 +7,20 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.n52.prosecco.filter.RequestContextFilter;
+import org.n52.prosecco.filter.RequestFilterEngine;
 import org.n52.prosecco.web.FilterException;
 import org.n52.prosecco.web.request.FilterContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class SosFilterPostRequestService {
-    
+
     private static final Logger LOGGER = LoggerFactory.getLogger(SosFilterPostRequestService.class);
-    
-    private final RequestContextFilter requestContextEvaluator;
-    
-    public SosFilterPostRequestService(RequestContextFilter requestContextEvaluator) {
-        this.requestContextEvaluator = requestContextEvaluator;
+
+    private final RequestFilterEngine filterEngine;
+
+    public SosFilterPostRequestService(RequestFilterEngine filterEngine) {
+        this.filterEngine = filterEngine;
     }
 
     public String filter(HttpServletRequest request, FilterContext context) throws FilterException {

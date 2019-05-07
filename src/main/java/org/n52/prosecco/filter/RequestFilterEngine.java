@@ -8,11 +8,11 @@ import org.n52.prosecco.web.request.FilterContext;
 import org.n52.prosecco.web.request.FilterContext.FilterContextBuilder;
 import org.n52.prosecco.web.request.Timespan;
 
-public class RequestContextFilter {
+public final class RequestFilterEngine {
 
     private final PolicyConfig config;
 
-    public RequestContextFilter(PolicyConfig config) {
+    public RequestFilterEngine(PolicyConfig config) {
         this.config = config;
     }
 

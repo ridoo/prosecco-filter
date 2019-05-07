@@ -43,7 +43,7 @@ public final class Policy {
         return name;
     }
 
-    Effect getEffect() {
+    public Effect getEffect() {
         return effect;
     }
     

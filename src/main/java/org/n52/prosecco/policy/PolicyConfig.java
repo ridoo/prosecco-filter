@@ -18,6 +18,22 @@ public final class PolicyConfig {
     private final List<Policy> policies;
     private final List<Rule> rules;
     
+    public static PolicyConfig createSimple(ValueRestriction... valueRestrictions) {
+        return createSimple("deny", valueRestrictions);
+    }
+    
+    public static PolicyConfig createSimple(String effect, ValueRestriction... valueRestrictions) {
+        Policy policy = Policy.of("policy1", effect, valueRestrictions);
+        List<Policy> policies = Collections.singletonList(policy);
+
+        List<String> roles = Collections.singletonList("role");
+        List<String> policyReferences = Collections.singletonList("policy1");
+        Rule rule = new Rule("rule1", roles, policyReferences);
+        List<Rule> rules = Collections.singletonList(rule);
+
+        return new PolicyConfig(policies, rules);
+    }
+    
     public PolicyConfig() {
         this(Collections.emptyList(), Collections.emptyList());
     }
@@ -32,7 +48,7 @@ public final class PolicyConfig {
 
     public PolicyConfig(List<Policy> policies, Rule... rules) {
         this(policies, Stream.of(rules).collect(Collectors.toList()));
-    }
+    }    
 
     @JsonCreator
     public PolicyConfig(@JsonProperty("policies") List<Policy> policies,
