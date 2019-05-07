@@ -6,6 +6,8 @@ import java.io.IOException;
 import org.n52.prosecco.filter.RequestFilterEngine;
 import org.n52.prosecco.policy.PolicyValidator;
 import org.n52.prosecco.policy.PolicyConfig;
+import org.n52.prosecco.web.sos.xml.SosResponseFilterEngine;
+import org.n52.prosecco.web.sos.xml.XPathConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,6 +35,14 @@ public class ProseccoApplication {
     public RequestFilterEngine getRequestFilterEngine(PolicyConfig policyConfig) {
         return new RequestFilterEngine(policyConfig);
     }
+    
+    @Bean
+    public SosResponseFilterEngine getResponseFilterEngine(@Value("${prosecco.config.xpaths}") Resource xpathConfigFile,
+                                                           PolicyConfig policyConfig)
+            throws IOException, ConfigurationException {
+        ConfigReader configReader = new ConfigReader(xpathConfigFile.getFile());
+        XPathConfig xpathConfig = configReader.readConfig(XPathConfig.class);
+        return new SosResponseFilterEngine(policyConfig, xpathConfig);
     }
 
 }

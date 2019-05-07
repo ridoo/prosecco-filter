@@ -1,0 +1,8 @@
+{
+  "capabilities": {
+    "procedure": [
+      "/*[local-name()=\"Capabilities\"]/*/*/*[local-name()=\"Parameter\" and @name=\"procedure\"]/*/*[local-name()=\"Value\" and text()=\"{0}\"]",
+      "/*[local-name()=\"Capabilities\"]/*/*/*/*[local-name()=\"ObservationOffering\"]/*[local-name()=\"procedure\" and text()=\"{0}\"]"
+    ]
+  }
+}

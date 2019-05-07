@@ -1,0 +1,2474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sos:Capabilities xmlns:sos="http://www.opengis.net/sos/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:fes="http://www.opengis.net/fes/2.0" xmlns:swes="http://www.opengis.net/swes/2.0" xmlns:gml="http://www.opengis.net/gml/3.2" version="2.0.0" xsi:schemaLocation="http://www.opengis.net/fes/2.0 http://schemas.opengis.net/filter/2.0/filterAll.xsd http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swes.xsd http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sosGetCapabilities.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://www.opengis.net/ows/1.1 http://schemas.opengis.net/ows/1.1.0/owsAll.xsd">
+  <ows:ServiceIdentification>
+    <ows:Title xml:lang="eng">52N SOS</ows:Title>
+    <ows:Abstract xml:lang="eng">52North Sensor Observation Service - Data Access for the Sensor Web</ows:Abstract>
+    <ows:ServiceType>OGC:SOS</ows:ServiceType>
+    <ows:ServiceTypeVersion>1.0.0</ows:ServiceTypeVersion>
+    <ows:ServiceTypeVersion>2.0.0</ows:ServiceTypeVersion>
+    <ows:Profile>http://www.opengis.net/extension/SOSDO/1.0/observationDeletion</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/OMXML/1.0/conf/categoryObservation</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/OMXML/1.0/conf/countObservation</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/OMXML/1.0/conf/geometryObservation</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/OMXML/1.0/conf/measurement</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/OMXML/1.0/conf/textObservation</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/OMXML/1.0/conf/truthObservation</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/categoryObservation</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/countObservation</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/geometryObservation</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/measurement</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/samplingCurve</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/samplingPoint</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/samplingSurface</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/spatialSampling</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/textObservation</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/OMXML/2.0/conf/truthObservation</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SOS/1.0/conf/core</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SOS/1.0/conf/enhanced</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/core</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/daRetrieval</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/exi</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/foiRetrieval</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/insertionCap</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/json</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/kvp-core</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/obsByIdRetrieval</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/obsInsertion</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/pox</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/rest</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/resultInsertion</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/resultRetrieval</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/sensorDeletion</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/sensorInsertion</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/soap</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SOS/2.0/conf/updateSensorDescription</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/core</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/general-encoding-rules</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/text-encoding-rules</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/uml-block-components</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/uml-record-components</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/uml-simple-components</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/uml-simple-encodings</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/xsd-block-components</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/xsd-record-components</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/xsd-simple-components</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/SWE/2.0/conf/xsd-simple-encodings</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/waterml/2.0/conf/uml-measurement-timeries-tvp-observation</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/waterml/2.0/conf/uml-timeseries-tvp-observation</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/waterml/2.0/conf/xsd-measurement-timeseries-tvp</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/waterml/2.0/conf/xsd-timeseries-observation</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/waterml/2.0/conf/xsd-timeseries-tvp-observation</ows:Profile>
+    <ows:Profile>http://www.opengis.net/spec/waterml/2.0/conf/xsd-xml-rules</ows:Profile>
+    <ows:Fees>NONE</ows:Fees>
+    <ows:AccessConstraints>NONE</ows:AccessConstraints>
+  </ows:ServiceIdentification>
+  <ows:ServiceProvider>
+    <ows:ProviderName>52North</ows:ProviderName>
+    <ows:ProviderSite xlink:href="http://52north.org/swe"/>
+    <ows:ServiceContact>
+      <ows:IndividualName>TBA</ows:IndividualName>
+      <ows:PositionName>TBA</ows:PositionName>
+      <ows:ContactInfo>
+        <ows:Phone>
+          <ows:Voice>+49(0)251/396 371-0</ows:Voice>
+        </ows:Phone>
+        <ows:Address>
+          <ows:DeliveryPoint>Martin-Luther-King-Weg 24</ows:DeliveryPoint>
+          <ows:City>Münster</ows:City>
+          <ows:AdministrativeArea>North Rhine-Westphalia</ows:AdministrativeArea>
+          <ows:PostalCode>48155</ows:PostalCode>
+          <ows:Country>Germany</ows:Country>
+          <ows:ElectronicMailAddress>info@52north.org</ows:ElectronicMailAddress>
+        </ows:Address>
+      </ows:ContactInfo>
+    </ows:ServiceContact>
+  </ows:ServiceProvider>
+  <ows:OperationsMetadata>
+    <ows:Operation name="Batch">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/json">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/json</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+        </ows:HTTP>
+      </ows:DCP>
+    </ows:Operation>
+    <ows:Operation name="DeleteObservation">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/kvp?">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/x-kvp</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Get>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/exi">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/exi</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/json">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/json</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/pox">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/xml</ows:Value>
+                <ows:Value>text/xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/soap">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/soap+xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="observation">
+        <ows:AnyValue/>
+      </ows:Parameter>
+    </ows:Operation>
+    <ows:Operation name="DeleteSensor">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/kvp?">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/x-kvp</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Get>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/exi">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/exi</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/json">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/json</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/pox">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/xml</ows:Value>
+                <ows:Value>text/xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/soap">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/soap+xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="procedure">
+        <ows:AllowedValues>
+          <ows:Value>adxl345</ows:Value>
+          <ows:Value>apu</ows:Value>
+          <ows:Value>file32</ows:Value>
+          <ows:Value>homer</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/1</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/10</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/2</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/3</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/4</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/5</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/6</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/7</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/8</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/9</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/developer</ows:Value>
+          <ows:Value>id</ows:Value>
+          <ows:Value>k</ows:Value>
+          <ows:Value>kokolox</ows:Value>
+          <ows:Value>kolox</ows:Value>
+          <ows:Value>myNewSens</ows:Value>
+          <ows:Value>sensor10_id</ows:Value>
+          <ows:Value>sensor11_id</ows:Value>
+          <ows:Value>sensor13_id</ows:Value>
+          <ows:Value>sensor1_id</ows:Value>
+          <ows:Value>temp_senor</ows:Value>
+          <ows:Value>temp_sensor</ows:Value>
+          <ows:Value>test100</ows:Value>
+          <ows:Value>test55</ows:Value>
+          <ows:Value>testArd</ows:Value>
+          <ows:Value>testSensor2</ows:Value>
+          <ows:Value>www.edisoft.org/java/procedure/1</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+    </ows:Operation>
+    <ows:Operation name="DescribeSensor">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/kvp?">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/x-kvp</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Get>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/exi">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/exi</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/json">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/json</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/pox">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/xml</ows:Value>
+                <ows:Value>text/xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/soap">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/soap+xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="procedure">
+        <ows:AllowedValues>
+          <ows:Value>adxl345</ows:Value>
+          <ows:Value>apu</ows:Value>
+          <ows:Value>file32</ows:Value>
+          <ows:Value>homer</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/1</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/10</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/2</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/3</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/4</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/5</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/6</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/7</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/8</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/9</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/developer</ows:Value>
+          <ows:Value>id</ows:Value>
+          <ows:Value>k</ows:Value>
+          <ows:Value>kokolox</ows:Value>
+          <ows:Value>kolox</ows:Value>
+          <ows:Value>myNewSens</ows:Value>
+          <ows:Value>sensor10_id</ows:Value>
+          <ows:Value>sensor11_id</ows:Value>
+          <ows:Value>sensor13_id</ows:Value>
+          <ows:Value>sensor1_id</ows:Value>
+          <ows:Value>temp_senor</ows:Value>
+          <ows:Value>temp_sensor</ows:Value>
+          <ows:Value>test100</ows:Value>
+          <ows:Value>test55</ows:Value>
+          <ows:Value>testArd</ows:Value>
+          <ows:Value>testSensor2</ows:Value>
+          <ows:Value>www.edisoft.org/java/procedure/1</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Parameter name="procedureDescriptionFormat">
+        <ows:AllowedValues>
+          <ows:Value>http://www.opengis.net/sensorML/1.0.1</ows:Value>
+          <ows:Value>http://www.opengis.net/sensorml/2.0</ows:Value>
+          <ows:Value>http://www.opengis.net/waterml/2.0/observationProcess</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Parameter name="validTime">
+        <ows:AnyValue/>
+      </ows:Parameter>
+    </ows:Operation>
+    <ows:Operation name="GetCapabilities">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/kvp?">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/x-kvp</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Get>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/exi">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/exi</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/json">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/json</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/pox">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/xml</ows:Value>
+                <ows:Value>text/xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/soap">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/soap+xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="AcceptFormats">
+        <ows:AllowedValues>
+          <ows:Value>application/xml</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Parameter name="AcceptVersions">
+        <ows:AllowedValues>
+          <ows:Value>1.0.0</ows:Value>
+          <ows:Value>2.0.0</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Parameter name="Sections">
+        <ows:AllowedValues>
+          <ows:Value>All</ows:Value>
+          <ows:Value>Contents</ows:Value>
+          <ows:Value>FilterCapabilities</ows:Value>
+          <ows:Value>InsertionCapabilities</ows:Value>
+          <ows:Value>OperationsMetadata</ows:Value>
+          <ows:Value>ServiceIdentification</ows:Value>
+          <ows:Value>ServiceProvider</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Parameter name="updateSequence">
+        <ows:AnyValue/>
+      </ows:Parameter>
+    </ows:Operation>
+    <ows:Operation name="GetDataAvailability">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/kvp?">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/x-kvp</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Get>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/exi">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/exi</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/json">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/json</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/pox">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/xml</ows:Value>
+                <ows:Value>text/xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/soap">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/soap+xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="featureOfInterest">
+        <ows:AllowedValues>
+          <ows:Value>adxl345</ows:Value>
+          <ows:Value>building</ows:Value>
+          <ows:Value>feature_1</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/1</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/2</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/3</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/4</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/5</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/6</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/7</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/8</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/9</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/Heiden</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/Münster/FE101</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/Portland</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/TODO</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/world</ows:Value>
+          <ows:Value>sensor1_id</ows:Value>
+          <ows:Value>testArd</ows:Value>
+          <ows:Value>www.edisoft.org/java/featureOfInterest/1</ows:Value>
+          <ows:Value>www.edisoft.org/java/featureOfInterest/2</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Parameter name="observedProperty">
+        <ows:AllowedValues>
+          <ows:Value>AirTemperatur</ows:Value>
+          <ows:Value>AirTemperature</ows:Value>
+          <ows:Value>Humidity</ows:Value>
+          <ows:Value>MyTemperatur2</ows:Value>
+          <ows:Value>Schinken</ows:Value>
+          <ows:Value>Tilt</ows:Value>
+          <ows:Value>Windspeed</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/1</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_1</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_2</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_3</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_4</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_5</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_6</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_7</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/2</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/3</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/4</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/5</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/6</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/7</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/8</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/9_1</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/9_2</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/9_3</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/9_4</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/9_5</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/9_6</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/developer</ows:Value>
+          <ows:Value>temperature</ows:Value>
+          <ows:Value>www.edisoft.org/java/observableProperty/ASLVZZ01</ows:Value>
+          <ows:Value>www.edisoft.org/java/observableProperty/PRESPR01</ows:Value>
+          <ows:Value>www.edisoft.org/java/observableProperty/TEMPPR01</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Parameter name="procedure">
+        <ows:AllowedValues>
+          <ows:Value>adxl345</ows:Value>
+          <ows:Value>apu</ows:Value>
+          <ows:Value>file32</ows:Value>
+          <ows:Value>homer</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/1</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/10</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/2</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/3</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/4</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/5</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/6</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/7</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/8</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/9</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/developer</ows:Value>
+          <ows:Value>id</ows:Value>
+          <ows:Value>k</ows:Value>
+          <ows:Value>kokolox</ows:Value>
+          <ows:Value>kolox</ows:Value>
+          <ows:Value>myNewSens</ows:Value>
+          <ows:Value>sensor10_id</ows:Value>
+          <ows:Value>sensor11_id</ows:Value>
+          <ows:Value>sensor13_id</ows:Value>
+          <ows:Value>sensor1_id</ows:Value>
+          <ows:Value>temp_senor</ows:Value>
+          <ows:Value>temp_sensor</ows:Value>
+          <ows:Value>test100</ows:Value>
+          <ows:Value>test55</ows:Value>
+          <ows:Value>testArd</ows:Value>
+          <ows:Value>testSensor2</ows:Value>
+          <ows:Value>www.edisoft.org/java/procedure/1</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+    </ows:Operation>
+    <ows:Operation name="GetFeatureOfInterest">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/kvp?">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/x-kvp</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Get>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/exi">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/exi</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/json">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/json</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/pox">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/xml</ows:Value>
+                <ows:Value>text/xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/soap">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/soap+xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="featureOfInterest">
+        <ows:AllowedValues>
+          <ows:Value>adxl345</ows:Value>
+          <ows:Value>building</ows:Value>
+          <ows:Value>feature_1</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/1</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/2</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/3</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/4</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/5</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/6</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/7</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/8</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/9</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/Heiden</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/Münster/FE101</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/Portland</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/TODO</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/world</ows:Value>
+          <ows:Value>sensor1_id</ows:Value>
+          <ows:Value>testArd</ows:Value>
+          <ows:Value>www.edisoft.org/java/featureOfInterest/1</ows:Value>
+          <ows:Value>www.edisoft.org/java/featureOfInterest/2</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Parameter name="observedProperty">
+        <ows:AllowedValues>
+          <ows:Value>AirTemperatur</ows:Value>
+          <ows:Value>AirTemperature</ows:Value>
+          <ows:Value>Humidity</ows:Value>
+          <ows:Value>MyTemperatur2</ows:Value>
+          <ows:Value>Schinken</ows:Value>
+          <ows:Value>Tilt</ows:Value>
+          <ows:Value>Windspeed</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/1</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_1</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_2</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_3</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_4</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_5</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_6</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_7</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/2</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/3</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/4</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/5</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/6</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/7</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/8</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/9_1</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/9_2</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/9_3</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/9_4</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/9_5</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/9_6</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/developer</ows:Value>
+          <ows:Value>temperature</ows:Value>
+          <ows:Value>www.edisoft.org/java/observableProperty/ASLVZZ01</ows:Value>
+          <ows:Value>www.edisoft.org/java/observableProperty/PRESPR01</ows:Value>
+          <ows:Value>www.edisoft.org/java/observableProperty/TEMPPR01</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Parameter name="procedure">
+        <ows:AllowedValues>
+          <ows:Value>adxl345</ows:Value>
+          <ows:Value>apu</ows:Value>
+          <ows:Value>file32</ows:Value>
+          <ows:Value>homer</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/1</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/10</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/2</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/3</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/4</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/5</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/6</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/7</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/8</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/9</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/developer</ows:Value>
+          <ows:Value>id</ows:Value>
+          <ows:Value>k</ows:Value>
+          <ows:Value>kokolox</ows:Value>
+          <ows:Value>kolox</ows:Value>
+          <ows:Value>myNewSens</ows:Value>
+          <ows:Value>sensor10_id</ows:Value>
+          <ows:Value>sensor11_id</ows:Value>
+          <ows:Value>sensor13_id</ows:Value>
+          <ows:Value>sensor1_id</ows:Value>
+          <ows:Value>temp_senor</ows:Value>
+          <ows:Value>temp_sensor</ows:Value>
+          <ows:Value>test100</ows:Value>
+          <ows:Value>test55</ows:Value>
+          <ows:Value>testArd</ows:Value>
+          <ows:Value>testSensor2</ows:Value>
+          <ows:Value>www.edisoft.org/java/procedure/1</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Parameter name="spatialFilter">
+        <ows:AllowedValues>
+          <ows:Range>
+            <ows:MinimumValue>-18.1425 -122.6819</ows:MinimumValue>
+            <ows:MaximumValue>52.0464393 178.4535</ows:MaximumValue>
+          </ows:Range>
+        </ows:AllowedValues>
+      </ows:Parameter>
+    </ows:Operation>
+    <ows:Operation name="GetObservation">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/kvp?">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/x-kvp</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Get>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/exi">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/exi</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/json">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/json</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/pox">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/xml</ows:Value>
+                <ows:Value>text/xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/soap">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/soap+xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="featureOfInterest">
+        <ows:AllowedValues>
+          <ows:Value>adxl345</ows:Value>
+          <ows:Value>building</ows:Value>
+          <ows:Value>feature_1</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/1</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/2</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/3</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/4</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/5</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/6</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/7</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/8</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/9</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/Heiden</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/Münster/FE101</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/Portland</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/TODO</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/world</ows:Value>
+          <ows:Value>sensor1_id</ows:Value>
+          <ows:Value>testArd</ows:Value>
+          <ows:Value>www.edisoft.org/java/featureOfInterest/1</ows:Value>
+          <ows:Value>www.edisoft.org/java/featureOfInterest/2</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Parameter name="observedProperty">
+        <ows:AllowedValues>
+          <ows:Value>AirTemperatur</ows:Value>
+          <ows:Value>AirTemperature</ows:Value>
+          <ows:Value>Humidity</ows:Value>
+          <ows:Value>MyTemperatur2</ows:Value>
+          <ows:Value>Schinken</ows:Value>
+          <ows:Value>Tilt</ows:Value>
+          <ows:Value>Windspeed</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/1</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_1</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_2</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_3</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_4</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_5</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_6</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/10_7</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/2</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/3</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/4</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/5</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/6</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/7</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/8</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/9_1</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/9_2</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/9_3</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/9_4</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/9_5</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/9_6</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/developer</ows:Value>
+          <ows:Value>temperature</ows:Value>
+          <ows:Value>www.edisoft.org/java/observableProperty/ASLVZZ01</ows:Value>
+          <ows:Value>www.edisoft.org/java/observableProperty/PRESPR01</ows:Value>
+          <ows:Value>www.edisoft.org/java/observableProperty/TEMPPR01</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Parameter name="offering">
+        <ows:AllowedValues>
+          <ows:Value>adxl345</ows:Value>
+          <ows:Value>apu</ows:Value>
+          <ows:Value>b</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/1</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/10</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/2</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/3</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/4</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/5</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/6</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/7</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/8</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/9</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/9x3</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/developer</ows:Value>
+          <ows:Value>idwniu</ows:Value>
+          <ows:Value>iok</ows:Value>
+          <ows:Value>k</ows:Value>
+          <ows:Value>miyo</ows:Value>
+          <ows:Value>myNewOffering</ows:Value>
+          <ows:Value>offering</ows:Value>
+          <ows:Value>sensor10_offering_AirTemperatur</ows:Value>
+          <ows:Value>sensor10_offering_Windspeed</ows:Value>
+          <ows:Value>sensor11_offering_AirTemperatur</ows:Value>
+          <ows:Value>sensor13_offering</ows:Value>
+          <ows:Value>sensor1_offering</ows:Value>
+          <ows:Value>sensor1_offering2</ows:Value>
+          <ows:Value>sensor1_offering_2</ows:Value>
+          <ows:Value>temp_senor_data</ows:Value>
+          <ows:Value>temp_sensor_data</ows:Value>
+          <ows:Value>test100</ows:Value>
+          <ows:Value>test55</ows:Value>
+          <ows:Value>testArd</ows:Value>
+          <ows:Value>testOffering2</ows:Value>
+          <ows:Value>www.edisoft.org/java/offering/1</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Parameter name="procedure">
+        <ows:AllowedValues>
+          <ows:Value>adxl345</ows:Value>
+          <ows:Value>apu</ows:Value>
+          <ows:Value>file32</ows:Value>
+          <ows:Value>homer</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/1</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/10</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/2</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/3</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/4</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/5</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/6</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/7</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/8</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/9</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/developer</ows:Value>
+          <ows:Value>id</ows:Value>
+          <ows:Value>k</ows:Value>
+          <ows:Value>kokolox</ows:Value>
+          <ows:Value>kolox</ows:Value>
+          <ows:Value>myNewSens</ows:Value>
+          <ows:Value>sensor10_id</ows:Value>
+          <ows:Value>sensor11_id</ows:Value>
+          <ows:Value>sensor13_id</ows:Value>
+          <ows:Value>sensor1_id</ows:Value>
+          <ows:Value>temp_senor</ows:Value>
+          <ows:Value>temp_sensor</ows:Value>
+          <ows:Value>test100</ows:Value>
+          <ows:Value>test55</ows:Value>
+          <ows:Value>testArd</ows:Value>
+          <ows:Value>testSensor2</ows:Value>
+          <ows:Value>www.edisoft.org/java/procedure/1</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Parameter name="responseFormat">
+        <ows:AllowedValues>
+          <ows:Value>application/json</ows:Value>
+          <ows:Value>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</ows:Value>
+          <ows:Value>http://www.opengis.net/om/2.0</ows:Value>
+          <ows:Value>http://www.opengis.net/waterml-dr/2.0</ows:Value>
+          <ows:Value>http://www.opengis.net/waterml/2.0</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Parameter name="spatialFilter">
+        <ows:AllowedValues>
+          <ows:Range>
+            <ows:MinimumValue>-18.1425 -122.6819</ows:MinimumValue>
+            <ows:MaximumValue>52.0464393 178.4535</ows:MaximumValue>
+          </ows:Range>
+        </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Parameter name="temporalFilter">
+        <ows:AllowedValues>
+          <ows:Range>
+            <ows:MinimumValue>1998-07-21T20:29:59.971Z</ows:MinimumValue>
+            <ows:MaximumValue>2023-11-19T17:45:17.000Z</ows:MaximumValue>
+          </ows:Range>
+        </ows:AllowedValues>
+      </ows:Parameter>
+    </ows:Operation>
+    <ows:Operation name="GetObservationById">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/kvp?">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/x-kvp</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Get>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/exi">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/exi</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/json">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/json</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/pox">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/xml</ows:Value>
+                <ows:Value>text/xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/soap">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/soap+xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="observation">
+        <ows:AnyValue/>
+      </ows:Parameter>
+    </ows:Operation>
+    <ows:Operation name="GetResult">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/kvp?">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/x-kvp</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Get>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/exi">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/exi</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/json">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/json</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/pox">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/xml</ows:Value>
+                <ows:Value>text/xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/soap">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/soap+xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="featureOfInterest">
+        <ows:AllowedValues>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/6</ows:Value>
+          <ows:Value>http://www.52north.org/test/featureOfInterest/9</ows:Value>
+          <ows:Value>www.edisoft.org/java/featureOfInterest/1</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Parameter name="observedProperty">
+        <ows:AllowedValues>
+          <ows:Value>http://www.52north.org/test/observableProperty/6</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/9_2</ows:Value>
+          <ows:Value>www.edisoft.org/java/observableProperty/ASLVZZ01</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Parameter name="offering">
+        <ows:AllowedValues>
+          <ows:Value>http://www.52north.org/test/offering/6</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/9</ows:Value>
+          <ows:Value>www.edisoft.org/java/offering/1</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+    </ows:Operation>
+    <ows:Operation name="GetResultTemplate">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/kvp?">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/x-kvp</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Get>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/exi">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/exi</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/json">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/json</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/pox">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/xml</ows:Value>
+                <ows:Value>text/xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/soap">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/soap+xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="observedProperty">
+        <ows:AllowedValues>
+          <ows:Value>http://www.52north.org/test/observableProperty/6</ows:Value>
+          <ows:Value>http://www.52north.org/test/observableProperty/9_2</ows:Value>
+          <ows:Value>www.edisoft.org/java/observableProperty/ASLVZZ01</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Parameter name="offering">
+        <ows:AllowedValues>
+          <ows:Value>http://www.52north.org/test/offering/6</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/9</ows:Value>
+          <ows:Value>www.edisoft.org/java/offering/1</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+    </ows:Operation>
+    <ows:Operation name="InsertObservation">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/exi">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/exi</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/json">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/json</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/pox">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/xml</ows:Value>
+                <ows:Value>text/xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/soap">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/soap+xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="observation">
+        <ows:AnyValue/>
+        <ows:DataType ows:reference="http://schemas.opengis.net/om/2.0/observation.xsd#OM_Observation"/>
+      </ows:Parameter>
+      <ows:Parameter name="offering">
+        <ows:AllowedValues>
+          <ows:Value>adxl345</ows:Value>
+          <ows:Value>apu</ows:Value>
+          <ows:Value>b</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/1</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/10</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/2</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/3</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/4</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/5</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/6</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/7</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/8</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/9</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/9x3</ows:Value>
+          <ows:Value>http://www.52north.org/test/offering/developer</ows:Value>
+          <ows:Value>idwniu</ows:Value>
+          <ows:Value>iok</ows:Value>
+          <ows:Value>k</ows:Value>
+          <ows:Value>miyo</ows:Value>
+          <ows:Value>myNewOffering</ows:Value>
+          <ows:Value>offering</ows:Value>
+          <ows:Value>sensor10_offering_AirTemperatur</ows:Value>
+          <ows:Value>sensor10_offering_Windspeed</ows:Value>
+          <ows:Value>sensor11_offering_AirTemperatur</ows:Value>
+          <ows:Value>sensor13_offering</ows:Value>
+          <ows:Value>sensor1_offering</ows:Value>
+          <ows:Value>sensor1_offering2</ows:Value>
+          <ows:Value>sensor1_offering_2</ows:Value>
+          <ows:Value>temp_senor_data</ows:Value>
+          <ows:Value>temp_sensor_data</ows:Value>
+          <ows:Value>test100</ows:Value>
+          <ows:Value>test55</ows:Value>
+          <ows:Value>testArd</ows:Value>
+          <ows:Value>testOffering2</ows:Value>
+          <ows:Value>www.edisoft.org/java/offering/1</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+    </ows:Operation>
+    <ows:Operation name="InsertResult">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/exi">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/exi</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/json">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/json</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/pox">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/xml</ows:Value>
+                <ows:Value>text/xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/soap">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/soap+xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="resultValues">
+        <ows:AnyValue/>
+      </ows:Parameter>
+      <ows:Parameter name="template">
+        <ows:AllowedValues>
+          <ows:Value>http://www.52north.org/test/procedure/6/template/1</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/9/template/2</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/9/template/3</ows:Value>
+          <ows:Value>www.edisoft.org/java/template/1/1/ASLVZZ01</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+    </ows:Operation>
+    <ows:Operation name="InsertResultTemplate">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/exi">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/exi</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/json">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/json</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/pox">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/xml</ows:Value>
+                <ows:Value>text/xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/soap">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/soap+xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="proposedTemplate">
+        <ows:AnyValue/>
+      </ows:Parameter>
+    </ows:Operation>
+    <ows:Operation name="InsertSensor">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/exi">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/exi</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/json">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/json</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/pox">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/xml</ows:Value>
+                <ows:Value>text/xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/soap">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/soap+xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="metadata">
+        <ows:AnyValue/>
+        <ows:DataType ows:reference="http://schemas.opengis.net/sos/2.0/sosInsertionCapabilities.xsd#InsertionCapabilities"/>
+      </ows:Parameter>
+      <ows:Parameter name="observableProperty">
+        <ows:AnyValue/>
+      </ows:Parameter>
+      <ows:Parameter name="procedureDescription">
+        <ows:AnyValue/>
+      </ows:Parameter>
+      <ows:Parameter name="procedureDescriptionFormat">
+        <ows:AllowedValues>
+          <ows:Value>http://www.opengis.net/sensorML/1.0.1</ows:Value>
+          <ows:Value>http://www.opengis.net/sensorml/2.0</ows:Value>
+          <ows:Value>http://www.opengis.net/waterml/2.0/observationProcess</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+    </ows:Operation>
+    <ows:Operation name="UpdateSensorDescription">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/exi">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/exi</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/json">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/json</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/pox">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/xml</ows:Value>
+                <ows:Value>text/xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+          <ows:Post xlink:href="http://sensorweb.demo.52north.org/52n-sos-webapp/service/soap">
+            <ows:Constraint name="Content-Type">
+              <ows:AllowedValues>
+                <ows:Value>application/soap+xml</ows:Value>
+              </ows:AllowedValues>
+            </ows:Constraint>
+          </ows:Post>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="description">
+        <ows:AnyValue/>
+      </ows:Parameter>
+      <ows:Parameter name="procedure">
+        <ows:AllowedValues>
+          <ows:Value>adxl345</ows:Value>
+          <ows:Value>apu</ows:Value>
+          <ows:Value>file32</ows:Value>
+          <ows:Value>homer</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/1</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/10</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/2</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/3</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/4</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/5</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/6</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/7</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/8</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/9</ows:Value>
+          <ows:Value>http://www.52north.org/test/procedure/developer</ows:Value>
+          <ows:Value>id</ows:Value>
+          <ows:Value>k</ows:Value>
+          <ows:Value>kokolox</ows:Value>
+          <ows:Value>kolox</ows:Value>
+          <ows:Value>myNewSens</ows:Value>
+          <ows:Value>sensor10_id</ows:Value>
+          <ows:Value>sensor11_id</ows:Value>
+          <ows:Value>sensor13_id</ows:Value>
+          <ows:Value>sensor1_id</ows:Value>
+          <ows:Value>temp_senor</ows:Value>
+          <ows:Value>temp_sensor</ows:Value>
+          <ows:Value>test100</ows:Value>
+          <ows:Value>test55</ows:Value>
+          <ows:Value>testArd</ows:Value>
+          <ows:Value>testSensor2</ows:Value>
+          <ows:Value>www.edisoft.org/java/procedure/1</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+      <ows:Parameter name="procedureDescriptionFormat">
+        <ows:AllowedValues>
+          <ows:Value>http://www.opengis.net/sensorML/1.0.1</ows:Value>
+          <ows:Value>http://www.opengis.net/sensorml/2.0</ows:Value>
+          <ows:Value>http://www.opengis.net/waterml/2.0/observationProcess</ows:Value>
+        </ows:AllowedValues>
+      </ows:Parameter>
+    </ows:Operation>
+    <ows:Parameter name="crs">
+      <ows:AllowedValues>
+        <ows:Value>http://www.opengis.net/def/crs/EPSG/0/31466</ows:Value>
+        <ows:Value>http://www.opengis.net/def/crs/EPSG/0/31467</ows:Value>
+        <ows:Value>http://www.opengis.net/def/crs/EPSG/0/4258</ows:Value>
+        <ows:Value>http://www.opengis.net/def/crs/EPSG/0/4326</ows:Value>
+        <ows:Value>http://www.opengis.net/def/crs/EPSG/0/4979</ows:Value>
+      </ows:AllowedValues>
+    </ows:Parameter>
+    <ows:Parameter name="language">
+      <ows:AllowedValues>
+        <ows:Value>eng</ows:Value>
+      </ows:AllowedValues>
+    </ows:Parameter>
+    <ows:Parameter name="service">
+      <ows:AllowedValues>
+        <ows:Value>SOS</ows:Value>
+      </ows:AllowedValues>
+    </ows:Parameter>
+    <ows:Parameter name="version">
+      <ows:AllowedValues>
+        <ows:Value>1.0.0</ows:Value>
+        <ows:Value>2.0.0</ows:Value>
+      </ows:AllowedValues>
+    </ows:Parameter>
+  </ows:OperationsMetadata>
+  <sos:filterCapabilities>
+    <fes:Filter_Capabilities>
+      <fes:Conformance>
+        <fes:Constraint name="ImplementsQuery">
+          <ows:NoValues/>
+          <ows:DefaultValue>false</ows:DefaultValue>
+        </fes:Constraint>
+        <fes:Constraint name="ImplementsAdHocQuery">
+          <ows:NoValues/>
+          <ows:DefaultValue>false</ows:DefaultValue>
+        </fes:Constraint>
+        <fes:Constraint name="ImplementsFunctions">
+          <ows:NoValues/>
+          <ows:DefaultValue>false</ows:DefaultValue>
+        </fes:Constraint>
+        <fes:Constraint name="ImplementsResourceld">
+          <ows:NoValues/>
+          <ows:DefaultValue>false</ows:DefaultValue>
+        </fes:Constraint>
+        <fes:Constraint name="ImplementsMinStandardFilter">
+          <ows:NoValues/>
+          <ows:DefaultValue>false</ows:DefaultValue>
+        </fes:Constraint>
+        <fes:Constraint name="ImplementsStandardFilter">
+          <ows:NoValues/>
+          <ows:DefaultValue>false</ows:DefaultValue>
+        </fes:Constraint>
+        <fes:Constraint name="ImplementsMinSpatialFilter">
+          <ows:NoValues/>
+          <ows:DefaultValue>true</ows:DefaultValue>
+        </fes:Constraint>
+        <fes:Constraint name="ImplementsSpatialFilter">
+          <ows:NoValues/>
+          <ows:DefaultValue>true</ows:DefaultValue>
+        </fes:Constraint>
+        <fes:Constraint name="ImplementsMinTemporalFilter">
+          <ows:NoValues/>
+          <ows:DefaultValue>true</ows:DefaultValue>
+        </fes:Constraint>
+        <fes:Constraint name="ImplementsTemporalFilter">
+          <ows:NoValues/>
+          <ows:DefaultValue>true</ows:DefaultValue>
+        </fes:Constraint>
+        <fes:Constraint name="ImplementsVersionNav">
+          <ows:NoValues/>
+          <ows:DefaultValue>false</ows:DefaultValue>
+        </fes:Constraint>
+        <fes:Constraint name="ImplementsSorting">
+          <ows:NoValues/>
+          <ows:DefaultValue>false</ows:DefaultValue>
+        </fes:Constraint>
+        <fes:Constraint name="ImplementsExtendedOperators">
+          <ows:NoValues/>
+          <ows:DefaultValue>false</ows:DefaultValue>
+        </fes:Constraint>
+        <fes:Constraint name="ImplementsMinimumXPath">
+          <ows:NoValues/>
+          <ows:DefaultValue>false</ows:DefaultValue>
+        </fes:Constraint>
+        <fes:Constraint name="ImplementsSchemaElementFunc">
+          <ows:NoValues/>
+          <ows:DefaultValue>false</ows:DefaultValue>
+        </fes:Constraint>
+      </fes:Conformance>
+      <fes:Spatial_Capabilities>
+        <fes:GeometryOperands>
+          <fes:GeometryOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:Envelope"/>
+        </fes:GeometryOperands>
+        <fes:SpatialOperators>
+          <fes:SpatialOperator name="BBOX">
+            <fes:GeometryOperands>
+              <fes:GeometryOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:Envelope"/>
+            </fes:GeometryOperands>
+          </fes:SpatialOperator>
+        </fes:SpatialOperators>
+      </fes:Spatial_Capabilities>
+      <fes:Temporal_Capabilities>
+        <fes:TemporalOperands>
+          <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimeInstant"/>
+          <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimePeriod"/>
+        </fes:TemporalOperands>
+        <fes:TemporalOperators>
+          <fes:TemporalOperator name="Before">
+            <fes:TemporalOperands>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimeInstant"/>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimePeriod"/>
+            </fes:TemporalOperands>
+          </fes:TemporalOperator>
+          <fes:TemporalOperator name="After">
+            <fes:TemporalOperands>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimeInstant"/>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimePeriod"/>
+            </fes:TemporalOperands>
+          </fes:TemporalOperator>
+          <fes:TemporalOperator name="Begins">
+            <fes:TemporalOperands>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimeInstant"/>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimePeriod"/>
+            </fes:TemporalOperands>
+          </fes:TemporalOperator>
+          <fes:TemporalOperator name="Ends">
+            <fes:TemporalOperands>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimeInstant"/>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimePeriod"/>
+            </fes:TemporalOperands>
+          </fes:TemporalOperator>
+          <fes:TemporalOperator name="EndedBy">
+            <fes:TemporalOperands>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimeInstant"/>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimePeriod"/>
+            </fes:TemporalOperands>
+          </fes:TemporalOperator>
+          <fes:TemporalOperator name="BegunBy">
+            <fes:TemporalOperands>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimeInstant"/>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimePeriod"/>
+            </fes:TemporalOperands>
+          </fes:TemporalOperator>
+          <fes:TemporalOperator name="During">
+            <fes:TemporalOperands>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimeInstant"/>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimePeriod"/>
+            </fes:TemporalOperands>
+          </fes:TemporalOperator>
+          <fes:TemporalOperator name="TEquals">
+            <fes:TemporalOperands>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimeInstant"/>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimePeriod"/>
+            </fes:TemporalOperands>
+          </fes:TemporalOperator>
+          <fes:TemporalOperator name="TContains">
+            <fes:TemporalOperands>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimeInstant"/>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimePeriod"/>
+            </fes:TemporalOperands>
+          </fes:TemporalOperator>
+          <fes:TemporalOperator name="TOverlaps">
+            <fes:TemporalOperands>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimeInstant"/>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimePeriod"/>
+            </fes:TemporalOperands>
+          </fes:TemporalOperator>
+          <fes:TemporalOperator name="Meets">
+            <fes:TemporalOperands>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimeInstant"/>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimePeriod"/>
+            </fes:TemporalOperands>
+          </fes:TemporalOperator>
+          <fes:TemporalOperator name="MetBy">
+            <fes:TemporalOperands>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimeInstant"/>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimePeriod"/>
+            </fes:TemporalOperands>
+          </fes:TemporalOperator>
+          <fes:TemporalOperator name="OverlappedBy">
+            <fes:TemporalOperands>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimeInstant"/>
+              <fes:TemporalOperand xmlns:ns="http://www.opengis.net/gml/3.2" name="ns:TimePeriod"/>
+            </fes:TemporalOperands>
+          </fes:TemporalOperator>
+        </fes:TemporalOperators>
+      </fes:Temporal_Capabilities>
+    </fes:Filter_Capabilities>
+  </sos:filterCapabilities>
+  <sos:contents>
+    <sos:Contents>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>adxl345</swes:identifier>
+          <swes:name codeSpace="eng">adxl345</swes:name>
+          <swes:procedure>adxl345</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>Tilt</swes:observableProperty>
+          <sos:observedArea>
+            <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:lowerCorner>7.5 52.0</gml:lowerCorner>
+              <gml:upperCorner>7.5 52.0</gml:upperCorner>
+            </gml:Envelope>
+          </sos:observedArea>
+          <sos:phenomenonTime>
+            <gml:TimePeriod gml:id="phenomenonTime_1">
+              <gml:beginPosition>2018-05-22T11:03:06.000Z</gml:beginPosition>
+              <gml:endPosition>2018-05-22T11:51:47.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:phenomenonTime>
+          <sos:resultTime>
+            <gml:TimePeriod gml:id="resultTime_1">
+              <gml:beginPosition>2018-05-22T11:03:06.000Z</gml:beginPosition>
+              <gml:endPosition>2018-05-22T11:51:47.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:resultTime>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>apu</swes:identifier>
+          <swes:name codeSpace="eng">apu</swes:name>
+          <swes:procedure>apu</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>Tilt</swes:observableProperty>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>b</swes:identifier>
+          <swes:name codeSpace="eng">b</swes:name>
+          <swes:procedure>homer</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>Tilt</swes:observableProperty>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>http://www.52north.org/test/offering/1</swes:identifier>
+          <swes:name codeSpace="eng">Offering for sensor 1</swes:name>
+          <swes:procedure>http://www.52north.org/test/procedure/1</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/1</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/10_1</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/10_2</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/10_3</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/10_4</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/10_5</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/10_6</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/10_7</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/9_1</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/9_2</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/9_3</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/9_4</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/9_5</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/9_6</swes:observableProperty>
+          <sos:observedArea>
+            <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:lowerCorner>51.883906 7.727958</gml:lowerCorner>
+              <gml:upperCorner>51.883906 7.727958</gml:upperCorner>
+            </gml:Envelope>
+          </sos:observedArea>
+          <sos:phenomenonTime>
+            <gml:TimePeriod gml:id="phenomenonTime_4">
+              <gml:beginPosition>2012-11-19T13:00:00.000Z</gml:beginPosition>
+              <gml:endPosition>2018-11-29T17:45:15.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:phenomenonTime>
+          <sos:resultTime>
+            <gml:TimePeriod gml:id="resultTime_4">
+              <gml:beginPosition>2012-11-19T13:00:00.000Z</gml:beginPosition>
+              <gml:endPosition>2018-11-29T17:45:15.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:resultTime>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation</sos:observationType>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CountObservation</sos:observationType>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TextObservation</sos:observationType>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TruthObservation</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>http://www.52north.org/test/offering/10</swes:identifier>
+          <swes:name codeSpace="eng">offeringID</swes:name>
+          <swes:procedure>http://www.52north.org/test/procedure/10</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/10_1</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/10_2</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/10_3</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/10_4</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/10_5</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/10_6</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/10_7</swes:observableProperty>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation</sos:observationType>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CountObservation</sos:observationType>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_GeometryObservation</sos:observationType>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_SWEArrayObservation</sos:observationType>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TextObservation</sos:observationType>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TruthObservation</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>http://www.52north.org/test/offering/2</swes:identifier>
+          <swes:name codeSpace="eng">Offering for sensor 2</swes:name>
+          <swes:procedure>http://www.52north.org/test/procedure/2</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/2</swes:observableProperty>
+          <sos:observedArea>
+            <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:lowerCorner>34.056517 -117.195711</gml:lowerCorner>
+              <gml:upperCorner>34.056517 -117.195711</gml:upperCorner>
+            </gml:Envelope>
+          </sos:observedArea>
+          <sos:phenomenonTime>
+            <gml:TimePeriod gml:id="phenomenonTime_6">
+              <gml:beginPosition>2012-11-19T13:00:00.000Z</gml:beginPosition>
+              <gml:endPosition>2012-11-19T13:09:00.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:phenomenonTime>
+          <sos:resultTime>
+            <gml:TimePeriod gml:id="resultTime_6">
+              <gml:beginPosition>2012-11-19T13:00:00.000Z</gml:beginPosition>
+              <gml:endPosition>2012-11-19T13:09:00.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:resultTime>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CountObservation</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>http://www.52north.org/test/offering/3</swes:identifier>
+          <swes:name codeSpace="eng">Offering for sensor 3</swes:name>
+          <swes:procedure>http://www.52north.org/test/procedure/3</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/3</swes:observableProperty>
+          <sos:observedArea>
+            <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:lowerCorner>50.7857066129618 6.13201440420609</gml:lowerCorner>
+              <gml:upperCorner>50.7857066129618 6.13201440420609</gml:upperCorner>
+            </gml:Envelope>
+          </sos:observedArea>
+          <sos:phenomenonTime>
+            <gml:TimePeriod gml:id="phenomenonTime_7">
+              <gml:beginPosition>2012-11-19T13:00:00.000Z</gml:beginPosition>
+              <gml:endPosition>2012-11-19T13:09:00.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:phenomenonTime>
+          <sos:resultTime>
+            <gml:TimePeriod gml:id="resultTime_7">
+              <gml:beginPosition>2012-11-19T13:00:00.000Z</gml:beginPosition>
+              <gml:endPosition>2012-11-19T13:09:00.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:resultTime>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TruthObservation</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>http://www.52north.org/test/offering/4</swes:identifier>
+          <swes:name codeSpace="eng">Offering for sensor 2</swes:name>
+          <swes:procedure>http://www.52north.org/test/procedure/4</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/4</swes:observableProperty>
+          <sos:observedArea>
+            <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:lowerCorner>51.883906 7.727958</gml:lowerCorner>
+              <gml:upperCorner>51.883906 7.727958</gml:upperCorner>
+            </gml:Envelope>
+          </sos:observedArea>
+          <sos:phenomenonTime>
+            <gml:TimePeriod gml:id="phenomenonTime_8">
+              <gml:beginPosition>2012-11-19T13:00:00.000Z</gml:beginPosition>
+              <gml:endPosition>2012-11-19T13:09:00.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:phenomenonTime>
+          <sos:resultTime>
+            <gml:TimePeriod gml:id="resultTime_8">
+              <gml:beginPosition>2012-11-19T13:00:00.000Z</gml:beginPosition>
+              <gml:endPosition>2012-11-19T13:09:00.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:resultTime>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>http://www.52north.org/test/offering/5</swes:identifier>
+          <swes:name codeSpace="eng">Offering for sensor 5</swes:name>
+          <swes:procedure>http://www.52north.org/test/procedure/5</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/5</swes:observableProperty>
+          <sos:observedArea>
+            <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:lowerCorner>51.02881 13.72376</gml:lowerCorner>
+              <gml:upperCorner>51.02881 13.72376</gml:upperCorner>
+            </gml:Envelope>
+          </sos:observedArea>
+          <sos:phenomenonTime>
+            <gml:TimePeriod gml:id="phenomenonTime_9">
+              <gml:beginPosition>2012-11-19T13:00:00.000Z</gml:beginPosition>
+              <gml:endPosition>2012-11-19T13:09:00.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:phenomenonTime>
+          <sos:resultTime>
+            <gml:TimePeriod gml:id="resultTime_9">
+              <gml:beginPosition>2012-11-19T13:00:00.000Z</gml:beginPosition>
+              <gml:endPosition>2012-11-19T13:09:00.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:resultTime>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TextObservation</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>http://www.52north.org/test/offering/6</swes:identifier>
+          <swes:name codeSpace="eng">Offering for sensor 6</swes:name>
+          <swes:procedure>http://www.52north.org/test/procedure/6</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/6</swes:observableProperty>
+          <sos:observedArea>
+            <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:lowerCorner>51.447722 7.270806</gml:lowerCorner>
+              <gml:upperCorner>51.447722 7.270806</gml:upperCorner>
+            </gml:Envelope>
+          </sos:observedArea>
+          <sos:phenomenonTime>
+            <gml:TimePeriod gml:id="phenomenonTime_10">
+              <gml:beginPosition>2012-11-19T13:00:00.000Z</gml:beginPosition>
+              <gml:endPosition>2012-11-19T13:09:00.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:phenomenonTime>
+          <sos:resultTime>
+            <gml:TimePeriod gml:id="resultTime_10">
+              <gml:beginPosition>2012-11-19T13:00:00.000Z</gml:beginPosition>
+              <gml:endPosition>2012-11-19T13:09:00.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:resultTime>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>http://www.52north.org/test/offering/7</swes:identifier>
+          <swes:name codeSpace="eng">Offering for sensor 7</swes:name>
+          <swes:procedure>http://www.52north.org/test/procedure/7</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/7</swes:observableProperty>
+          <sos:observedArea>
+            <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:lowerCorner>52.0464393 4.28339359999995</gml:lowerCorner>
+              <gml:upperCorner>52.0464393 4.28339359999995</gml:upperCorner>
+            </gml:Envelope>
+          </sos:observedArea>
+          <sos:phenomenonTime>
+            <gml:TimePeriod gml:id="phenomenonTime_11">
+              <gml:beginPosition>2012-11-19T13:00:00.000Z</gml:beginPosition>
+              <gml:endPosition>2012-11-19T13:09:00.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:phenomenonTime>
+          <sos:resultTime>
+            <gml:TimePeriod gml:id="resultTime_11">
+              <gml:beginPosition>2012-11-19T13:00:00.000Z</gml:beginPosition>
+              <gml:endPosition>2012-11-19T13:09:00.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:resultTime>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>http://www.52north.org/test/offering/8</swes:identifier>
+          <swes:name codeSpace="eng">Offering for sensor 8</swes:name>
+          <swes:procedure>http://www.52north.org/test/procedure/8</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/8</swes:observableProperty>
+          <sos:observedArea>
+            <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:lowerCorner>50.68606 10.9430600000001</gml:lowerCorner>
+              <gml:upperCorner>50.68606 10.9430600000001</gml:upperCorner>
+            </gml:Envelope>
+          </sos:observedArea>
+          <sos:phenomenonTime>
+            <gml:TimePeriod gml:id="phenomenonTime_12">
+              <gml:beginPosition>2012-11-19T13:00:00.000Z</gml:beginPosition>
+              <gml:endPosition>2012-11-19T13:49:59.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:phenomenonTime>
+          <sos:resultTime>
+            <gml:TimePeriod gml:id="resultTime_12">
+              <gml:beginPosition>2012-11-19T13:05:00.000Z</gml:beginPosition>
+              <gml:endPosition>2012-11-19T13:50:00.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:resultTime>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>http://www.52north.org/test/offering/9</swes:identifier>
+          <swes:name codeSpace="eng">offeringID</swes:name>
+          <swes:procedure>http://www.52north.org/test/procedure/9</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/9_1</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/9_2</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/9_3</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/9_4</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/9_5</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/9_6</swes:observableProperty>
+          <sos:observedArea>
+            <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:lowerCorner>7.52 52.9</gml:lowerCorner>
+              <gml:upperCorner>7.52 52.9</gml:upperCorner>
+            </gml:Envelope>
+          </sos:observedArea>
+          <sos:phenomenonTime>
+            <gml:TimePeriod gml:id="phenomenonTime_13">
+              <gml:beginPosition>2012-11-19T11:30:00.000Z</gml:beginPosition>
+              <gml:endPosition>2023-11-19T17:45:17.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:phenomenonTime>
+          <sos:resultTime>
+            <gml:TimePeriod gml:id="resultTime_13">
+              <gml:beginPosition>2012-11-19T11:31:01.000Z</gml:beginPosition>
+              <gml:endPosition>2023-11-19T17:45:17.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:resultTime>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation</sos:observationType>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CountObservation</sos:observationType>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TextObservation</sos:observationType>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TruthObservation</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>http://www.52north.org/test/offering/9x3</swes:identifier>
+          <swes:name codeSpace="eng">offeringID</swes:name>
+          <swes:procedure>http://www.52north.org/test/procedure/9</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/9_1</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/9_2</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/9_3</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/9_4</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/9_5</swes:observableProperty>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/9_6</swes:observableProperty>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CategoryObservation</sos:observationType>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CountObservation</sos:observationType>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_GeometryObservation</sos:observationType>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TextObservation</sos:observationType>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TruthObservation</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>http://www.52north.org/test/offering/developer</swes:identifier>
+          <swes:name codeSpace="eng">Offering for procedure developer</swes:name>
+          <swes:procedure>http://www.52north.org/test/procedure/developer</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>http://www.52north.org/test/observableProperty/developer</swes:observableProperty>
+          <sos:observedArea>
+            <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:lowerCorner>0.0 -122.6819</gml:lowerCorner>
+              <gml:upperCorner>51.947777 7.631538</gml:upperCorner>
+            </gml:Envelope>
+          </sos:observedArea>
+          <sos:phenomenonTime>
+            <gml:TimePeriod gml:id="phenomenonTime_15">
+              <gml:beginPosition>2008-10-29T00:00:00.000Z</gml:beginPosition>
+              <gml:endPosition>2012-12-31T23:00:00.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:phenomenonTime>
+          <sos:resultTime>
+            <gml:TimePeriod gml:id="resultTime_15">
+              <gml:beginPosition>2008-10-29T00:00:00.000Z</gml:beginPosition>
+              <gml:endPosition>2012-12-31T22:01:00.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:resultTime>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TextObservation</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>idwniu</swes:identifier>
+          <swes:name codeSpace="eng">idwniu</swes:name>
+          <swes:procedure>kolox</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>Humidity</swes:observableProperty>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>iok</swes:identifier>
+          <swes:name codeSpace="eng">iok</swes:name>
+          <swes:procedure>kokolox</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>AirTemperature</swes:observableProperty>
+          <swes:observableProperty>Tilt</swes:observableProperty>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>k</swes:identifier>
+          <swes:name codeSpace="eng">k</swes:name>
+          <swes:procedure>k</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>AirTemperature</swes:observableProperty>
+          <swes:observableProperty>Humidity</swes:observableProperty>
+          <swes:observableProperty>Tilt</swes:observableProperty>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>miyo</swes:identifier>
+          <swes:name codeSpace="eng">miyo</swes:name>
+          <swes:procedure>file32</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>AirTemperature</swes:observableProperty>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>myNewOffering</swes:identifier>
+          <swes:name codeSpace="eng">myNewOffering</swes:name>
+          <swes:procedure>myNewSens</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>AirTemperature</swes:observableProperty>
+          <swes:observableProperty>Tilt</swes:observableProperty>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>offering</swes:identifier>
+          <swes:name codeSpace="eng">offering</swes:name>
+          <swes:procedure>id</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>AirTemperature</swes:observableProperty>
+          <swes:observableProperty>Tilt</swes:observableProperty>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>sensor10_offering_AirTemperatur</swes:identifier>
+          <swes:name codeSpace="eng">sensor10_offering_AirTemperatur</swes:name>
+          <swes:procedure>sensor10_id</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>AirTemperatur</swes:observableProperty>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>sensor10_offering_Windspeed</swes:identifier>
+          <swes:name codeSpace="eng">sensor10_offering_Windspeed</swes:name>
+          <swes:procedure>sensor10_id</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>Windspeed</swes:observableProperty>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>sensor11_offering_AirTemperatur</swes:identifier>
+          <swes:name codeSpace="eng">sensor11_offering_AirTemperatur</swes:name>
+          <swes:procedure>sensor11_id</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>Schinken</swes:observableProperty>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>sensor13_offering</swes:identifier>
+          <swes:name codeSpace="eng">sensor13_offering_AirTemperatur</swes:name>
+          <swes:procedure>sensor13_id</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>AirTemperatur</swes:observableProperty>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>sensor1_offering</swes:identifier>
+          <swes:name codeSpace="eng">sensor1_offering</swes:name>
+          <swes:procedure>sensor1_id</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>AirTemperatur</swes:observableProperty>
+          <sos:observedArea>
+            <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:lowerCorner>7.5 52.2</gml:lowerCorner>
+              <gml:upperCorner>7.5 52.2</gml:upperCorner>
+            </gml:Envelope>
+          </sos:observedArea>
+          <sos:phenomenonTime>
+            <gml:TimePeriod gml:id="phenomenonTime_26">
+              <gml:beginPosition>2018-05-08T15:30:00.000Z</gml:beginPosition>
+              <gml:endPosition>2018-05-08T15:35:00.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:phenomenonTime>
+          <sos:resultTime>
+            <gml:TimePeriod gml:id="resultTime_26">
+              <gml:beginPosition>2018-05-08T15:30:00.000Z</gml:beginPosition>
+              <gml:endPosition>2018-05-08T15:35:00.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:resultTime>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>sensor1_offering2</swes:identifier>
+          <swes:name codeSpace="eng">sensor1_offering2</swes:name>
+          <swes:procedure>sensor1_id</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>AirTemperatur</swes:observableProperty>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>sensor1_offering_2</swes:identifier>
+          <swes:name codeSpace="eng">sensor1_offering_2</swes:name>
+          <swes:procedure>sensor1_id</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>AirTemperatur</swes:observableProperty>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>temp_senor_data</swes:identifier>
+          <swes:name codeSpace="eng">Temperature sensor data</swes:name>
+          <swes:procedure>temp_senor</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>temperature</swes:observableProperty>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>temp_sensor_data</swes:identifier>
+          <swes:name codeSpace="eng">Temperature sensor data</swes:name>
+          <swes:procedure>temp_sensor</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>temperature</swes:observableProperty>
+          <sos:observedArea>
+            <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:lowerCorner>51.9351011001049 7.65196881225419</gml:lowerCorner>
+              <gml:upperCorner>51.9351011001049 7.65196881225419</gml:upperCorner>
+            </gml:Envelope>
+          </sos:observedArea>
+          <sos:phenomenonTime>
+            <gml:TimePeriod gml:id="phenomenonTime_30">
+              <gml:beginPosition>2012-11-19T17:45:15.000Z</gml:beginPosition>
+              <gml:endPosition>2012-11-19T17:45:15.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:phenomenonTime>
+          <sos:resultTime>
+            <gml:TimePeriod gml:id="resultTime_30">
+              <gml:beginPosition>2012-11-19T17:45:15.000Z</gml:beginPosition>
+              <gml:endPosition>2012-11-19T17:45:15.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:resultTime>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>test100</swes:identifier>
+          <swes:name codeSpace="eng">test100</swes:name>
+          <swes:procedure>test100</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>AirTemperature</swes:observableProperty>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>test55</swes:identifier>
+          <swes:name codeSpace="eng">test55</swes:name>
+          <swes:procedure>test55</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>AirTemperature</swes:observableProperty>
+          <swes:observableProperty>Humidity</swes:observableProperty>
+          <swes:observableProperty>Tilt</swes:observableProperty>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>testArd</swes:identifier>
+          <swes:name codeSpace="eng">testArd</swes:name>
+          <swes:procedure>testArd</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>Tilt</swes:observableProperty>
+          <sos:observedArea>
+            <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:lowerCorner>7.5 52.0</gml:lowerCorner>
+              <gml:upperCorner>7.5 52.0</gml:upperCorner>
+            </gml:Envelope>
+          </sos:observedArea>
+          <sos:phenomenonTime>
+            <gml:TimePeriod gml:id="phenomenonTime_33">
+              <gml:beginPosition>2018-05-08T15:15:00.000Z</gml:beginPosition>
+              <gml:endPosition>2018-06-04T22:20:17.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:phenomenonTime>
+          <sos:resultTime>
+            <gml:TimePeriod gml:id="resultTime_33">
+              <gml:beginPosition>2018-05-08T15:15:00.000Z</gml:beginPosition>
+              <gml:endPosition>2018-06-04T22:20:17.000Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:resultTime>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>testOffering2</swes:identifier>
+          <swes:name codeSpace="eng">Offering for testSensor2</swes:name>
+          <swes:procedure>testSensor2</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>MyTemperatur2</swes:observableProperty>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+      <swes:offering>
+        <sos:ObservationOffering xmlns:ns="http://www.opengis.net/sos/2.0">
+          <swes:identifier>www.edisoft.org/java/offering/1</swes:identifier>
+          <swes:name codeSpace="eng">Dummy offering label</swes:name>
+          <swes:procedure>www.edisoft.org/java/procedure/1</swes:procedure>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
+          <swes:procedureDescriptionFormat>http://www.opengis.net/waterml/2.0/observationProcess</swes:procedureDescriptionFormat>
+          <swes:observableProperty>www.edisoft.org/java/observableProperty/ASLVZZ01</swes:observableProperty>
+          <swes:observableProperty>www.edisoft.org/java/observableProperty/PRESPR01</swes:observableProperty>
+          <swes:observableProperty>www.edisoft.org/java/observableProperty/TEMPPR01</swes:observableProperty>
+          <sos:observedArea>
+            <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:lowerCorner>-18.1425 178.4535</gml:lowerCorner>
+              <gml:upperCorner>-18.1425 178.4535</gml:upperCorner>
+            </gml:Envelope>
+          </sos:observedArea>
+          <sos:phenomenonTime>
+            <gml:TimePeriod gml:id="phenomenonTime_35">
+              <gml:beginPosition>1998-07-21T20:29:59.971Z</gml:beginPosition>
+              <gml:endPosition>1998-07-22T16:19:59.980Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:phenomenonTime>
+          <sos:resultTime>
+            <gml:TimePeriod gml:id="resultTime_35">
+              <gml:beginPosition>1998-07-21T20:29:59.971Z</gml:beginPosition>
+              <gml:endPosition>1998-07-22T16:19:59.980Z</gml:endPosition>
+            </gml:TimePeriod>
+          </sos:resultTime>
+          <sos:responseFormat>application/json</sos:responseFormat>
+          <sos:responseFormat>http://dd.eionet.europa.eu/schemaset/id2011850eu-1.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/om/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml-dr/2.0</sos:responseFormat>
+          <sos:responseFormat>http://www.opengis.net/waterml/2.0</sos:responseFormat>
+          <sos:observationType>http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement</sos:observationType>
+          <sos:featureOfInterestType>http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint</sos:featureOfInterestType>
+        </sos:ObservationOffering>
+      </swes:offering>
+    </sos:Contents>
+  </sos:contents>
+</sos:Capabilities>

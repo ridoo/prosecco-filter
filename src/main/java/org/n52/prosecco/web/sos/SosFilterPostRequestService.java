@@ -29,13 +29,13 @@ public final class SosFilterPostRequestService {
 
     String readRequestBody(HttpServletRequest request) {
         try (BufferedReader reader = request.getReader()) {
-            
-            
-            //XmlObject xmlDoc = XmlObject.Factory.parse(reader);
-            
+
+            // XmlObject xmlDoc = XmlObject.Factory.parse(reader);
+
             // TODO Auto-generated method stub
-            
-            return reader.lines().collect(Collectors.joining());
+
+            return reader.lines()
+                         .collect(Collectors.joining());
         } catch (IOException e) {
             // TODO Auto-generated catch block
             LOGGER.error("Could not read request payload: {}", e);
