@@ -17,7 +17,6 @@ public final class XPathConfig {
                 ? capabilitiesXPathsByParameter
                 : Collections.emptyMap();
     }
-    
 
     public Map<String, Set<String>> getCapabilitiesXPathsByParameter() {
         return capabilitiesXPathsByParameter;

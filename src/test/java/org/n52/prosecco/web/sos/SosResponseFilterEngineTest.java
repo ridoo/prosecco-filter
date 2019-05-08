@@ -4,10 +4,16 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.n52.prosecco.AuthenticationContext;
+import org.n52.prosecco.policy.Policy;
 import org.n52.prosecco.policy.PolicyConfig;
+import org.n52.prosecco.policy.Rule;
 import org.n52.prosecco.policy.ValueRestriction;
 import org.n52.prosecco.web.sos.xml.SosResponseFilterEngine;
 import org.n52.prosecco.web.sos.xml.XPathConfig;
@@ -35,7 +41,9 @@ public class SosResponseFilterEngineTest {
     
     @Test
     public void test() throws Exception {
-        PolicyConfig policyConfig = PolicyConfig.createSimple(ValueRestriction.of("procedure", "file32"));
+        Policy policy = Policy.of("policy1", "deny", ValueRestriction.of("procedure", "file32"));
+        PolicyConfig policyConfig = new PolicyConfig(policy, Rule.of("rule1", "role", "policy1"));
+        
         AuthenticationContext authContext = createStaticAuthContext("role");
         SosResponseFilterEngine engine = new SosResponseFilterEngine(policyConfig, xPathConfig, authContext);
 

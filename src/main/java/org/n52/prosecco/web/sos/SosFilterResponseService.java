@@ -20,7 +20,14 @@ public final class SosFilterResponseService {
 
     public ResponseEntity<String> filter(ResponseEntity<String> response) {
         try {
-            return filterEngine.filter(response);
+            ResponseEntity<String> filteredResponse = filterEngine.filter(response);
+            
+            LOGGER.trace("F I L T E R E D   R E S P O N S E   info:");
+            LOGGER.trace("headers         : {}", response.getHeaders());
+            LOGGER.trace("StatusCode      : {}", response.getStatusCode());
+            LOGGER.trace("body            : {}", response.getBody());
+            
+            return filteredResponse;
         } catch (FilterException e) {
             LOGGER.error("Returning unfiltered response!", e);
             return response;

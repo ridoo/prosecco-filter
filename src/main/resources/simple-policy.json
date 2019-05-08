@@ -14,7 +14,6 @@
     },
     {
       "name": "weather",
-      "effect": "allow",
       "valueRestriction": [
         {
           "name": "phenomenon",
@@ -37,6 +36,12 @@
           "name": "procedure",
           "values": [
             "Einzelwert"
+          ]
+        },
+        {
+          "name": "offering",
+          "values": [
+            "Zeitreihen_Einzelwert"
           ]
         }
       ]
