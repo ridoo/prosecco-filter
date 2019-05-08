@@ -27,7 +27,8 @@ public final class RequestFilterEngineTest {
 
     @Test
     public void given_allowingValueRestriction_when_contextWithAllowedValues_then_allowedValuesKept() {
-        PolicyConfig config = PolicyConfig.createSimple("allow", ValueRestriction.of("phenomenon", "value1", "value2"));
+        ValueRestriction restriction = ValueRestriction.of("phenomenon", "value1", "value2");
+        PolicyConfig config = PolicyConfig.createSimple("allow", "role", restriction);
         RequestFilterEngine engine = new RequestFilterEngine(config);
 
         FilterContext initialContext = FilterContextBuilder.of("role")
@@ -40,7 +41,8 @@ public final class RequestFilterEngineTest {
 
     @Test
     public void given_denyingValueRestriction_when_contextWithAllowedValues_then_deniedValuesRemoved() {
-        PolicyConfig config = PolicyConfig.createSimple(ValueRestriction.of("phenomenon", "value1", "value2"));
+        ValueRestriction restriction = ValueRestriction.of("phenomenon", "value1", "value2");
+        PolicyConfig config = PolicyConfig.createSimple("role", restriction);
         RequestFilterEngine engine = new RequestFilterEngine(config);
 
         FilterContext initialContext = FilterContextBuilder.of("role")
@@ -53,7 +55,8 @@ public final class RequestFilterEngineTest {
 
     @Test
     public void given_simpleConfig_when_contextWithHasUnconfiguredValues_then_unconfiguredValuesRemoved() {
-        PolicyConfig config = PolicyConfig.createSimple("allow", ValueRestriction.of("phenomenon", "value1"));
+        ValueRestriction restriction = ValueRestriction.of("phenomenon", "value1");
+        PolicyConfig config = PolicyConfig.createSimple("allow", "role", restriction);
         RequestFilterEngine engine = new RequestFilterEngine(config);
 
         FilterContext initialContext = FilterContextBuilder.of("role")

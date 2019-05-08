@@ -18,13 +18,13 @@ public final class PolicyConfig {
     private final List<Policy> policies;
     private final List<Rule> rules;
     
-    public static PolicyConfig createSimple(ValueRestriction... valueRestrictions) {
-        return createSimple("deny", valueRestrictions);
+    public static PolicyConfig createSimple(String role, ValueRestriction... valueRestrictions) {
+        return createSimple("deny", role, valueRestrictions);
     }
     
-    public static PolicyConfig createSimple(String effect, ValueRestriction... valueRestrictions) {
+    public static PolicyConfig createSimple(String effect, String role, ValueRestriction... valueRestrictions) {
         Policy policy = Policy.of("policy1", effect, valueRestrictions);
-        Rule rule = Rule.of("rule1", "role", "policy1");
+        Rule rule = Rule.of("rule1", role, "policy1");
         return new PolicyConfig(policy, rule);
     }
     
