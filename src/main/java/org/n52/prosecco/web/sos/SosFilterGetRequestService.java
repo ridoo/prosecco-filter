@@ -43,6 +43,7 @@ public final class SosFilterGetRequestService {
         Set<String> timespans = context.getTimespans()
                                        .stream()
                                        .map(Timespan::toString)
+                                       .map("om:phenomenonTime,"::concat)
                                        .collect(Collectors.toSet());
         return new String[] {
             formatKVP(SosFilterParameter.PHENOMENON, context.getPhenomena()),

@@ -21,6 +21,7 @@ import org.n52.prosecco.web.FilterException;
 import org.n52.prosecco.web.FilterRequestService;
 import org.n52.prosecco.web.request.FilterContext;
 import org.n52.prosecco.web.request.Timespan;
+import org.n52.prosecco.web.request.TimespanParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -93,7 +94,8 @@ public final class SosFilterRequestService implements FilterRequestService {
 
     private Timespan parseTimespan(String temporalFilter) throws FilterException {
         try {
-            return new TimespanParser().parsePhenomenonTime(temporalFilter);
+            TimespanParser timespanParser = new TimespanParser("om:phenomenontime");
+            return timespanParser.parsePhenomenonTime(temporalFilter);
         } catch (IllegalArgumentException | DateTimeException e) {
             LOGGER.error("Could not parse temporal filter: {}", temporalFilter, e);
             throw new FilterException("Invalid temporal filter: " + temporalFilter);

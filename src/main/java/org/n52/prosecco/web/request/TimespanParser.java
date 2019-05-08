@@ -1,5 +1,5 @@
 
-package org.n52.prosecco.web.sos;
+package org.n52.prosecco.web.request;
 
 import java.time.DateTimeException;
 import java.time.Instant;
@@ -14,9 +14,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import org.n52.prosecco.web.request.Timespan;
-import org.n52.prosecco.web.request.TimespanRelation;
-
 public final class TimespanParser {
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = new DateTimeFormatterBuilder().appendOptional(DateTimeFormatter.ISO_ZONED_DATE_TIME)
@@ -24,7 +21,17 @@ public final class TimespanParser {
                                                                                                .appendOptional(DateTimeFormatter.ISO_INSTANT)
                                                                                                .appendOptional(DateTimeFormatter.ISO_DATE)
                                                                                                .toFormatter();
-
+    private final String prefix;
+    
+    public TimespanParser() {
+        this(null);
+    }
+    
+    public TimespanParser(String prefix) {
+        this.prefix = prefix != null
+                ? prefix
+                : "";
+    }
 
     /**
      * @param temporalFilter
@@ -37,7 +44,6 @@ public final class TimespanParser {
             return null;
         }
         
-        String prefix = "om:phenomenontime";
         if (temporalFilter.toLowerCase().startsWith(prefix)) {
             String[] parts = temporalFilter.split(",");
             String[] partsWithoutPrefix = Arrays.copyOfRange(parts, 1, parts.length);

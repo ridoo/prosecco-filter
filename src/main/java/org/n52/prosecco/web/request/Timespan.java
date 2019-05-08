@@ -64,32 +64,6 @@ public final class Timespan {
         return end;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("om:phenomenonTime,");
-        switch (relation) {
-        case ON:
-            sb.append(start.toString());
-            return sb.toString();
-        case BETWEEN:
-            sb.append(start.toString())
-              .append("/")
-              .append(end.toString());
-            return sb.toString();
-        case BEFORE:
-            sb.append("before,")
-              .append(end.toString());
-            return sb.toString();
-        case AFTER:
-            sb.append("after,")
-              .append(start.toString());
-            return sb.toString();
-        default:
-            return "";
-        }
-    }
-
     public boolean isBefore(TemporalAccessor pointInTime) {
         Instant pit = asInstant(pointInTime);
         if (relation == TimespanRelation.BETWEEN) {
@@ -180,6 +154,31 @@ public final class Timespan {
         }
 
         throw new IllegalArgumentException("No conversion from " + temporalAccessor + " to Instant.");
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        switch (relation) {
+        case ON:
+            sb.append(start.toString());
+            return sb.toString();
+        case BETWEEN:
+            sb.append(start.toString())
+              .append("/")
+              .append(end.toString());
+            return sb.toString();
+        case BEFORE:
+            sb.append("before,")
+              .append(end.toString());
+            return sb.toString();
+        case AFTER:
+            sb.append("after,")
+              .append(start.toString());
+            return sb.toString();
+        default:
+            return "";
+        }
     }
 
 }

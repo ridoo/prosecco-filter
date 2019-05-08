@@ -14,28 +14,28 @@ public class TimespanTest {
 		Instant start = Instant.parse("2019-01-01T12:00:00Z");
 		Instant end = Instant.parse("2019-01-10T12:00:00Z");
 		Timespan actual = Timespan.between(start, end);
-		String expected = "om:phenomenonTime," + start.toString() + "/" + end.toString();
+		String expected = start.toString() + "/" + end.toString();
 		assertThat(actual.toString()).isEqualTo(expected);
 	}
 	
 	@Test
 	public void given_onTimespan_when_toString_then_validOmPhenomenonTime() {
 		Timespan actual = Timespan.on(LocalDate.parse("2019-01-01"));
-		String expected = "om:phenomenonTime," + LocalDate.parse("2019-01-01").toString();
+		String expected = LocalDate.parse("2019-01-01").toString();
 		assertThat(actual.toString()).isEqualTo(expected);
 	}
 	
 	@Test
 	public void given_beforeTimespan_when_toString_then_validOmPhenomenonTime() {
 		Timespan actual = Timespan.before(LocalDate.parse("2019-01-01"));
-		String expected = "om:phenomenonTime,before," + LocalDate.parse("2019-01-01").toString();
+		String expected = "before," + LocalDate.parse("2019-01-01").toString();
 		assertThat(actual.toString()).isEqualTo(expected);
 	}
 	
 	@Test
 	public void given_afterTimespan_when_toString_then_validOmPhenomenonTime() {
 		Timespan actual = Timespan.after(LocalDate.parse("2019-01-01"));
-		String expected = "om:phenomenonTime,after," + LocalDate.parse("2019-01-01").toString();
+		String expected = "after," + LocalDate.parse("2019-01-01").toString();
 		assertThat(actual.toString()).isEqualTo(expected);
 	}
 

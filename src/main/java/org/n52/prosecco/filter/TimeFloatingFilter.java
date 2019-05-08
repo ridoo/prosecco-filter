@@ -15,7 +15,7 @@ import org.n52.prosecco.policy.Rule;
 import org.n52.prosecco.policy.ValueRestriction;
 import org.n52.prosecco.web.request.FilterContext;
 import org.n52.prosecco.web.request.Timespan;
-import org.n52.prosecco.web.sos.TimespanParser;
+import org.n52.prosecco.web.request.TimespanParser;
 
 final class TimeFloatingFilter implements RequestFilter<Timespan> {
 

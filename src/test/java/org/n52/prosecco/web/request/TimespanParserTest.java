@@ -1,5 +1,5 @@
 
-package org.n52.prosecco.web.sos;
+package org.n52.prosecco.web.request;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,6 +11,7 @@ import java.time.temporal.ChronoUnit;
 import org.junit.Test;
 import org.n52.prosecco.web.FilterException;
 import org.n52.prosecco.web.request.Timespan;
+import org.n52.prosecco.web.request.TimespanParser;
 import org.n52.prosecco.web.request.TimespanRelation;
 
 public class TimespanParserTest {
@@ -19,7 +20,8 @@ public class TimespanParserTest {
 	public void given_temporalFilterWithValidInstantRange_when_parsingFilterContext_then_correctTimespan()
 			throws FilterException {
 	    String temporalFilter = "om:phenomenonTime,2012-11-19T13:00:00Z/2012-11-19T14:15:00+01:00";
-        Timespan timespan = new TimespanParser().parsePhenomenonTime(temporalFilter);
+        TimespanParser timespanParser = new TimespanParser("om:phenomenontime");
+        Timespan timespan = timespanParser.parsePhenomenonTime(temporalFilter);
 
 		assertThat(timespan.getStart()).isEqualTo(Instant.parse("2012-11-19T13:00:00Z"));
 		assertThat(timespan.getEnd()).isEqualTo(Instant.parse("2012-11-19T13:15:00Z"));
@@ -29,7 +31,8 @@ public class TimespanParserTest {
 	public void given_temporalFilterWithLocalOn_when_parsingFilterContext_then_correctTimespan()
 			throws FilterException {
 	    String temporalFilter = "om:phenomenonTime,2012-11-19";
-		Timespan timespan = new TimespanParser().parsePhenomenonTime(temporalFilter);
+	    TimespanParser timespanParser = new TimespanParser("om:phenomenontime");
+        Timespan timespan = timespanParser.parsePhenomenonTime(temporalFilter);
 
 		assertThat(timespan.getStart()).isEqualTo(LocalDate.parse("2012-11-19"));
 		assertThat(timespan.getEnd()).isEqualTo(LocalDate.parse("2012-11-19"));
@@ -39,15 +42,16 @@ public class TimespanParserTest {
 	public void given_tempFilterWithInvalidRelation_when_parsingFilterContext_then_exception()
 			throws FilterException {
 	    String temporalFilter = "om:phenomenonTime,unknown,2012-11-19";
-		new TimespanParser().parsePhenomenonTime(temporalFilter);
+	    TimespanParser timespanParser = new TimespanParser("om:phenomenontime");
+        timespanParser.parsePhenomenonTime(temporalFilter);
 	}
 	
 	@Test
 	public void given_tempFilterWithValidBefore_when_parsingFilterContext_then_exception()
 			throws FilterException {
-	    TimespanParser parser = new TimespanParser();
 		String temporalFilter = "om:phenomenonTime,before,2012-11-19";
-		Timespan timespan = parser.parsePhenomenonTime(temporalFilter);
+		TimespanParser timespanParser = new TimespanParser("om:phenomenontime");
+        Timespan timespan = timespanParser.parsePhenomenonTime(temporalFilter);
 		
 		assertThat(timespan.getRelation()).isEqualTo(TimespanRelation.BEFORE);
 		assertThat(timespan.getEnd()).isEqualTo(LocalDate.parse("2012-11-19"));
