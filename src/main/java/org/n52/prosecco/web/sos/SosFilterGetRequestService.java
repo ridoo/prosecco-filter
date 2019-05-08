@@ -46,11 +46,11 @@ public final class SosFilterGetRequestService {
                                        .map("om:phenomenonTime,"::concat)
                                        .collect(Collectors.toSet());
         return new String[] {
-            formatKVP(SosFilterParameter.PHENOMENON, context.getPhenomena()),
-            formatKVP(SosFilterParameter.PROCEDURE, context.getProcedures()),
-            formatKVP(SosFilterParameter.OFFERING, context.getOfferings()),
-            formatKVP(SosFilterParameter.FEATURE, context.getFeatures()),
-            formatKVP(SosFilterParameter.TIMESPAN, timespans)
+            formatKVP(SosFilterParameter.PHENOMENON.filterName, context.getPhenomena()),
+            formatKVP(SosFilterParameter.PROCEDURE.filterName, context.getProcedures()),
+            formatKVP(SosFilterParameter.OFFERING.filterName, context.getOfferings()),
+            formatKVP(SosFilterParameter.FEATURE.filterName, context.getFeatures()),
+            formatKVP(SosFilterParameter.TIMESPAN.filterName, timespans)
         };
     }
 
@@ -66,8 +66,8 @@ public final class SosFilterGetRequestService {
         return formatKVP(entry.getKey(), Stream.of(entry.getValue()));
     }
 
-    private String formatKVP(SosFilterParameter parameter, Set<String> values) {
-        return formatKVP(parameter.filterName, values.stream());
+    private String formatKVP(String parameter, Set<String> values) {
+        return formatKVP(parameter, values.stream());
     }
 
     private String formatKVP(String parameter, Stream<String> values) {
