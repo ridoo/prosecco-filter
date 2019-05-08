@@ -3,7 +3,7 @@ package org.n52.prosecco.web;
 
 import javax.servlet.http.HttpServletRequest;
 
-public interface FilterRequestService extends AuthenticationContext {
+public interface FilterRequestService {
     
     /**
      * Filters the content of an HTTP GET request according configured rules. The filtered result may have to

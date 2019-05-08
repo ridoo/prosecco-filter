@@ -36,7 +36,8 @@ public class SosResponseFilterEngineTest {
     @Test
     public void test() throws Exception {
         PolicyConfig policyConfig = PolicyConfig.createSimple(ValueRestriction.of("procedure", "file32"));
-        SosResponseFilterEngine engine = new SosResponseFilterEngine(policyConfig, xPathConfig);
+        AuthenticationContext authContext = createStaticAuthContext("role");
+        SosResponseFilterEngine engine = new SosResponseFilterEngine(policyConfig, xPathConfig, authContext);
 
         String xmlBeforeFiltering = capabilitiesResponse.getBody();
         String xpath = ""
@@ -53,6 +54,15 @@ public class SosResponseFilterEngineTest {
         XmlAssert.assertThat(filtered.getBody()).doesNotHaveXPath(xpath);
         
         // TODO check offerings
+    }
+
+    private AuthenticationContext createStaticAuthContext(String ... roles) {
+        return new AuthenticationContext() {
+            @Override
+            public Set<String> getRoles() {
+                return new HashSet<>(Arrays.asList(roles));
+            }
+        };
     }
     
     private File loadFileContent(String name) throws URISyntaxException {

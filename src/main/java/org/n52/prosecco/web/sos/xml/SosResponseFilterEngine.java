@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.n52.prosecco.AuthenticationContext;
 import org.n52.prosecco.policy.PolicyConfig;
 import org.n52.prosecco.policy.Rule;
 import org.n52.prosecco.web.FilterException;
@@ -21,9 +22,12 @@ public final class SosResponseFilterEngine implements ResponseFilterEngine<Strin
 
     private final XPathConfig xpathConfig;
 
-    public SosResponseFilterEngine(PolicyConfig policyConfig, XPathConfig xpathConfig) {
+    private final AuthenticationContext authContext;
+
+    public SosResponseFilterEngine(PolicyConfig policyConfig, XPathConfig xpathConfig, AuthenticationContext authContext) {
         this.policyConfig = policyConfig;
         this.xpathConfig = xpathConfig;
+        this.authContext = authContext;
     }
 
     @Override
@@ -37,7 +41,7 @@ public final class SosResponseFilterEngine implements ResponseFilterEngine<Strin
 
     private Set<String> getFilterExpressions(String documentName) {
         Set<String> xpaths = new HashSet<>();
-        Collection<Rule> relevantRules = policyConfig.getRulesForRole(getRoles());
+        Collection<Rule> relevantRules = policyConfig.getRulesForRole(authContext.getRoles());
 
         // List<Policy> allowingPolicies = config.getReferencedPolicies(rule, Effect.ALLOW);
         // List<Policy> denyingPolicies = config.getReferencedPolicies(rule, Effect.DENY);

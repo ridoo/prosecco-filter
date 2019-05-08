@@ -1,4 +1,4 @@
-package org.n52.prosecco.web;
+package org.n52.prosecco;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -10,12 +10,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-public interface AuthenticationContext {
+public class SpringSecurityAuthenticationContext implements AuthenticationContext {
 
-    /**
-     * @return all roles of the current authenticaion context
-     */
-    default Set<String> getRoles() {
+    @Override
+    public Set<String> getRoles() {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
         if (authentication == null) {
@@ -27,4 +25,5 @@ public interface AuthenticationContext {
                               .collect(Collectors.toSet());
         }
     }
+
 }

@@ -24,8 +24,9 @@ public class SosFilterRequestServiceTest {
         request.addParameter("other", "x,y");
         request.addParameter("other", "z");
 
+        
         RequestFilterEngine engine = new RequestFilterEngine(new PolicyConfig());
-        SosFilterRequestService service = new SosFilterRequestService(engine);
+        SosFilterRequestService service = SosFilterRequestService.withEmptyAuthenticationContext(engine);
         String queryString = service.filterGET(request);
 
         assertThat(queryString.split("&")).containsExactly("other=x,y,z");
@@ -39,7 +40,7 @@ public class SosFilterRequestServiceTest {
         PolicyConfig policyConfig = new PolicyConfig(policies, Rule.of("foo1", "role", "policy1"));
 
         RequestFilterEngine engine = new RequestFilterEngine(policyConfig);
-        SosFilterRequestService service = new SosFilterRequestService(engine);
+        SosFilterRequestService service = SosFilterRequestService.withEmptyAuthenticationContext(engine);
         MockHttpServletRequest request = createServletRequest("GetCapabilities");
         String queryString = service.filterGET(request);
 

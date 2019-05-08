@@ -8,12 +8,14 @@ import static org.n52.prosecco.web.sos.SosFilterParameter.PROCEDURE;
 import static org.n52.prosecco.web.sos.SosFilterParameter.TIMESPAN;
 
 import java.time.DateTimeException;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.n52.prosecco.AuthenticationContext;
 import org.n52.prosecco.filter.RequestFilterEngine;
 import org.n52.prosecco.web.FilterException;
 import org.n52.prosecco.web.FilterRequestService;
@@ -32,20 +34,33 @@ public final class SosFilterRequestService implements FilterRequestService {
 
     private final SosFilterPostRequestService filterPostService;
 
-    public SosFilterRequestService(RequestFilterEngine filterEngine) {
+    private final AuthenticationContext authContext;
+    
+    static SosFilterRequestService withEmptyAuthenticationContext(RequestFilterEngine filterEngine) {
+        AuthenticationContext emptyAuthenticationContext = new AuthenticationContext() {
+            @Override
+            public Set<String> getRoles() {
+                return Collections.emptySet();
+            }
+        };
+        return new SosFilterRequestService(filterEngine, emptyAuthenticationContext);
+    }
+    
+    public SosFilterRequestService(RequestFilterEngine filterEngine, AuthenticationContext authContext) {
         this.filterGetService = new SosFilterGetRequestService(filterEngine);
         this.filterPostService = new SosFilterPostRequestService(filterEngine);
+        this.authContext = authContext;
     }
 
     @Override
     public String filterGET(HttpServletRequest request) throws FilterException {
-        FilterContext context = createFilterContext(request, getRoles());
+        FilterContext context = createFilterContext(request, authContext.getRoles());
         return filterGetService.filter(request, context);
     }
 
     @Override
     public String filterPOST(HttpServletRequest request) throws FilterException {
-        FilterContext context = createFilterContext(request, getRoles());
+        FilterContext context = createFilterContext(request, authContext.getRoles());
         return filterPostService.filter(request, context);
     }
 
