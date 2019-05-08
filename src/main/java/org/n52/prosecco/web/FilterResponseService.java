@@ -1,5 +1,8 @@
 package org.n52.prosecco.web;
 
-public interface FilterResponseService {
+import org.springframework.http.ResponseEntity;
 
+public interface FilterResponseService<T> {
+
+    ResponseEntity<T> filter(ResponseEntity<T> response) throws FilterException;
 }
