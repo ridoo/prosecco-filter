@@ -15,7 +15,7 @@ import org.n52.prosecco.policy.Rule;
 import org.n52.prosecco.policy.ValueRestriction;
 import org.n52.prosecco.web.request.FilterContext;
 
-final class ThematicFilter implements FilterContextFilter<String> {
+final class ThematicFilter implements RequestFilter<String> {
 
     private final String parameter;
     private final PolicyConfig config;

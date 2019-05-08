@@ -21,7 +21,7 @@ import org.n52.prosecco.web.request.FilterContext.FilterContextBuilder;
 import org.n52.prosecco.web.request.Timespan;
 import org.n52.prosecco.web.request.TimespanRelation;
 
-public final class FilterEngineTest {
+public final class RequestFilterEngineTest {
 
     // TODO test with empty parameters --> serviceParameters
 
