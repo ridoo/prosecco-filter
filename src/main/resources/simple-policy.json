@@ -7,7 +7,7 @@
         {
           "name": "timespan",
           "values": [
-            "before:P7D"
+            "floating,P7D"
           ]
         }
       ]
