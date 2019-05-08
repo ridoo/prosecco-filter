@@ -24,14 +24,8 @@ public final class PolicyConfig {
     
     public static PolicyConfig createSimple(String effect, ValueRestriction... valueRestrictions) {
         Policy policy = Policy.of("policy1", effect, valueRestrictions);
-        List<Policy> policies = Collections.singletonList(policy);
-
-        List<String> roles = Collections.singletonList("role");
-        List<String> policyReferences = Collections.singletonList("policy1");
-        Rule rule = new Rule("rule1", roles, policyReferences);
-        List<Rule> rules = Collections.singletonList(rule);
-
-        return new PolicyConfig(policies, rules);
+        Rule rule = Rule.of("rule1", "role", "policy1");
+        return new PolicyConfig(policy, rule);
     }
     
     public PolicyConfig() {
