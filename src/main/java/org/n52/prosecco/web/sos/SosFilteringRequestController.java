@@ -37,8 +37,8 @@ public final class SosFilteringRequestController extends ForwardingRequestContro
     
     private final SosFilterResponseService responseService;
 
-                                  @Value("${prosecco.servlet.context-path}") String contextPath,
     SosFilteringRequestController(@Value("${prosecco.target.url.sos}") URI endpoint,
+                                  @Value("${prosecco.servlet.context-path:/}") String contextPath,
                                   SosFilterRequestService requestService,
                                   SosFilterResponseService responseService) {
         super(endpoint, contextPath, PATH_PREFIX);
