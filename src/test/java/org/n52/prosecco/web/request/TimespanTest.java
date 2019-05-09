@@ -21,21 +21,21 @@ public class TimespanTest {
 	@Test
 	public void given_onTimespan_when_toString_then_validOmPhenomenonTime() {
 		Timespan actual = Timespan.on(LocalDate.parse("2019-01-01"));
-		String expected = LocalDate.parse("2019-01-01").toString();
+		String expected = Instant.parse("2019-01-01T00:00:00Z").toString();
 		assertThat(actual.toString()).isEqualTo(expected);
 	}
 	
 	@Test
 	public void given_beforeTimespan_when_toString_then_validOmPhenomenonTime() {
 		Timespan actual = Timespan.before(LocalDate.parse("2019-01-01"));
-		String expected = "before," + LocalDate.parse("2019-01-01").toString();
+		String expected = "before," + Instant.parse("2019-01-01T00:00:00Z").toString();
 		assertThat(actual.toString()).isEqualTo(expected);
 	}
 	
 	@Test
 	public void given_afterTimespan_when_toString_then_validOmPhenomenonTime() {
 		Timespan actual = Timespan.after(LocalDate.parse("2019-01-01"));
-		String expected = "after," + LocalDate.parse("2019-01-01").toString();
+		String expected = "after," + Instant.parse("2019-01-01T00:00:00Z").toString();
 		assertThat(actual.toString()).isEqualTo(expected);
 	}
 

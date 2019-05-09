@@ -141,6 +141,38 @@ public final class Timespan {
         throw new IllegalStateException("Unknown time relation: " + relation);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        switch (relation) {
+        case ON:
+            sb.append(toString(start));
+            return sb.toString();
+        case BETWEEN:
+            sb.append(toString(start))
+              .append("/")
+              .append(toString(end));
+            return sb.toString();
+        case BEFORE:
+            sb.append("before,")
+              .append(toString(end));
+            return sb.toString();
+        case AFTER:
+            sb.append("after,")
+              .append(toString(start));
+            return sb.toString();
+        default:
+            return "";
+        }
+    }
+    
+    private String toString(TemporalAccessor temporalAccessor) {
+        if (temporalAccessor == null) {
+            return null;
+        }
+        return asInstant(temporalAccessor).toString();
+    }
+
     private Instant asInstant(TemporalAccessor temporalAccessor) {
         if (temporalAccessor instanceof Instant) {
             return Instant.from(temporalAccessor);
@@ -156,29 +188,4 @@ public final class Timespan {
         throw new IllegalArgumentException("No conversion from " + temporalAccessor + " to Instant.");
     }
     
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        switch (relation) {
-        case ON:
-            sb.append(start.toString());
-            return sb.toString();
-        case BETWEEN:
-            sb.append(start.toString())
-              .append("/")
-              .append(end.toString());
-            return sb.toString();
-        case BEFORE:
-            sb.append("before,")
-              .append(end.toString());
-            return sb.toString();
-        case AFTER:
-            sb.append("after,")
-              .append(start.toString());
-            return sb.toString();
-        default:
-            return "";
-        }
-    }
-
 }
