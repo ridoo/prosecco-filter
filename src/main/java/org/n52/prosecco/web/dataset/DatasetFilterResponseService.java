@@ -11,7 +11,7 @@ public class DatasetFilterResponseService implements FilterResponseService<Strin
     @Override
     public ResponseEntity<String> filter(ResponseEntity<String> response) throws FilterException {
         // TODO Auto-generated method stub
-        return null;
+        return response;
     }
 
 }
