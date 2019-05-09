@@ -8,14 +8,8 @@ import static org.n52.prosecco.web.sos.SosFilterParameter.PROCEDURE;
 import static org.n52.prosecco.web.sos.SosFilterParameter.TIMESPAN;
 
 import java.time.DateTimeException;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 

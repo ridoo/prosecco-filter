@@ -10,9 +10,6 @@ import java.time.temporal.ChronoUnit;
 
 import org.junit.Test;
 import org.n52.prosecco.web.FilterException;
-import org.n52.prosecco.web.request.Timespan;
-import org.n52.prosecco.web.request.TimespanParser;
-import org.n52.prosecco.web.request.TimespanRelation;
 
 public class TimespanParserTest {
 

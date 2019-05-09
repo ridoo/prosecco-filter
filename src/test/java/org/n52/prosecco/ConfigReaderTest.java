@@ -10,8 +10,6 @@ import java.io.IOException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.n52.prosecco.ConfigReader;
-import org.n52.prosecco.ConfigurationException;
 import org.n52.prosecco.policy.Effect;
 import org.n52.prosecco.policy.PolicyConfig;
 
