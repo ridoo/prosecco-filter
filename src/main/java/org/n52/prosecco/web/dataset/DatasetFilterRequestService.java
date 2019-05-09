@@ -73,7 +73,6 @@ public class DatasetFilterRequestService implements FilterRequestService {
     }
 
     private Timespan parseTimespan(String temporalFilter) {
-        // TODO Auto-generated method stub
         return new TimespanParser().parsePhenomenonTime(temporalFilter);
     }
 
