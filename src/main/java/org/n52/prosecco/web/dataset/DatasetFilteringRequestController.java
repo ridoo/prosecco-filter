@@ -37,7 +37,7 @@ public class DatasetFilteringRequestController extends ForwardingRequestControll
     
     private final DatasetFilterResponseService responseService;
 
-    DatasetFilteringRequestController(@Value("${prosecco.target.url.dataset}") URI endpoint,
+    DatasetFilteringRequestController(@Value("${prosecco.dataset.url}") URI endpoint,
                                   @Value("${prosecco.servlet.context-path:/}") String contextPath,
                                   DatasetFilterRequestService requestService,
                                   DatasetFilterResponseService responseService) {
