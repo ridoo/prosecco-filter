@@ -1,66 +1,49 @@
 
 package org.n52.prosecco.web;
 
-import java.util.HashSet;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class ServiceParameters {
-    
-    private Set<String> phenomena;
 
-    private Set<String> offerings;
+    private Map<String, Set<String>> parameters;
 
-    private Set<String> procedures;
-
-    private Set<String> features;
-    
     public ServiceParameters() {
-        this.phenomena = new HashSet<>();
-        this.offerings = new HashSet<>();
-        this.procedures = new HashSet<>();
-        this.features = new HashSet<>();
+        this.parameters = new HashMap<>();
     }
     
-    public ServiceParameters updatePhenomena(String... phenomena) {
-        this.phenomena = asSet(phenomena);
-        return this;
+    public ServiceParameters(String parameter, String... values) {
+        this();
+        updateParameter(parameter, values);
     }
-    
-    public ServiceParameters updateIfferings(String... offerings) {
-        this.offerings = asSet(offerings);
-        return this;
-    }
-    
-    public ServiceParameters updateProcedures(String... procedures) {
-        this.procedures = asSet(procedures);
+
+    public ServiceParameters updateParameter(String parameter, String... values) {
+        parameters.put(parameter, asSet(values));
         return this;
     }
 
-    public ServiceParameters updateFeatures(String... features) {
-        this.features = asSet(features);
-        return this;
-    }
-    
     private Set<String> asSet(String... items) {
-        return Stream.of(items).collect(Collectors.toSet());
-    }
-
-    public Set<String> getPhenomena() {
-        return new HashSet<>(phenomena);
-    }
-
-    public Set<String> getOfferings() {
-        return new HashSet<>(offerings);
-    }
-
-    public Set<String> getProcedures() {
-        return new HashSet<>(procedures);
-    }
-
-    public Set<String> getFeatures() {
-        return new HashSet<>(features);
+        Stream<String> stream = Stream.of(items);
+        return stream.collect(Collectors.toSet());
     }
     
+    public Set<String> getThematicParameterNames() {
+        return Collections.unmodifiableSet(parameters.keySet());
+    }
+
+    public Set<String> getValues(String parameter) {
+        Set<String> values = parameters.get(parameter);
+        return hasItems(values)
+                ? Collections.unmodifiableSet(values)
+                : Collections.emptySet();
+    }
+
+    private boolean hasItems(Set<String> values) {
+        return values != null && !values.isEmpty();
+    }
+
 }

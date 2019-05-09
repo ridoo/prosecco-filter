@@ -4,9 +4,13 @@ package org.n52.prosecco.web.request;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.Map.Entry;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,12 +23,9 @@ public final class FilterContext {
 
     public static class FilterContextBuilder {
         private final Set<String> roles;
-        private Map<String, String[]> remainingQuery;
+        private Map<String, Set<String>> parameters;
+        private Map<String, Set<String>> remainingQuery;
         private ServiceParameters serviceParameters;
-        private Set<String> phenomena;
-        private Set<String> offerings;
-        private Set<String> procedures;
-        private Set<String> features;
         private Set<Timespan> timespans;
 
         public FilterContextBuilder(Set<String> roles) {
@@ -39,9 +40,32 @@ public final class FilterContext {
             return new FilterContextBuilder(roles);
         }
 
-        public FilterContextBuilder andRemainingQuery(Map<String, String[]> remainingQuery) {
-            this.remainingQuery = remainingQuery;
+        /**
+         * Sets query parameters which remain after applying the given {@code predicate}.
+         * 
+         * @param query
+         *        the query
+         * @param predicate
+         *        a predicate to filter the remaining parameters
+         * @return the builder instance for method chaining
+         */
+        public FilterContextBuilder andRemainingFrom(Map<String, String[]> query,
+                                                     Predicate<Entry<String, String[]>> predicate) {
+            this.remainingQuery = query.entrySet()
+                                       .stream()
+                                       .filter(predicate)
+                                       .collect(Collectors.toMap(Map.Entry::getKey,
+                                                                 entry -> new HashSet<>(Arrays.asList(entry.getValue()))));
             return this;
+        }
+
+        public FilterContextBuilder andRemainingFrom(FilterContext context) {
+            this.remainingQuery = context.getRemainingQuery();
+            return this;
+        }
+        
+        public FilterContextBuilder withServiceParameters(FilterContext context) {
+            return withServiceParameters(context.getServiceParameters());
         }
 
         public FilterContextBuilder withServiceParameters(ServiceParameters serviceParameters) {
@@ -49,39 +73,15 @@ public final class FilterContext {
             return this;
         }
 
-        public FilterContextBuilder withPhenomena(String... phenomena) {
-            return withPhenomena(toSet(phenomena));
+        public FilterContextBuilder withParameters(String parameter, String... values) {
+            return withParameters(parameter, toSet(values));
         }
 
-        public FilterContextBuilder withPhenomena(Set<String> phenomena) {
-            this.phenomena = phenomena;
-            return this;
-        }
-
-        public FilterContextBuilder withOfferings(String... offerings) {
-            return withOfferings(toSet(offerings));
-        }
-
-        public FilterContextBuilder withOfferings(Set<String> offerings) {
-            this.offerings = offerings;
-            return this;
-        }
-
-        public FilterContextBuilder withProcedures(String... procedures) {
-            return withProcedures(toSet(procedures));
-        }
-
-        public FilterContextBuilder withProcedures(Set<String> procedures) {
-            this.procedures = procedures;
-            return this;
-        }
-
-        public FilterContextBuilder withFeatures(String... features) {
-            return withFeatures(toSet(features));
-        }
-
-        public FilterContextBuilder withFeatures(Set<String> features) {
-            this.features = features;
+        public FilterContextBuilder withParameters(String parameter, Set<String> values) {
+            if (parameters == null) {
+                parameters = new HashMap<>();
+            }
+            parameters.put(parameter, values);
             return this;
         }
 
@@ -92,7 +92,8 @@ public final class FilterContext {
 
         public FilterContextBuilder withTimespans(Timespan... timespans) {
             Stream<Timespan> items = timespans != null
-                    ? Stream.of(timespans).filter(t -> t != null)
+                    ? Stream.of(timespans)
+                            .filter(t -> t != null)
                     : Stream.empty();
             this.timespans = toSet(items);
             return this;
@@ -102,9 +103,9 @@ public final class FilterContext {
             return items == null
                     ? Collections.emptySet()
                     : toSet(Stream.of(items)
-                            .map(i -> i.split(","))
-                            .map(Arrays::asList)
-                            .flatMap(Collection::stream));
+                                  .map(i -> i.split(","))
+                                  .map(Arrays::asList)
+                                  .flatMap(Collection::stream));
         }
 
         private <T> Set<T> toSet(Stream<T> items) {
@@ -112,15 +113,12 @@ public final class FilterContext {
                     ? items.collect(Collectors.toSet())
                     : Collections.emptySet();
         }
-        
+
         public FilterContext build() {
             return new FilterContext(roles,
+                                     parameters,
                                      remainingQuery,
                                      serviceParameters,
-                                     phenomena,
-                                     offerings,
-                                     procedures,
-                                     features,
                                      timespans);
         }
 
@@ -128,17 +126,11 @@ public final class FilterContext {
 
     private final Set<String> roles;
 
-    private final Map<String, String[]> remainingQuery;
+    private final Map<String, Set<String>> parameters;
+
+    private final Map<String, Set<String>> remainingQuery;
 
     private final ServiceParameters serviceParameters;
-
-    private final Set<String> phenomena;
-
-    private final Set<String> offerings;
-
-    private final Set<String> procedures;
-
-    private final Set<String> features;
 
     private final Set<Timespan> timespans;
 
@@ -152,22 +144,15 @@ public final class FilterContext {
         return new FilterContextBuilder(roles);
     }
 
-
     private FilterContext(Set<String> roles,
-                          Map<String, String[]> remainingQuery,
+                          Map<String, Set<String>> parameters,
+                          Map<String, Set<String>> remainingQuery,
                           ServiceParameters serviceParameters,
-                          Set<String> phenomena,
-                          Set<String> offerings,
-                          Set<String> procedures,
-                          Set<String> features,
                           Set<Timespan> timespans) {
         this.roles = roles;
+        this.parameters = parameters;
         this.remainingQuery = remainingQuery;
         this.serviceParameters = serviceParameters;
-        this.phenomena = phenomena;
-        this.offerings = offerings;
-        this.procedures = procedures;
-        this.features = features;
         this.timespans = timespans;
     }
 
@@ -175,7 +160,7 @@ public final class FilterContext {
         return roles;
     }
 
-    public Map<String, String[]> getRemainingQuery() {
+    public Map<String, Set<String>> getRemainingQuery() {
         return remainingQuery == null
                 ? Collections.emptyMap()
                 : remainingQuery;
@@ -187,44 +172,31 @@ public final class FilterContext {
                 : serviceParameters;
     }
 
-    public Set<String> getPhenomena() {
-        return hasPhenomena()
-                ? Collections.unmodifiableSet(phenomena)
+    public Set<String> getServiceParameterValues(String parameter) {
+        ServiceParameters parameters = getServiceParameters();
+        return parameters.getValues(parameter);
+    }
+
+    public Set<String> getValues(String parameter) {
+        return hasParameter(parameter)
+                ? Collections.unmodifiableSet(parameters.get(parameter))
                 : Collections.emptySet();
     }
 
-    public boolean hasPhenomena() {
-        return hasItems(phenomena);
+    public boolean hasParameter(String parameter) {
+        return parameters != null && hasItems(parameters.get(parameter));
     }
 
-    public Set<String> getOfferings() {
-        return hasOfferings()
-                ? Collections.unmodifiableSet(offerings)
+    public Set<String> getThematicParameterNames() {
+        ServiceParameters serviceParameterNames = getServiceParameters();
+        Set<String> serviceParameters = serviceParameterNames.getThematicParameterNames();
+        Set<String> queryParameters = parameters != null
+                ? Collections.unmodifiableSet(parameters.keySet())
                 : Collections.emptySet();
-    }
-
-    public boolean hasOfferings() {
-        return hasItems(offerings);
-    }
-
-    public Set<String> getProcedures() {
-        return hasProcedures()
-                ? Collections.unmodifiableSet(procedures)
-                : Collections.emptySet();
-    }
-
-    public boolean hasProcedures() {
-        return hasItems(procedures);
-    }
-
-    public Set<String> getFeatures() {
-        return hasFeatures()
-                ? Collections.unmodifiableSet(features)
-                : Collections.emptySet();
-    }
-
-    public boolean hasFeatures() {
-        return hasItems(features);
+        Set<String> availableParameters = new HashSet<>();
+        availableParameters.addAll(serviceParameters);
+        availableParameters.addAll(queryParameters);
+        return availableParameters;
     }
 
     public Set<Timespan> getTimespans() {
@@ -245,4 +217,5 @@ public final class FilterContext {
     private boolean hasItems(Collection< ? > items) {
         return items != null && !items.isEmpty();
     }
+
 }

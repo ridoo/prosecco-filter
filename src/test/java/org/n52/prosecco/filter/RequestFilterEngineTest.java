@@ -32,11 +32,11 @@ public final class RequestFilterEngineTest {
         RequestFilterEngine engine = new RequestFilterEngine(config);
 
         FilterContext initialContext = FilterContextBuilder.of("role")
-                                                           .withPhenomena("value1", "value2")
+                                                           .withParameters("phenomenon", "value1", "value2")
                                                            .build();
 
         FilterContext evaluatedContext = engine.evaluate(initialContext);
-        assertThat(evaluatedContext.getPhenomena()).containsAll(Arrays.asList("value1", "value2"));
+        assertThat(evaluatedContext.getValues("phenomenon")).containsAll(Arrays.asList("value1", "value2"));
     }
 
     @Test
@@ -46,11 +46,11 @@ public final class RequestFilterEngineTest {
         RequestFilterEngine engine = new RequestFilterEngine(config);
 
         FilterContext initialContext = FilterContextBuilder.of("role")
-                                                           .withPhenomena("value1", "value2")
+                                                           .withParameters("phenomenon", "value1", "value2")
                                                            .build();
 
         FilterContext evaluatedContext = engine.evaluate(initialContext);
-        assertThat(evaluatedContext.getPhenomena()).doesNotContain("value1", "value2");
+        assertThat(evaluatedContext.getValues("phenomenon")).doesNotContain("value1", "value2");
     }
 
     @Test
@@ -60,11 +60,11 @@ public final class RequestFilterEngineTest {
         RequestFilterEngine engine = new RequestFilterEngine(config);
 
         FilterContext initialContext = FilterContextBuilder.of("role")
-                                                           .withPhenomena("value1", "value2")
+                                                           .withParameters("phenomenon", "value1", "value2")
                                                            .build();
 
         FilterContext evaluatedContext = engine.evaluate(initialContext);
-        assertThat(evaluatedContext.getPhenomena()).containsExactly("value1");
+        assertThat(evaluatedContext.getValues("phenomenon")).containsExactly("value1");
     }
 
     @Test
@@ -83,11 +83,11 @@ public final class RequestFilterEngineTest {
         RequestFilterEngine engine = new RequestFilterEngine(config);
 
         FilterContext initialContext = FilterContextBuilder.of("role")
-                                                           .withPhenomena("value1", "restrictedValue")
+                                                           .withParameters("phenomenon", "value1", "restrictedValue")
                                                            .build();
 
         FilterContext evaluatedContext = engine.evaluate(initialContext);
-        assertThat(evaluatedContext.getPhenomena()).containsExactly("value1");
+        assertThat(evaluatedContext.getValues("phenomenon")).containsExactly("value1");
     }
 
     @Test
@@ -106,13 +106,13 @@ public final class RequestFilterEngineTest {
         RequestFilterEngine engine = new RequestFilterEngine(config);
 
         // simulate an empty request and having cached service parameters
-        ServiceParameters serviceParameters = new ServiceParameters().updatePhenomena("value1", "value2", "restricted");
+        ServiceParameters serviceParameters = new ServiceParameters("phenomenon", "value1", "value2", "restricted");
         FilterContext initialContext = FilterContextBuilder.of("role")
                                                            .withServiceParameters(serviceParameters)
                                                            .build();
 
         FilterContext evaluatedContext = engine.evaluate(initialContext);
-        assertThat(evaluatedContext.getPhenomena()).containsAll(Arrays.asList("value1", "value2"));
+        assertThat(evaluatedContext.getValues("phenomenon")).containsAll(Arrays.asList("value1", "value2"));
     }
 
     @Test

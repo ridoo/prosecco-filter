@@ -2,6 +2,7 @@
 package org.n52.prosecco.filter;
 
 import java.util.Set;
+import java.util.function.Consumer;
 
 import org.n52.prosecco.policy.PolicyConfig;
 import org.n52.prosecco.web.request.FilterContext;
@@ -25,49 +26,26 @@ public final class RequestFilterEngine {
      * @return the new context matching the policy config.
      */
     public FilterContext evaluate(FilterContext context) {
-        return FilterContextBuilder.of(context.getRoles())
-                                   .withFeatures(evaluateFeatures(context))
-                                   .withTimespans(evaluateTimespans(context))
-                                   .withPhenomena(evaluatePhenomena(context))
-                                   .withOfferings(evaluateOfferings(context))
-                                   .withProcedures(evaluateProcedures(context))
-                                   .withServiceParameters(context.getServiceParameters())
-                                   .andRemainingQuery(context.getRemainingQuery())
-                                   .build();
+        FilterContextBuilder builder = FilterContextBuilder.of(context.getRoles())
+                                                           .withTimespans(evaluateTimespans(context))
+                                                           .withServiceParameters(context)
+                                                           .andRemainingFrom(context);
+        Set<String> parameters = context.getThematicParameterNames();
+        parameters.forEach(updateThematicContext(builder, context));
+        return builder.build();
     }
 
-    private Set<String> evaluatePhenomena(FilterContext context) {
-        ThematicFilter evaluator = new ThematicFilter("phenomenon", config);
-        Set<String> values = !context.hasPhenomena()
-                ? context.getServiceParameters().getPhenomena()
-                : context.getPhenomena();
+    private Consumer<String> updateThematicContext(FilterContextBuilder builder, FilterContext context) {
+        return parameter -> builder.withParameters(parameter, evaluate(parameter, context));
+    }
+
+    private Set<String> evaluate(String parameter, FilterContext context) {
+        ThematicFilter evaluator = new ThematicFilter(parameter, config);
+        Set<String> values = !context.hasParameter(parameter)
+                ? context.getServiceParameterValues(parameter)
+                : context.getValues(parameter);
         return evaluator.evaluate(values, context);
     }
-
-    private Set<String> evaluateOfferings(FilterContext context) {
-        ThematicFilter evaluator = new ThematicFilter("offering", config);
-        Set<String> values = !context.hasOfferings()
-                ? context.getServiceParameters().getOfferings()
-                : context.getOfferings();
-        return evaluator.evaluate(values, context);
-    }
-
-    private Set<String> evaluateProcedures(FilterContext context) {
-        ThematicFilter evaluator = new ThematicFilter("procedure", config);
-        Set<String> values = !context.hasProcedures()
-                ? context.getServiceParameters().getProcedures()
-                : context.getProcedures();
-        return evaluator.evaluate(values, context);
-    }
-
-    private Set<String> evaluateFeatures(FilterContext context) {
-        ThematicFilter evaluator = new ThematicFilter("feature", config);
-        Set<String> values = !context.hasFeatures()
-                ? context.getServiceParameters().getFeatures()
-                : context.getFeatures();
-        return evaluator.evaluate(values, context);
-    }
-
 
     private Set<Timespan> evaluateTimespans(FilterContext context) {
         Set<Timespan> timespans = context.getTimespans();

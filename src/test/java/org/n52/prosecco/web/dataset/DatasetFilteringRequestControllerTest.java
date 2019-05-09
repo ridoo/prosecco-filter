@@ -26,7 +26,7 @@ public class DatasetFilteringRequestControllerTest {
     private static final String SERVER_ENDPOINT = "http://somewhere.net/api";
 
     @Test
-    public void test() throws Exception {
+    public void given_policyWithOfferings_when_queryWithOfferings_then_allowedOfferingsAreDelegated() throws Exception {
         ValueRestriction restriction = ValueRestriction.of("offering", "off1", "off2");
         PolicyConfig config = PolicyConfig.createSimple("allow", "role", restriction);
         ControllerSeam seam = ControllerSeam.of(config, Collections.singleton("role"));
@@ -37,7 +37,7 @@ public class DatasetFilteringRequestControllerTest {
               .andRespond(withSuccess());
 
         MockHttpServletRequest request = new MockHttpServletRequest("GET", "/ds");
-        request.addParameter("offerings", "off1", "off2");
+        request.addParameter("offerings", "off1", "off2", "restricted");
         seam.filterGet(request, HttpMethod.GET);
 
         server.verify();

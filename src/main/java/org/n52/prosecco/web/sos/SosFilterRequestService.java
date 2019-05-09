@@ -8,9 +8,13 @@ import static org.n52.prosecco.web.sos.SosFilterParameter.PROCEDURE;
 import static org.n52.prosecco.web.sos.SosFilterParameter.TIMESPAN;
 
 import java.time.DateTimeException;
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,16 +73,15 @@ public final class SosFilterRequestService implements FilterRequestService {
     private FilterContext createFilterContext(HttpServletRequest request, Set<String> roles)
             throws FilterException {
         String temporalFilter = request.getParameter(TIMESPAN.filterName);
-        Timespan timespan = parseTimespan(temporalFilter);
         Map<String, String[]> valuesByParameter = request.getParameterMap();
         return FilterContext.of(roles)
-                            .withTimespans(timespan)
-                            .withFeatures(valuesByParameter.get(FEATURE.filterName))
-                            .withPhenomena(valuesByParameter.get(PHENOMENON.filterName))
-                            .withProcedures(valuesByParameter.get(PROCEDURE.filterName))
-                            .withOfferings(valuesByParameter.get(OFFERING.filterName))
+                            .withTimespans(parseTimespan(temporalFilter))
+                            .withParameters("feature", valuesByParameter.get(FEATURE.filterName))
+                            .withParameters("phenomenon", valuesByParameter.get(PHENOMENON.filterName))
+                            .withParameters("procedure", valuesByParameter.get(PROCEDURE.filterName))
+                            .withParameters("offering", valuesByParameter.get(OFFERING.filterName))
                             // TODO .withServiceParameters(serviceParameters)
-                            .andRemainingQuery(getRemainingQuery(valuesByParameter))
+                            .andRemainingFrom(valuesByParameter, e -> !SosFilterParameter.isKnown(e.getKey()))
                             .build();
     }
 
@@ -90,13 +93,6 @@ public final class SosFilterRequestService implements FilterRequestService {
             LOGGER.error("Could not parse temporal filter: {}", temporalFilter, e);
             throw new FilterException("Invalid temporal filter: " + temporalFilter);
         }
-    }
-
-    private Map<String, String[]> getRemainingQuery(Map<String, String[]> valuesByParameter) {
-        return valuesByParameter.entrySet()
-                                .stream()
-                                .filter(e -> !SosFilterParameter.isKnown(e.getKey()))
-                                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
 }

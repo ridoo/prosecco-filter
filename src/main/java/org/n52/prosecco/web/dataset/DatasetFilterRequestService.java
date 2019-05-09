@@ -8,7 +8,6 @@ import static org.n52.prosecco.web.dataset.DatasetFilterParameter.PROCEDURE;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -63,12 +62,12 @@ public class DatasetFilterRequestService implements FilterRequestService {
         Map<String, String[]> valuesByParameter = request.getParameterMap();
         return FilterContext.of(roles)
                             .withTimespans(parseTimespan(temporalFilter))
-                            .withFeatures(valuesByParameter.get(FEATURE.filterName))
-                            .withPhenomena(valuesByParameter.get(PHENOMENON.filterName))
-                            .withProcedures(valuesByParameter.get(PROCEDURE.filterName))
-                            .withOfferings(valuesByParameter.get(OFFERING.filterName))
+                            .withParameters("feature", valuesByParameter.get(FEATURE.filterName))
+                            .withParameters("phenomenon", valuesByParameter.get(PHENOMENON.filterName))
+                            .withParameters("procedures", valuesByParameter.get(PROCEDURE.filterName))
+                            .withParameters("offering", valuesByParameter.get(OFFERING.filterName))
                             // TODO .withServiceParameters(serviceParameters)
-                            .andRemainingQuery(getRemainingQuery(valuesByParameter))
+                            .andRemainingFrom(valuesByParameter, e -> !DatasetFilterParameter.isKnown(e.getKey()))
                             .build();
     }
 
@@ -77,10 +76,5 @@ public class DatasetFilterRequestService implements FilterRequestService {
         return null;
     }
 
-    private Map<String, String[]> getRemainingQuery(Map<String, String[]> valuesByParameter) {
-        return valuesByParameter.entrySet()
-                                .stream()
-                                .filter(e -> !DatasetFilterParameter.isKnown(e.getKey()))
-                                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-    }
+
 }
