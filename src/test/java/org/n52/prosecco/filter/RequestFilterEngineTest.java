@@ -11,13 +11,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
+import org.n52.prosecco.ConfigurationContainer;
 import org.n52.prosecco.policy.Policy;
 import org.n52.prosecco.policy.PolicyConfig;
 import org.n52.prosecco.policy.Rule;
 import org.n52.prosecco.policy.ValueRestriction;
 import org.n52.prosecco.web.ServiceParameters;
 import org.n52.prosecco.web.request.FilterContext;
-import org.n52.prosecco.web.request.FilterContext.FilterContextBuilder;
 import org.n52.prosecco.web.request.Timespan;
 import org.n52.prosecco.web.request.TimespanRelation;
 
@@ -28,12 +28,13 @@ public final class RequestFilterEngineTest {
     @Test
     public void given_allowingValueRestriction_when_contextWithAllowedValues_then_allowedValuesKept() {
         ValueRestriction restriction = ValueRestriction.of("phenomenon", "value1", "value2");
-        PolicyConfig config = PolicyConfig.createSimple("allow", "role", restriction);
+        PolicyConfig policyConfig = PolicyConfig.createSimple("allow", "role", restriction);
+        ConfigurationContainer config = ConfigurationContainer.create("sos", policyConfig);
         RequestFilterEngine engine = new RequestFilterEngine(config);
 
-        FilterContext initialContext = FilterContextBuilder.of("role")
-                                                           .withParameters("phenomenon", "value1", "value2")
-                                                           .build();
+        FilterContext initialContext = FilterContext.create("sos", "role")
+                                                    .withParameters("phenomenon", "value1", "value2")
+                                                    .build();
 
         FilterContext evaluatedContext = engine.evaluate(initialContext);
         assertThat(evaluatedContext.getValues("phenomenon")).containsAll(Arrays.asList("value1", "value2"));
@@ -42,12 +43,13 @@ public final class RequestFilterEngineTest {
     @Test
     public void given_denyingValueRestriction_when_contextWithAllowedValues_then_deniedValuesRemoved() {
         ValueRestriction restriction = ValueRestriction.of("phenomenon", "value1", "value2");
-        PolicyConfig config = PolicyConfig.createSimple("role", restriction);
+        PolicyConfig policyConfig = PolicyConfig.createSimple("role", restriction);
+        ConfigurationContainer config = ConfigurationContainer.create("sos", policyConfig);
         RequestFilterEngine engine = new RequestFilterEngine(config);
 
-        FilterContext initialContext = FilterContextBuilder.of("role")
-                                                           .withParameters("phenomenon", "value1", "value2")
-                                                           .build();
+        FilterContext initialContext = FilterContext.create("sos", "role")
+                                                    .withParameters("phenomenon", "value1", "value2")
+                                                    .build();
 
         FilterContext evaluatedContext = engine.evaluate(initialContext);
         assertThat(evaluatedContext.getValues("phenomenon")).doesNotContain("value1", "value2");
@@ -56,12 +58,13 @@ public final class RequestFilterEngineTest {
     @Test
     public void given_simpleConfig_when_contextWithHasUnconfiguredValues_then_unconfiguredValuesRemoved() {
         ValueRestriction restriction = ValueRestriction.of("phenomenon", "value1");
-        PolicyConfig config = PolicyConfig.createSimple("allow", "role", restriction);
+        PolicyConfig policyConfig = PolicyConfig.createSimple("allow", "role", restriction);
+        ConfigurationContainer config = ConfigurationContainer.create("sos", policyConfig);
         RequestFilterEngine engine = new RequestFilterEngine(config);
 
-        FilterContext initialContext = FilterContextBuilder.of("role")
-                                                           .withParameters("phenomenon", "value1", "value2")
-                                                           .build();
+        FilterContext initialContext = FilterContext.create("sos", "role")
+                                                    .withParameters("phenomenon", "value1", "value2")
+                                                    .build();
 
         FilterContext evaluatedContext = engine.evaluate(initialContext);
         assertThat(evaluatedContext.getValues("phenomenon")).containsExactly("value1");
@@ -79,12 +82,13 @@ public final class RequestFilterEngineTest {
         Rule rule = Rule.of("rule1", roles, "allowing-policy", "denying-policy");
         List<Rule> rules = Collections.singletonList(rule);
 
-        PolicyConfig config = new PolicyConfig(policies, rules);
+        PolicyConfig policyConfig = new PolicyConfig(policies, rules);
+        ConfigurationContainer config = ConfigurationContainer.create("sos", policyConfig);
         RequestFilterEngine engine = new RequestFilterEngine(config);
 
-        FilterContext initialContext = FilterContextBuilder.of("role")
-                                                           .withParameters("phenomenon", "value1", "restrictedValue")
-                                                           .build();
+        FilterContext initialContext = FilterContext.create("sos", "role")
+                                                    .withParameters("phenomenon", "value1", "restrictedValue")
+                                                    .build();
 
         FilterContext evaluatedContext = engine.evaluate(initialContext);
         assertThat(evaluatedContext.getValues("phenomenon")).containsExactly("value1");
@@ -102,14 +106,15 @@ public final class RequestFilterEngineTest {
         Rule rule = Rule.of("rule1", roles, "allowing-policy", "denying-policy");
         List<Rule> rules = Collections.singletonList(rule);
 
-        PolicyConfig config = new PolicyConfig(policies, rules);
+        PolicyConfig policyConfig = new PolicyConfig(policies, rules);
+        ConfigurationContainer config = ConfigurationContainer.create("sos", policyConfig);
         RequestFilterEngine engine = new RequestFilterEngine(config);
 
         // simulate an empty request and having cached service parameters
         ServiceParameters serviceParameters = new ServiceParameters("phenomenon", "value1", "value2", "restricted");
-        FilterContext initialContext = FilterContextBuilder.of("role")
-                                                           .withServiceParameters(serviceParameters)
-                                                           .build();
+        FilterContext initialContext = FilterContext.create("sos", "role")
+                                                    .withServiceParameters(serviceParameters)
+                                                    .build();
 
         FilterContext evaluatedContext = engine.evaluate(initialContext);
         assertThat(evaluatedContext.getValues("phenomenon")).containsAll(Arrays.asList("value1", "value2"));
@@ -123,15 +128,16 @@ public final class RequestFilterEngineTest {
         List<String> roles = Collections.singletonList("role");
         Rule rule = Rule.of("rule1", roles, "allowing-policy", "denying-policy");
 
-        PolicyConfig config = new PolicyConfig(denyingPolicy, rule);
+        PolicyConfig policyConfig = new PolicyConfig(denyingPolicy, rule);
+        ConfigurationContainer config = ConfigurationContainer.create("sos", policyConfig);
         RequestFilterEngine engine = new RequestFilterEngine(config);
 
         Instant end = Instant.now();
         Instant start = end.minus(4, ChronoUnit.DAYS);
         Timespan queriedTimespan = Timespan.between(start, end);
-        FilterContext initialContext = FilterContextBuilder.of("role")
-                                                           .withTimespans(queriedTimespan)
-                                                           .build();
+        FilterContext initialContext = FilterContext.create("sos", "role")
+                                                    .withTimespans(queriedTimespan)
+                                                    .build();
 
         FilterContext evaluatedContext = engine.evaluate(initialContext);
         Optional<Timespan> timespan = evaluatedContext.getFirstTimespan();

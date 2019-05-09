@@ -22,11 +22,11 @@ public final class TimespanParser {
                                                                                                .appendOptional(DateTimeFormatter.ISO_DATE)
                                                                                                .toFormatter();
     private final String prefix;
-    
+
     public TimespanParser() {
         this(null);
     }
-    
+
     public TimespanParser(String prefix) {
         this.prefix = prefix != null
                 ? prefix
@@ -35,22 +35,28 @@ public final class TimespanParser {
 
     /**
      * @param temporalFilter
-     * @return
+     *        the temporal filter
+     * @return an instance of {@link Timespan} parsed from the given input
      * @throws IllegalArgumentException
+     *         if an expected indetermined time position is invalid
      * @throws DateTimeException
+     *         if the actual date-time string is in an invalid format
      */
     public Timespan parsePhenomenonTime(String temporalFilter) {
         if (temporalFilter == null) {
             return null;
         }
-        
-        if (temporalFilter.toLowerCase().startsWith(prefix)) {
+
+        if (temporalFilter.toLowerCase()
+                          .startsWith(prefix)) {
             String[] parts = temporalFilter.split(",");
             String[] partsWithoutPrefix = Arrays.copyOfRange(parts, 1, parts.length);
             return parseTimespan(partsWithoutPrefix);
+        } else {
+            return parseTimespan(new String[] {
+                temporalFilter
+            });
         }
-        
-        throw new IllegalArgumentException("Missing om:phenomenonTime prefix");
     }
 
     public Timespan parseTimeRestriction(String restrictionValue) {
@@ -76,9 +82,10 @@ public final class TimespanParser {
                     + "\t 3) after,<time instant>\n"
                     + "\t 4) <date>\n"
                     + "but was: "
-                    + Arrays.stream(parts).collect(Collectors.joining(",")));
-        } 
-        
+                    + Arrays.stream(parts)
+                            .collect(Collectors.joining(",")));
+        }
+
         if (parts.length == 1) {
             String value = parts[0];
             if (value.contains("/")) {

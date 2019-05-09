@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.n52.prosecco.AuthenticationContext;
+import org.n52.prosecco.ConfigurationContainer;
 import org.n52.prosecco.AuthenticationContext.AuthenticationContextBuilder;
 import org.n52.prosecco.filter.RequestFilterEngine;
 import org.n52.prosecco.policy.Policy;
@@ -26,9 +27,10 @@ public class SosFilterRequestServiceTest {
         request.addParameter("other", "x,y");
         request.addParameter("other", "z");
 
-        
-        RequestFilterEngine engine = new RequestFilterEngine(new PolicyConfig());
         AuthenticationContext authenticationContext = AuthenticationContextBuilder.empty();
+        ConfigurationContainer config = ConfigurationContainer.create("sos", new PolicyConfig());
+        RequestFilterEngine engine = new RequestFilterEngine(config);
+        
         SosFilterRequestService service = new SosFilterRequestService(engine, authenticationContext);
         String queryString = service.filterGET(request);
 
@@ -42,8 +44,10 @@ public class SosFilterRequestServiceTest {
         List<Policy> policies = Arrays.asList(Policy.of("policy1", valueRestriction));
         PolicyConfig policyConfig = new PolicyConfig(policies, Rule.of("foo1", "role", "policy1"));
 
-        RequestFilterEngine engine = new RequestFilterEngine(policyConfig);
         AuthenticationContext authenticationContext = AuthenticationContextBuilder.empty();
+        ConfigurationContainer config = ConfigurationContainer.create("sos", policyConfig);
+        RequestFilterEngine engine = new RequestFilterEngine(config);
+        
         SosFilterRequestService service = new SosFilterRequestService(engine, authenticationContext);
         MockHttpServletRequest request = createServletRequest("GetCapabilities");
         String queryString = service.filterGET(request);

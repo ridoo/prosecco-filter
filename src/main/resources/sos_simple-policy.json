@@ -1,0 +1,80 @@
+{
+  "policies": [
+    {
+      "name": "last_week",
+      "effect": "deny",
+      "valueRestriction": [
+        {
+          "name": "timespan",
+          "values": [
+            "floating,P7D"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "weather",
+      "effect": "deny",
+      "valueRestriction": [
+        {
+          "name": "phenomenon",
+          "values": [
+            "Luftdruck",
+            "Luftfeuchte",
+            "Lufttemperatur",
+            "Niederschlagshoehe",
+            "Windstaerke"
+          ]
+        },
+        {
+          "name": "feature",
+          "values": [
+            "Holzwipper",
+            "Hueckeswagen"
+          ]
+        },
+        {
+          "name": "procedure",
+          "values": [
+            "Einzelwert"
+          ]
+        },
+        {
+          "name": "offering",
+          "values": [
+            "Zeitreihen_Einzelwert"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "runoff",
+      "effect": "allow",
+      "valueRestriction": [
+        {
+          "name": "phenomenon",
+          "values": [
+            "Abfluss",
+            "Wassermenge",
+            "Wasserstand",
+            "Wassertemperatur",
+            "Zufluss"
+          ]
+        }
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "name": "freemium",
+      "roles": [
+        "ROLE_niwa"
+      ],
+      "policies": [
+        "last_week",
+        "weather",
+        "runoff"
+      ]
+    }
+  ]
+}

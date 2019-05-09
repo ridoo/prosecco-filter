@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-public class ConfigReaderTest {
+public class JsonFileReaderTest {
 
     @Rule
     public TemporaryFolder tempFolder = new TemporaryFolder();
@@ -26,26 +26,26 @@ public class ConfigReaderTest {
 
     @Test(expected = NullPointerException.class)
     public void exceptionWhenNullConfigFile() {
-        new ConfigReader(null);
+        new JsonFileReader(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void exceptionWhenMissingConfigFile() {
         File configFile = new File("does not exist");
-        new ConfigReader(configFile);
+        new JsonFileReader(configFile);
     }
 
     @Test(expected = ConfigurationException.class)
     public void exceptionWhenInvalidConfigFile() throws IOException, ConfigurationException {
         File configFile = writeTempFile("not json content");
-        new ConfigReader(configFile).readConfig(PolicyConfig.class);
+        new JsonFileReader(configFile).readConfig(PolicyConfig.class);
     }
 
     @Test
     public void emptyPoliciesWhenEmptyConfigFile() throws IOException, ConfigurationException {
         ObjectNode root = om.createObjectNode();
         File configFile = writeTempFile(root);
-        ConfigReader configReader = new ConfigReader(configFile);
+        JsonFileReader configReader = new JsonFileReader(configFile);
         PolicyConfig config = configReader.readConfig(PolicyConfig.class);
         assertThat(config.hasPolicies()).isFalse();
     }
@@ -56,7 +56,7 @@ public class ConfigReaderTest {
         root.putArray("policies");
 
         File configFile = writeTempFile(root);
-        ConfigReader configReader = new ConfigReader(configFile);
+        JsonFileReader configReader = new JsonFileReader(configFile);
         PolicyConfig config = configReader.readConfig(PolicyConfig.class);
         assertThat(config.hasPolicies()).isFalse();
     }
@@ -69,7 +69,7 @@ public class ConfigReaderTest {
                                       .put("name", "policy1");
 
         File configFile = writeTempFile(root);
-        ConfigReader configReader = new ConfigReader(configFile);
+        JsonFileReader configReader = new JsonFileReader(configFile);
         PolicyConfig config = configReader.readConfig(PolicyConfig.class);
         assertThat(config.getPolicies()).hasSize(1);
 
@@ -86,7 +86,7 @@ public class ConfigReaderTest {
         root.putArray("rules");
 
         File configFile = writeTempFile(root);
-        ConfigReader configReader = new ConfigReader(configFile);
+        JsonFileReader configReader = new JsonFileReader(configFile);
         PolicyConfig config = configReader.readConfig(PolicyConfig.class);
         assertThat(config.hasRules()).isFalse();
     }

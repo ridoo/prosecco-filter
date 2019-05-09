@@ -17,6 +17,7 @@ import org.n52.prosecco.web.FilterException;
 import org.n52.prosecco.web.FilterRequestService;
 import org.n52.prosecco.web.request.FilterContext;
 import org.n52.prosecco.web.request.Timespan;
+import org.n52.prosecco.web.request.TimespanParser;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -60,7 +61,7 @@ public class DatasetFilterRequestService implements FilterRequestService {
             throws FilterException {
         String temporalFilter = request.getParameter(DatasetFilterParameter.TIMESPAN.filterName);
         Map<String, String[]> valuesByParameter = request.getParameterMap();
-        return FilterContext.of(roles)
+        return FilterContext.create("ds", roles)
                             .withTimespans(parseTimespan(temporalFilter))
                             .withParameters("feature", valuesByParameter.get(FEATURE.filterName))
                             .withParameters("phenomenon", valuesByParameter.get(PHENOMENON.filterName))
@@ -73,7 +74,7 @@ public class DatasetFilterRequestService implements FilterRequestService {
 
     private Timespan parseTimespan(String temporalFilter) {
         // TODO Auto-generated method stub
-        return null;
+        return new TimespanParser().parsePhenomenonTime(temporalFilter);
     }
 
 

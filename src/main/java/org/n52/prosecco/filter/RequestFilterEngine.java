@@ -4,6 +4,7 @@ package org.n52.prosecco.filter;
 import java.util.Set;
 import java.util.function.Consumer;
 
+import org.n52.prosecco.ConfigurationContainer;
 import org.n52.prosecco.policy.PolicyConfig;
 import org.n52.prosecco.web.request.FilterContext;
 import org.n52.prosecco.web.request.FilterContext.FilterContextBuilder;
@@ -11,10 +12,10 @@ import org.n52.prosecco.web.request.Timespan;
 
 public final class RequestFilterEngine {
 
-    private final PolicyConfig config;
+    private final ConfigurationContainer configuration;
 
-    public RequestFilterEngine(PolicyConfig config) {
-        this.config = config;
+    public RequestFilterEngine(ConfigurationContainer configurationContainer) {
+        this.configuration = configurationContainer;
     }
 
     /**
@@ -26,10 +27,8 @@ public final class RequestFilterEngine {
      * @return the new context matching the policy config.
      */
     public FilterContext evaluate(FilterContext context) {
-        FilterContextBuilder builder = FilterContextBuilder.of(context.getRoles())
-                                                           .withTimespans(evaluateTimespans(context))
-                                                           .withServiceParameters(context)
-                                                           .andRemainingFrom(context);
+        FilterContextBuilder builder = FilterContext.fromContext(context)
+                                                    .withTimespans(evaluateTimespans(context));
         Set<String> parameters = context.getThematicParameterNames();
         parameters.forEach(updateThematicContext(builder, context));
         return builder.build();
@@ -40,6 +39,7 @@ public final class RequestFilterEngine {
     }
 
     private Set<String> evaluate(String parameter, FilterContext context) {
+        PolicyConfig config = configuration.getConfig(context.getEndpoint());
         ThematicFilter evaluator = new ThematicFilter(parameter, config);
         Set<String> values = !context.hasParameter(parameter)
                 ? context.getServiceParameterValues(parameter)
@@ -53,6 +53,7 @@ public final class RequestFilterEngine {
     }
 
     private Set<Timespan> evaluateTimeFloating(String string, Set<Timespan> timespans, FilterContext context) {
+        PolicyConfig config = configuration.getConfig(context.getEndpoint());
         TimeFloatingFilter evaluator = new TimeFloatingFilter("timespan", config);
         return evaluator.evaluate(timespans, context);
     }

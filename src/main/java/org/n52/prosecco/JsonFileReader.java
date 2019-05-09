@@ -7,11 +7,11 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public final class ConfigReader {
+public final class JsonFileReader {
 
     private final File configFile;
 
-    public ConfigReader(File configFile) {
+    public JsonFileReader(File configFile) {
         Objects.requireNonNull(configFile, "config file is null");
         if (! (configFile.exists() && configFile.canRead())) {
             String path = configFile.getAbsolutePath();

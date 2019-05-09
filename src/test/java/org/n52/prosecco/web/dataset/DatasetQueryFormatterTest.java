@@ -18,7 +18,7 @@ public class DatasetQueryFormatterTest {
 
     @Test
     public void given_filterContextWithCategory_when_formattingQuery_then_expectCategoryIsPresent() {
-        FilterContextBuilder builder = FilterContextBuilder.of(Collections.emptySet());
+        FilterContextBuilder builder = FilterContext.create("", Collections.emptySet());
         FilterContext filterContext = builder.withParameters("category", "cat")
                                              .build();
 
@@ -31,7 +31,7 @@ public class DatasetQueryFormatterTest {
     public void given_filterContextWithTimespan_when_formattingQuery_then_expectTimespanIsPresent() {
         LocalDate now = LocalDate.now();
         Timespan timespan = Timespan.between(now.minus(1, ChronoUnit.DAYS), now);
-        FilterContextBuilder builder = FilterContextBuilder.of(Collections.emptySet());
+        FilterContextBuilder builder = FilterContext.create("", Collections.emptySet());
         FilterContext filterContext = builder.withTimespans(timespan)
                                              .build();
 
@@ -44,7 +44,7 @@ public class DatasetQueryFormatterTest {
     public void given_filterContextWithRemainingParameters_when_formattingContext_then_expectRemainingIsPresent() {
         Map<String, String[]> remainingQuery = new HashMap<>();
         remainingQuery.put("expanded", new String[] { "true" });
-        FilterContextBuilder builder = FilterContextBuilder.of(Collections.emptySet());
+        FilterContextBuilder builder = FilterContext.create("", Collections.emptySet());
         FilterContext filterContext = builder.andRemainingFrom(remainingQuery, e -> true)
                                              .build();
 

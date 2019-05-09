@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.junit.Test;
 import org.n52.prosecco.AuthenticationContext;
+import org.n52.prosecco.ConfigurationContainer;
 import org.n52.prosecco.AuthenticationContext.AuthenticationContextBuilder;
 import org.n52.prosecco.filter.RequestFilterEngine;
 import org.n52.prosecco.policy.PolicyConfig;
@@ -48,8 +49,10 @@ public class DatasetFilteringRequestControllerTest {
         static ControllerSeam of(PolicyConfig policyConfig, Set<String> roles) throws URISyntaxException {
             String contextPath = "/";
             URI endpoint = new URI(SERVER_ENDPOINT);
-            RequestFilterEngine engine = new RequestFilterEngine(policyConfig);
             AuthenticationContext authContext = AuthenticationContextBuilder.withRoles(roles);
+            ConfigurationContainer config = ConfigurationContainer.create("ds", policyConfig);
+            RequestFilterEngine engine = new RequestFilterEngine(config);
+            
             DatasetFilterRequestService requestService = new DatasetFilterRequestService(engine, authContext);
             DatasetFilterResponseService responseService = new DatasetFilterResponseService();
             return new ControllerSeam(endpoint, contextPath, requestService, responseService);

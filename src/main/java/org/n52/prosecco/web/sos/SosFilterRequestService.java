@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
 public final class SosFilterRequestService implements FilterRequestService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SosFilterRequestService.class);
-
+    
     private final SosFilterGetRequestService filterGetService;
 
     private final SosFilterPostRequestService filterPostService;
@@ -68,7 +68,7 @@ public final class SosFilterRequestService implements FilterRequestService {
             throws FilterException {
         String temporalFilter = request.getParameter(TIMESPAN.filterName);
         Map<String, String[]> valuesByParameter = request.getParameterMap();
-        return FilterContext.of(roles)
+        return FilterContext.create("sos", roles)
                             .withTimespans(parseTimespan(temporalFilter))
                             .withParameters("feature", valuesByParameter.get(FEATURE.filterName))
                             .withParameters("phenomenon", valuesByParameter.get(PHENOMENON.filterName))

@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -22,22 +23,22 @@ import org.n52.prosecco.web.ServiceParameters;
 public final class FilterContext {
 
     public static class FilterContextBuilder {
-        private final Set<String> roles;
+        private final String endpoint;
+        private Set<String> roles;
         private Map<String, Set<String>> parameters;
         private Map<String, Set<String>> remainingQuery;
         private ServiceParameters serviceParameters;
         private Set<Timespan> timespans;
 
-        public FilterContextBuilder(Set<String> roles) {
-            this.roles = roles;
+        private FilterContextBuilder(String endpoint) {
+            this.endpoint = endpoint;
         }
 
-        public static FilterContextBuilder of(String role) {
-            return of(Collections.singleton(role));
-        }
-
-        public static FilterContextBuilder of(Set<String> roles) {
-            return new FilterContextBuilder(roles);
+        public FilterContextBuilder withRoles(Set<String> roles) {
+            this.roles = roles != null
+                    ? Collections.unmodifiableSet(roles)
+                    : Collections.emptySet();
+            return this;
         }
 
         /**
@@ -51,21 +52,18 @@ public final class FilterContext {
          */
         public FilterContextBuilder andRemainingFrom(Map<String, String[]> query,
                                                      Predicate<Entry<String, String[]>> predicate) {
-            this.remainingQuery = query.entrySet()
-                                       .stream()
-                                       .filter(predicate)
-                                       .collect(Collectors.toMap(Map.Entry::getKey,
-                                                                 entry -> new HashSet<>(Arrays.asList(entry.getValue()))));
-            return this;
+            Function<Entry<String, String[]>, Set<String>> valuesToSet = e -> new HashSet<>(Arrays.asList(e.getValue()));
+            return andRemainingFrom(query.entrySet()
+                                         .stream()
+                                         .filter(predicate)
+                                         .collect(Collectors.toMap(Map.Entry::getKey, valuesToSet)));
         }
 
-        public FilterContextBuilder andRemainingFrom(FilterContext context) {
-            this.remainingQuery = context.getRemainingQuery();
+        public FilterContextBuilder andRemainingFrom(Map<String, Set<String>> query) {
+            this.remainingQuery = query != null
+                    ? Collections.unmodifiableMap(query)
+                    : Collections.emptyMap();
             return this;
-        }
-        
-        public FilterContextBuilder withServiceParameters(FilterContext context) {
-            return withServiceParameters(context.getServiceParameters());
         }
 
         public FilterContextBuilder withServiceParameters(ServiceParameters serviceParameters) {
@@ -115,7 +113,8 @@ public final class FilterContext {
         }
 
         public FilterContext build() {
-            return new FilterContext(roles,
+            return new FilterContext(endpoint,
+                                     roles,
                                      parameters,
                                      remainingQuery,
                                      serviceParameters,
@@ -123,6 +122,8 @@ public final class FilterContext {
         }
 
     }
+
+    private final String endpoint;
 
     private final Set<String> roles;
 
@@ -136,24 +137,40 @@ public final class FilterContext {
 
     // TODO spatial
 
-    public static FilterContext empty() {
-        return of(Collections.emptySet()).build();
+    public static FilterContext empty(String endpoint) {
+        return new FilterContextBuilder(endpoint).build();
     }
 
-    public static FilterContextBuilder of(Set<String> roles) {
-        return new FilterContextBuilder(roles);
+    public static FilterContextBuilder fromContext(FilterContext context) {
+        FilterContextBuilder builder = create(context.getEndpoint(), context.getRoles());
+        return builder.withServiceParameters(context.getServiceParameters())
+                      .andRemainingFrom(context.getRemainingQuery());
     }
 
-    private FilterContext(Set<String> roles,
+    public static FilterContextBuilder create(String endpoint, String role) {
+        return FilterContext.create(endpoint, Collections.singleton(role));
+    }
+
+    public static FilterContextBuilder create(String endpoint, Set<String> roles) {
+        return new FilterContextBuilder(endpoint).withRoles(roles);
+    }
+
+    private FilterContext(String endpoint,
+                          Set<String> roles,
                           Map<String, Set<String>> parameters,
                           Map<String, Set<String>> remainingQuery,
                           ServiceParameters serviceParameters,
                           Set<Timespan> timespans) {
+        this.endpoint = endpoint;
         this.roles = roles;
         this.parameters = parameters;
         this.remainingQuery = remainingQuery;
         this.serviceParameters = serviceParameters;
         this.timespans = timespans;
+    }
+
+    public String getEndpoint() {
+        return endpoint;
     }
 
     public Set<String> getRoles() {
