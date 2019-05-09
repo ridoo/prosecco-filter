@@ -5,11 +5,11 @@ import java.util.List;
 
 enum DatasetFilterParameter {
     
-    FEATURE("features"), 
+    FEATURE("features"),
     PHENOMENON("phenomena"), 
     PROCEDURE("procedures"), 
     OFFERING("offerings"),
-    CATEGORY("category"),
+    CATEGORY("categories"),
     TIMESPAN("timespan");
     
     final String filterName;
