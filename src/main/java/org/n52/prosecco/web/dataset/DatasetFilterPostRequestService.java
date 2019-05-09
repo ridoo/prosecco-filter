@@ -5,9 +5,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.n52.prosecco.filter.RequestFilterEngine;
 import org.n52.prosecco.web.request.FilterContext;
 
-public class DatasetFilterGetResponseService {
+public class DatasetFilterPostRequestService {
 
-    public DatasetFilterGetResponseService(RequestFilterEngine filterEngine) {
+    public DatasetFilterPostRequestService(RequestFilterEngine filterEngine) {
         // TODO Auto-generated constructor stub
     }
 

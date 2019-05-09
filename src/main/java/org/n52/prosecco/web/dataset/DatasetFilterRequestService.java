@@ -35,13 +35,13 @@ public class DatasetFilterRequestService implements FilterRequestService {
 
     private final DatasetFilterGetRequestService filterGetService;
     
-    private final DatasetFilterGetResponseService filterPostService;
+    private final DatasetFilterPostRequestService filterPostService;
     
     private final AuthenticationContext authContext;
     
     public DatasetFilterRequestService(RequestFilterEngine filterEngine, AuthenticationContext authContext) {
         this.filterGetService = new DatasetFilterGetRequestService(filterEngine);
-        this.filterPostService = new DatasetFilterGetResponseService(filterEngine);
+        this.filterPostService = new DatasetFilterPostRequestService(filterEngine);
         this.authContext = authContext;
     }
 
