@@ -99,6 +99,9 @@ public abstract class ForwardingRequestController {
             if (httpHeaders.containsKey("Authorization")) {
                 httpHeaders.remove("Authorization");
             }
+            if (httpHeaders.containsKey("host")) {
+                httpHeaders.remove("host");
+            }
         }
         return httpHeaders;
     }
