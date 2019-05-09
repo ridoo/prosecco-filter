@@ -37,16 +37,6 @@ public final class SosFilterRequestService implements FilterRequestService {
 
     private final AuthenticationContext authContext;
     
-    static SosFilterRequestService withEmptyAuthenticationContext(RequestFilterEngine filterEngine) {
-        AuthenticationContext emptyAuthenticationContext = new AuthenticationContext() {
-            @Override
-            public Set<String> getRoles() {
-                return Collections.emptySet();
-            }
-        };
-        return new SosFilterRequestService(filterEngine, emptyAuthenticationContext);
-    }
-    
     public SosFilterRequestService(RequestFilterEngine filterEngine, AuthenticationContext authContext) {
         this.filterGetService = new SosFilterGetRequestService(filterEngine);
         this.filterPostService = new SosFilterPostRequestService(filterEngine);

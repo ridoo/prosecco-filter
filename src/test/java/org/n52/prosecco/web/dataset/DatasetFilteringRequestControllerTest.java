@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.junit.Test;
 import org.n52.prosecco.AuthenticationContext;
+import org.n52.prosecco.AuthenticationContext.AuthenticationContextBuilder;
 import org.n52.prosecco.filter.RequestFilterEngine;
 import org.n52.prosecco.policy.PolicyConfig;
 import org.n52.prosecco.policy.ValueRestriction;
@@ -48,12 +49,7 @@ public class DatasetFilteringRequestControllerTest {
             String contextPath = "/";
             URI endpoint = new URI(SERVER_ENDPOINT);
             RequestFilterEngine engine = new RequestFilterEngine(policyConfig);
-            AuthenticationContext authContext = new AuthenticationContext() {
-                @Override
-                public Set<String> getRoles() {
-                    return roles;
-                }
-            };
+            AuthenticationContext authContext = AuthenticationContextBuilder.withRoles(roles);
             DatasetFilterRequestService requestService = new DatasetFilterRequestService(engine, authContext);
             DatasetFilterResponseService responseService = new DatasetFilterResponseService();
             return new ControllerSeam(endpoint, contextPath, requestService, responseService);

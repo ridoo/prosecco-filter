@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
+import org.n52.prosecco.AuthenticationContext;
+import org.n52.prosecco.AuthenticationContext.AuthenticationContextBuilder;
 import org.n52.prosecco.filter.RequestFilterEngine;
 import org.n52.prosecco.policy.Policy;
 import org.n52.prosecco.policy.PolicyConfig;
@@ -26,7 +28,8 @@ public class SosFilterRequestServiceTest {
 
         
         RequestFilterEngine engine = new RequestFilterEngine(new PolicyConfig());
-        SosFilterRequestService service = SosFilterRequestService.withEmptyAuthenticationContext(engine);
+        AuthenticationContext authenticationContext = AuthenticationContextBuilder.empty();
+        SosFilterRequestService service = new SosFilterRequestService(engine, authenticationContext);
         String queryString = service.filterGET(request);
 
         assertThat(queryString.split("&")).containsExactly("other=x,y,z");
@@ -40,7 +43,8 @@ public class SosFilterRequestServiceTest {
         PolicyConfig policyConfig = new PolicyConfig(policies, Rule.of("foo1", "role", "policy1"));
 
         RequestFilterEngine engine = new RequestFilterEngine(policyConfig);
-        SosFilterRequestService service = SosFilterRequestService.withEmptyAuthenticationContext(engine);
+        AuthenticationContext authenticationContext = AuthenticationContextBuilder.empty();
+        SosFilterRequestService service = new SosFilterRequestService(engine, authenticationContext);
         MockHttpServletRequest request = createServletRequest("GetCapabilities");
         String queryString = service.filterGET(request);
 
