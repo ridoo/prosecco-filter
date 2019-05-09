@@ -96,6 +96,9 @@ public abstract class ForwardingRequestController {
                 // CORS is not relevant in a non-Javascript context
                 httpHeaders.add(sentHeader, request.getHeader(sentHeader));
             }
+            if (httpHeaders.containsKey("Authorization")) {
+                httpHeaders.remove("Authorization");
+            }
         }
         return httpHeaders;
     }
