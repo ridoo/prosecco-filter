@@ -19,30 +19,22 @@
         {
           "name": "phenomenon",
           "values": [
-            "Luftdruck",
-            "Luftfeuchte",
-            "Lufttemperatur",
-            "Niederschlagshoehe",
-            "Windstaerke"
+            "29"
           ]
         },
         {
           "name": "feature",
           "values": [
-            "Holzwipper",
-            "Hueckeswagen"
           ]
         },
         {
           "name": "procedure",
           "values": [
-            "Einzelwert"
           ]
         },
         {
           "name": "offering",
           "values": [
-            "Zeitreihen_Einzelwert"
           ]
         }
       ]
@@ -54,11 +46,6 @@
         {
           "name": "phenomenon",
           "values": [
-            "Abfluss",
-            "Wassermenge",
-            "Wasserstand",
-            "Wassertemperatur",
-            "Zufluss"
           ]
         }
       ]
