@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.n52.prosecco.policy.Policy;
@@ -62,25 +63,25 @@ final class TimeFloatingFilter implements RequestFilter<Timespan> {
     }
 
     private Function<Policy, Set<Timespan>> applyFilter(String parameter, Timespan timespan) {
-        return policy -> this.alignWithTemporalRestriction(parameter, timespan, policy);
+        return policy -> {
+            List<ValueRestriction> restrictions = policy.getValueRestriction();
+            boolean allowed = policy.isAllowed();
+            return restrictions.stream()
+                               .filter(matchesValueRestriction(parameter))
+                               .map(ValueRestriction::getValues)
+                               .map(adjustIfRestricted(timespan, allowed))
+                               .flatMap(Collection::stream)
+                               .filter(o -> !o.isEmpty())
+                               .map(Optional::get)
+                               .collect(Collectors.toSet());
+        };
     }
 
-    private Set<Timespan> alignWithTemporalRestriction(String parameter, Timespan value, Policy policy) {
-        List<ValueRestriction> restrictions = policy.getValueRestriction();
-        boolean allowed = policy.isAllowed();
-        return restrictions.stream()
-                           .filter(r -> matchesValueRestriction(parameter, r))
-                           .map(ValueRestriction::getValues)
-                           .map(adjustIfRestricted(value, allowed))
-                           .flatMap(Collection::stream)
-                           .filter(o -> !o.isEmpty())
-                           .map(Optional::get)
-                           .collect(Collectors.toSet());
-    }
-
-    private boolean matchesValueRestriction(String parameter, ValueRestriction restriction) {
-        String restrictionName = restriction.getName();
-        return restrictionName.equalsIgnoreCase(parameter);
+    private Predicate< ? super ValueRestriction> matchesValueRestriction(String parameter) {
+        return rrestriction -> {
+            String restrictionName = rrestriction.getName();
+            return restrictionName.equalsIgnoreCase(parameter);
+        };
     }
 
     private Function<Set<String>, Set<Optional<Timespan>>> adjustIfRestricted(Timespan value, boolean allowed) {
@@ -111,6 +112,8 @@ final class TimeFloatingFilter implements RequestFilter<Timespan> {
             if (restriction.isOverlapping(value) && !allowed) {
                 return wrapAsSet(Timespan.before(restriction.getStart()));
             }
+            
+            // TODO allowed restriction does not overlap value --> split
 
             return wrapAsSet(value);
         };

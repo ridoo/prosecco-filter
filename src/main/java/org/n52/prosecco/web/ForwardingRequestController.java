@@ -40,18 +40,19 @@ public abstract class ForwardingRequestController {
         this.endpoint = endpoint;
         this.pathPrefix = pathPrefix;
         this.contextPath = !"/".equals(contextPath)
-            ? contextPath
-            : "";
+                ? contextPath
+                : "";
     }
 
     private RestTemplate createRestTemplate() {
-        CloseableHttpClient clientBuilder = HttpClientBuilder.create().build();
+        CloseableHttpClient clientBuilder = HttpClientBuilder.create()
+                                                             .build();
         return new RestTemplate(new HttpComponentsClientHttpRequestFactory(clientBuilder));
     }
 
     protected ResponseEntity<String> performRequest(URI uri,
-                                                 HttpEntity< ? > entity,
-                                                 HttpMethod method)
+                                                    HttpEntity<String> entity,
+                                                    HttpMethod method)
             throws URISyntaxException {
         LOGGER.trace("Forwarding to: {}", uri.toString());
         LOGGER.trace("R E Q U E S T   info:");
@@ -62,14 +63,14 @@ public abstract class ForwardingRequestController {
         LOGGER.trace("query      : {}", uri.getQuery());
         LOGGER.trace("entity     : {}", entity);
         LOGGER.trace(" ");
-        
+
         ResponseEntity<String> response = restTemplate.exchange(uri, method, entity, String.class);
-        
+
         LOGGER.trace("R E S P O N S E   info:");
         LOGGER.trace("headers         : {}", response.getHeaders());
         LOGGER.trace("StatusCode      : {}", response.getStatusCode());
         LOGGER.trace("body            : {}", response.getBody());
-        
+
         return response;
     }
 
@@ -92,7 +93,9 @@ public abstract class ForwardingRequestController {
         Enumeration<String> sentHeaders = request.getHeaderNames();
         while (sentHeaders.hasMoreElements()) {
             String sentHeader = sentHeaders.nextElement();
-            if ( (sentHeader != null) && !sentHeader.toLowerCase().startsWith("origin")) {
+            if ( (sentHeader != null)
+                    && !sentHeader.toLowerCase()
+                                  .startsWith("origin")) {
                 // CORS is not relevant in a non-Javascript context
                 httpHeaders.add(sentHeader, request.getHeader(sentHeader));
             }
@@ -106,11 +109,11 @@ public abstract class ForwardingRequestController {
         return httpHeaders;
     }
 
-    protected HttpEntity< ? > createRequestEntity(HttpServletRequest request) {
-        return createRequestEntity(null, request);
+    protected HttpEntity<String> createRequestEntity(HttpServletRequest request) {
+        return createRequestEntity((String) null, request);
     }
 
-    protected HttpEntity< ? > createRequestEntity(String body, HttpServletRequest request) {
+    protected HttpEntity<String> createRequestEntity(String body, HttpServletRequest request) {
         HttpHeaders httpHeader = getHttpHeaders(request);
         return new HttpEntity<>(body, httpHeader);
     }
@@ -123,8 +126,8 @@ public abstract class ForwardingRequestController {
 
     private String removeTrailingSlash(String value) {
         return value.endsWith("/")
-            ? value.substring(0, value.lastIndexOf("/"))
-            : value;
+                ? value.substring(0, value.lastIndexOf("/"))
+                : value;
     }
 
     private String removePathPrefix(String requestURI) {

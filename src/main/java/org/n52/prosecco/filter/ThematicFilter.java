@@ -1,7 +1,6 @@
 
 package org.n52.prosecco.filter;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -44,51 +43,45 @@ final class ThematicFilter implements RequestFilter<String> {
 
     private Set<String> applyRule(Rule rule, String parameter, Set<String> values) {
         List<Policy> allowingPolicies = config.getReferencedPolicies(rule, Effect.ALLOW);
-        List<Policy> denyingPolicies = config.getReferencedPolicies(rule, Effect.DENY);
-        List<Policy> allPolicies = new ArrayList<>();
-        allPolicies.addAll(allowingPolicies);
-        allPolicies.addAll(denyingPolicies);
         return values.stream()
-                     .filter(notConfiguredAtAll(allPolicies))
-                     .filter(applyPolicies(parameter, allowingPolicies, denyingPolicies))
+                     .filter(configuredValues(parameter, allowingPolicies))
+                     .filter(applyPolicies(parameter, allowingPolicies))
                      .collect(Collectors.toSet());
     }
 
-    private Predicate< ? super String> notConfiguredAtAll(List<Policy> allPolicies) {
+    private Predicate<String> configuredValues(String parameter, List<Policy> allPolicies) {
         return value -> allPolicies.stream()
                                    .map(Policy::getValueRestriction)
                                    .flatMap(Collection::stream)
+                                   .filter(matchesRestriction(parameter))
                                    .map(ValueRestriction::getValues)
                                    .flatMap(Collection::stream)
                                    // this applies denied by default
                                    .anyMatch(v -> v.equalsIgnoreCase(value));
     }
 
-    private Predicate< ? super String> applyPolicies(String parameter,
-                                                     List<Policy> allowingPolicies,
-                                                     List<Policy> denyingPolicies) {
+    private Predicate<String> applyPolicies(String parameter, List<Policy> policies) {
         return value -> {
-            boolean allowed = matchesThematicRestriction(parameter, value, allowingPolicies);
-            boolean notDenied = !matchesThematicRestriction(parameter, value, denyingPolicies);
-            return allowed || notDenied;
+            return policies.stream()
+                           .map(Policy::getValueRestriction)
+                           .flatMap(Collection::stream)
+                           .filter(matchesRestriction(parameter))
+                           .anyMatch(matchesValue(value));
         };
     }
 
-    private boolean matchesThematicRestriction(String parameter, String value, List<Policy> policies) {
-        return policies.stream()
-                       .map(Policy::getValueRestriction)
-                       .flatMap(Collection::stream)
-                       .filter(v -> matchesValueRestriction(parameter, v))
-                       .anyMatch(matchesValue(value));
+    private Predicate<ValueRestriction> matchesRestriction(String parameter) {
+        return v -> {
+            String restrictionName = v.getName();
+            return restrictionName.equalsIgnoreCase(parameter);
+        };
     }
 
-    private boolean matchesValueRestriction(String parameter, ValueRestriction restriction) {
-        String restrictionName = restriction.getName();
-        return restrictionName.equalsIgnoreCase(parameter);
-    }
+    private Predicate<ValueRestriction> matchesValue(String value) {
+        return restriction -> {
+            Set<String> values = restriction.getValues();
+            return values.contains(value);
+        };
 
-    private Predicate< ? super ValueRestriction> matchesValue(String value) {
-        return valueRestriction -> valueRestriction.getValues()
-                                                   .contains(value);
     }
 }

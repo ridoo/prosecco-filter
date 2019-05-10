@@ -5,7 +5,6 @@ import static org.n52.prosecco.web.dataset.DatasetFilterParameter.OFFERING;
 import static org.n52.prosecco.web.dataset.DatasetFilterParameter.PHENOMENON;
 import static org.n52.prosecco.web.dataset.DatasetFilterParameter.PROCEDURE;
 
-import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,16 +22,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DatasetFilterRequestService implements FilterRequestService {
-
-    static DatasetFilterRequestService withEmptyAuthenticationContext(RequestFilterEngine filterEngine) {
-        AuthenticationContext emptyAuthenticationContext = new AuthenticationContext() {
-            @Override
-            public Set<String> getRoles() {
-                return Collections.emptySet();
-            }
-        };
-        return new DatasetFilterRequestService(filterEngine, emptyAuthenticationContext);
-    }
 
     private final DatasetRequestGetFilter filterGetService;
     

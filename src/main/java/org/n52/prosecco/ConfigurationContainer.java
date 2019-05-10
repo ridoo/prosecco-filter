@@ -9,17 +9,19 @@ public final class ConfigurationContainer {
 
     private final Map<String, PolicyConfig> policyConfigs;
 
-    public static ConfigurationContainer create(String endpoint, PolicyConfig config) {
-        return new ConfigurationContainer().addConfig(endpoint, config);
+    public ConfigurationContainer() {
+        this(null, null);
     }
-    
-    private ConfigurationContainer() {
+
+    public ConfigurationContainer(String endpoint, PolicyConfig config) {
         this.policyConfigs = new HashMap<>();
+        addConfig(endpoint, config);
     }
     
-    public ConfigurationContainer addConfig(String endpoint, PolicyConfig config) {
-        this.policyConfigs.put(endpoint, config);
-        return this;
+    public void addConfig(String endpoint, PolicyConfig config) {
+        if (endpoint != null && config != null) {
+            this.policyConfigs.put(endpoint, config);
+        }
     }
     
     public PolicyConfig getConfig(String endpoint) {

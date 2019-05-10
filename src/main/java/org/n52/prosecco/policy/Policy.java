@@ -14,7 +14,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public final class Policy {
     
     private final String name;
+    
     private final Effect effect;
+    
     private final List<ValueRestriction> valueRestriction;
     
     public static Policy of(String name, ValueRestriction... valueRestriction) {

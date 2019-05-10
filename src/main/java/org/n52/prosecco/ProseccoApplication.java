@@ -2,18 +2,17 @@
 package org.n52.prosecco;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import org.n52.prosecco.filter.RequestFilterEngine;
 import org.n52.prosecco.policy.PolicyConfig;
 import org.n52.prosecco.policy.PolicyValidator;
 import org.n52.prosecco.web.sos.xml.SosResponseFilterEngine;
 import org.n52.prosecco.web.sos.xml.XPathConfig;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.Resource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -31,11 +30,13 @@ public class ProseccoApplication {
     }
 
     @Bean
-    public ConfigurationContainer getSosPolicyConfig(@Value("${prosecco.sos.policy}") Resource sosConfigFile,
-                                                     @Value("${prosecco.dataset.policy}") Resource dsConfigFile)
+    public ConfigurationContainer getPolicyConfig(@Value("${prosecco.sos.policy}") Resource sosConfigFile,
+                                                  @Value("${prosecco.dataset.policy}") Resource dsConfigFile)
             throws IOException, ConfigurationException {
-        return ConfigurationContainer.create("sos", readPolicyConfig(sosConfigFile))
-                                     .addConfig("ds", readPolicyConfig(dsConfigFile));
+        ConfigurationContainer configurationContainer = new ConfigurationContainer();
+        addConfiguration("ds", dsConfigFile, configurationContainer);
+        addConfiguration("sos", sosConfigFile, configurationContainer);
+        return configurationContainer;
     }
 
     @Bean
@@ -54,9 +55,18 @@ public class ProseccoApplication {
         return new SosResponseFilterEngine(policyConfig, xpathConfig, authenticationContext);
     }
 
-    private PolicyConfig readPolicyConfig(Resource configFile) throws IOException, ConfigurationException {
-        PolicyConfig config = readConfig(configFile, PolicyConfig.class);
-        return new PolicyValidator(config).validate();
+    private void addConfiguration(String endpoint, Resource resource, ConfigurationContainer container)
+            throws IOException, ConfigurationException {
+        readPolicyConfig(resource).ifPresent(c -> container.addConfig(endpoint, c));
+    }
+
+    private Optional<PolicyConfig> readPolicyConfig(Resource configFile) throws IOException, ConfigurationException {
+        if (configFile == null) {
+            return Optional.empty();
+        } else {
+            PolicyConfig config = readConfig(configFile, PolicyConfig.class);
+            return Optional.of(new PolicyValidator(config).validate());
+        }
     }
 
     private <T> T readConfig(Resource configFile, Class<T> clazz) throws IOException, ConfigurationException {

@@ -35,13 +35,13 @@ public class DatasetFilteringRequestController extends ForwardingRequestControll
     private static final String PATH_PREFIX = "/ds";
 
     private final DatasetFilterRequestService requestService;
-    
+
     private final DatasetFilterResponseService responseService;
 
     DatasetFilteringRequestController(@Value("${prosecco.dataset.url}") URI endpoint,
-                                  @Value("${prosecco.servlet.context-path:/}") String contextPath,
-                                  DatasetFilterRequestService requestService,
-                                  DatasetFilterResponseService responseService) {
+                                      @Value("${prosecco.servlet.context-path:/}") String contextPath,
+                                      DatasetFilterRequestService requestService,
+                                      DatasetFilterResponseService responseService) {
         super(endpoint, contextPath, PATH_PREFIX);
         this.requestService = requestService;
         this.responseService = responseService;
@@ -54,9 +54,9 @@ public class DatasetFilteringRequestController extends ForwardingRequestControll
         try {
             LOGGER.trace("O R I G I N A L   query: {}", request.getQueryString());
             String queryString = requestService.filterGET(request);
-            HttpEntity< ? > entity = createRequestEntity(request);
+            HttpEntity<String> entity = createRequestEntity(request);
             URI uri = createTargetURI(request, queryString);
-            
+
             ResponseEntity<String> response = performRequest(uri, entity, method);
             return responseService.filter(response);
         } catch (DroppedQueryConditionException e) {
@@ -81,7 +81,7 @@ public class DatasetFilteringRequestController extends ForwardingRequestControll
                 LOGGER.trace("O R I G I N A L   entity: {}", body);
             }
             String body = requestService.filterPOST(request);
-            HttpEntity< ? > entity = createRequestEntity(body, request);
+            HttpEntity<String> entity = createRequestEntity(body, request);
             URI uri = createTargetURI(request);
 
             ResponseEntity<String> response = performRequest(uri, entity, method);
@@ -94,12 +94,12 @@ public class DatasetFilteringRequestController extends ForwardingRequestControll
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
-    
+
     private String readRequestBody(HttpServletRequest request) throws IOException {
         try (BufferedReader reader = request.getReader()) {
-            return reader.lines().collect(Collectors.joining());
+            return reader.lines()
+                         .collect(Collectors.joining());
         }
     }
-
 
 }
