@@ -2,7 +2,6 @@
 package org.n52.prosecco.filter;
 
 import java.util.Set;
-import java.util.function.Consumer;
 
 import org.n52.prosecco.ConfigurationContainer;
 import org.n52.prosecco.policy.PolicyConfig;
@@ -25,26 +24,38 @@ public final class RequestFilterEngine {
      * @param context
      *        the context to evaluate
      * @return the new context matching the policy config.
+     * @throws DroppedQueryConditionException
+     *         in cases where filtering would falsify the actual query (e.g. dropping an AND condition)
      */
-    public FilterContext evaluate(FilterContext context) {
+    public FilterContext evaluate(FilterContext context) throws DroppedQueryConditionException {
         FilterContextBuilder builder = FilterContext.fromContext(context)
                                                     .withTimespans(evaluateTimespans(context));
-        Set<String> parameters = context.getThematicParameterNames();
-        parameters.forEach(updateThematicContext(builder, context));
+        for (String parameter : context.getThematicParameterNames()) {
+            Set<String> filteredContext = evaluate(parameter, context);
+            builder.withParameters(parameter, filteredContext);
+        }
         return builder.build();
     }
 
-    private Consumer<String> updateThematicContext(FilterContextBuilder builder, FilterContext context) {
-        return parameter -> builder.withParameters(parameter, evaluate(parameter, context));
-    }
-
-    private Set<String> evaluate(String parameter, FilterContext context) {
-        PolicyConfig config = configuration.getConfig(context.getEndpoint());
-        ThematicFilter evaluator = new ThematicFilter(context, config);
-        Set<String> values = !context.hasParameter(parameter)
+    private Set<String> evaluate(String parameter, FilterContext context) throws DroppedQueryConditionException {
+        boolean hasQueryValues = context.hasParameter(parameter);
+        Set<String> values = !hasQueryValues
                 ? context.getAllowedValues(parameter)
                 : context.getValues(parameter);
-        return evaluator.evaluate(parameter, values);
+
+        PolicyConfig config = configuration.getConfig(context.getEndpoint());
+        ThematicFilter evaluator = new ThematicFilter(context, config);
+        Set<String> filteredQueryValues = evaluator.evaluate(parameter, values);
+        if (isDroppingQueryCondition(hasQueryValues, filteredQueryValues)) {
+            Set<String> queryValues = context.getValues(parameter);
+            String message = "Filter drops condition for '" + parameter + "'";
+            throw new DroppedQueryConditionException(parameter, queryValues, message);
+        }
+        return filteredQueryValues;
+    }
+
+    private boolean isDroppingQueryCondition(boolean hasQueryValues, Set<String> filteredValues) {
+        return hasQueryValues && filteredValues.isEmpty();
     }
 
     private Set<Timespan> evaluateTimespans(FilterContext context) {

@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,10 +25,11 @@ public final class RequestFilterEngineTest {
     // TODO test with empty parameters --> allowedParameters
 
     @Test
-    public void given_allowingValueRestriction_when_contextWithAllowedValues_then_allowedValuesKept() {
+    public void given_allowingValueRestriction_when_contextWithAllowedValues_then_allowedValuesKept()
+            throws DroppedQueryConditionException {
         ValueRestriction restriction = ValueRestriction.of("phenomenon", "value1", "value2");
         PolicyConfig policyConfig = PolicyConfig.createSimple("allow", "role", restriction);
-        ConfigurationContainer config = ConfigurationContainer.create("sos", policyConfig);
+        ConfigurationContainer config = new ConfigurationContainer("sos", policyConfig);
         RequestFilterEngine engine = new RequestFilterEngine(config);
 
         FilterContext initialContext = FilterContext.create("sos", "role")
@@ -41,25 +41,11 @@ public final class RequestFilterEngineTest {
     }
 
     @Test
-    public void given_denyingValueRestriction_when_contextWithAllowedValues_then_deniedValuesRemoved() {
-        ValueRestriction restriction = ValueRestriction.of("phenomenon", "value1", "value2");
-        PolicyConfig policyConfig = PolicyConfig.createSimple("role", restriction);
-        ConfigurationContainer config = ConfigurationContainer.create("sos", policyConfig);
-        RequestFilterEngine engine = new RequestFilterEngine(config);
-
-        FilterContext initialContext = FilterContext.create("sos", "role")
-                                                    .withParameters("phenomenon", "value1", "value2")
-                                                    .build();
-
-        FilterContext evaluatedContext = engine.evaluate(initialContext);
-        assertThat(evaluatedContext.getValues("phenomenon")).doesNotContain("value1", "value2");
-    }
-
-    @Test
-    public void given_simpleConfig_when_contextWithHasUnconfiguredValues_then_unconfiguredValuesRemoved() {
+    public void given_simpleConfig_when_contextWithHasUnconfiguredValues_then_unconfiguredValuesRemoved()
+            throws DroppedQueryConditionException {
         ValueRestriction restriction = ValueRestriction.of("phenomenon", "value1");
         PolicyConfig policyConfig = PolicyConfig.createSimple("allow", "role", restriction);
-        ConfigurationContainer config = ConfigurationContainer.create("sos", policyConfig);
+        ConfigurationContainer config = new ConfigurationContainer("sos", policyConfig);
         RequestFilterEngine engine = new RequestFilterEngine(config);
 
         FilterContext initialContext = FilterContext.create("sos", "role")
@@ -71,19 +57,16 @@ public final class RequestFilterEngineTest {
     }
 
     @Test
-    public void given_phenomenaFilter_when_contextWithAllowedAndDeniedValues_then_allowedValuesKeptOnly() {
+    public void given_phenomenaFilter_when_contextWithAllowedAndDeniedValues_then_allowedValuesKeptOnly()
+            throws DroppedQueryConditionException {
         ValueRestriction valueRestriction1 = ValueRestriction.of("phenomenon", "value1", "value2");
         ValueRestriction valueRestriction2 = ValueRestriction.of("phenomenon", "restrictedValue");
-        Policy allowingPolicy = Policy.of("allowing-policy", "allow", valueRestriction1);
-        Policy denyingPolicy = Policy.of("denying-policy", valueRestriction2);
-        List<Policy> policies = Arrays.asList(allowingPolicy, denyingPolicy);
+        List<Policy> policies = Arrays.asList(Policy.of("allowing", "allow", valueRestriction1),
+                                              Policy.of("denying", valueRestriction2));
 
-        List<String> roles = Collections.singletonList("role");
-        Rule rule = Rule.of("rule1", roles, "allowing-policy", "denying-policy");
-        List<Rule> rules = Collections.singletonList(rule);
-
-        PolicyConfig policyConfig = new PolicyConfig(policies, rules);
-        ConfigurationContainer config = ConfigurationContainer.create("sos", policyConfig);
+        Rule rule = Rule.of("rule1", "role", "allowing", "denying");
+        PolicyConfig policyConfig = new PolicyConfig(policies, rule);
+        ConfigurationContainer config = new ConfigurationContainer("sos", policyConfig);
         RequestFilterEngine engine = new RequestFilterEngine(config);
 
         FilterContext initialContext = FilterContext.create("sos", "role")
@@ -95,19 +78,17 @@ public final class RequestFilterEngineTest {
     }
 
     @Test
-    public void given_allowedParameters_when_contextIsEmpty_then_allowedValuesAddedOnly() {
+    public void given_allowedParameters_when_contextIsEmpty_then_allowedValuesAddedOnly()
+            throws DroppedQueryConditionException {
         ValueRestriction valueRestriction1 = ValueRestriction.of("phenomenon", "value1", "value2");
         ValueRestriction valueRestriction2 = ValueRestriction.of("phenomenon", "restricted");
-        Policy allowingPolicy = Policy.of("allowing-policy", "allow", valueRestriction1);
-        Policy denyingPolicy = Policy.of("denying-policy", valueRestriction2);
+        Policy allowingPolicy = Policy.of("allowing", "allow", valueRestriction1);
+        Policy denyingPolicy = Policy.of("denying", valueRestriction2);
         List<Policy> policies = Arrays.asList(allowingPolicy, denyingPolicy);
 
-        List<String> roles = Collections.singletonList("role");
-        Rule rule = Rule.of("rule1", roles, "allowing-policy", "denying-policy");
-        List<Rule> rules = Collections.singletonList(rule);
-
-        PolicyConfig policyConfig = new PolicyConfig(policies, rules);
-        ConfigurationContainer config = ConfigurationContainer.create("sos", policyConfig);
+        Rule rule = Rule.of("rule1", "role", "allowing", "denying");
+        PolicyConfig policyConfig = new PolicyConfig(policies, rule);
+        ConfigurationContainer config = new ConfigurationContainer("sos", policyConfig);
         RequestFilterEngine engine = new RequestFilterEngine(config);
 
         // simulate an empty request and having cached service parameters
@@ -121,15 +102,14 @@ public final class RequestFilterEngineTest {
     }
 
     @Test
-    public void given_restrictedFloatingTime_when_fullyIncludingBetween_then_timespanBeforeStartRestriction() {
+    public void given_restrictedFloatingTime_when_fullyIncludingBetween_then_timespanBeforeStartRestriction()
+            throws DroppedQueryConditionException {
         ValueRestriction timeRestriction = ValueRestriction.of("timespan", "floating,P7D");
-        Policy denyingPolicy = Policy.of("denying-policy", timeRestriction);
-
-        List<String> roles = Collections.singletonList("role");
-        Rule rule = Rule.of("rule1", roles, "allowing-policy", "denying-policy");
+        Policy denyingPolicy = Policy.of("denying", timeRestriction);
+        Rule rule = Rule.of("rule1", "role", "allowing", "denying");
 
         PolicyConfig policyConfig = new PolicyConfig(denyingPolicy, rule);
-        ConfigurationContainer config = ConfigurationContainer.create("sos", policyConfig);
+        ConfigurationContainer config = new ConfigurationContainer("sos", policyConfig);
         RequestFilterEngine engine = new RequestFilterEngine(config);
 
         Instant end = Instant.now();
@@ -148,5 +128,23 @@ public final class RequestFilterEngineTest {
             Instant expectedEnd = end.minus(7, ChronoUnit.DAYS);
             assertThat(e).isBefore(expectedEnd.plus(1, ChronoUnit.SECONDS));
         });
+    }
+
+    @Test(expected = DroppedQueryConditionException.class)
+    public void given_restrictedValues_when_allQueryValuesFiltered_then_exception()
+            throws DroppedQueryConditionException {
+        ValueRestriction timeRestriction = ValueRestriction.of("offering", "value1");
+        Policy denyingPolicy = Policy.of("denying", timeRestriction);
+        Rule rule = Rule.of("rule1", "role", "denying");
+
+        PolicyConfig policyConfig = new PolicyConfig(denyingPolicy, rule);
+        ConfigurationContainer config = new ConfigurationContainer("sos", policyConfig);
+        RequestFilterEngine engine = new RequestFilterEngine(config);
+
+        FilterContext initialContext = FilterContext.create("sos", "role")
+                                                    .withParameters("offering", "value1")
+                                                    .build();
+
+        engine.evaluate(initialContext);
     }
 }

@@ -2,6 +2,7 @@ package org.n52.prosecco.web.sos;
 
 import org.n52.prosecco.web.FilterException;
 import org.n52.prosecco.web.FilterResponseService;
+import org.n52.prosecco.web.ResponseFilterEngine;
 import org.n52.prosecco.web.sos.xml.SosResponseFilterEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +14,7 @@ public final class SosFilterResponseService implements FilterResponseService<Str
     
     private static final Logger LOGGER = LoggerFactory.getLogger(SosFilterResponseService.class);
     
-    private final SosResponseFilterEngine filterEngine;
+    private final ResponseFilterEngine<String> filterEngine;
 
     public SosFilterResponseService(SosResponseFilterEngine filterEngine) {
         this.filterEngine = filterEngine;

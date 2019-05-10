@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.n52.prosecco.filter.DroppedQueryConditionException;
 import org.n52.prosecco.web.FilterException;
 import org.n52.prosecco.web.ForwardingRequestController;
 import org.slf4j.Logger;
@@ -48,7 +49,7 @@ public class DatasetFilteringRequestController extends ForwardingRequestControll
 
     @ResponseBody
     @RequestMapping(value = PATH_PREFIX + "/**", method = GET)
-    public ResponseEntity< ? > filterGet(HttpServletRequest request, HttpMethod method) throws URISyntaxException {
+    public ResponseEntity<String> filterGet(HttpServletRequest request, HttpMethod method) throws URISyntaxException {
         LOGGER.debug("Filter GET request on: {}", PATH_PREFIX);
         try {
             LOGGER.trace("O R I G I N A L   query: {}", request.getQueryString());
@@ -58,6 +59,9 @@ public class DatasetFilteringRequestController extends ForwardingRequestControll
             
             ResponseEntity<String> response = performRequest(uri, entity, method);
             return responseService.filter(response);
+        } catch (DroppedQueryConditionException e) {
+            LOGGER.info("Returning an 'empty' response.", e);
+            return new ResponseEntity<>("[]", HttpStatus.OK);
         } catch (FilterException e) {
             LOGGER.debug("Could not filter request!", e);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());

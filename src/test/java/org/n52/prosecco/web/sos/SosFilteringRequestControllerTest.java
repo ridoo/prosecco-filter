@@ -1,7 +1,6 @@
 
-package org.n52.prosecco.web.dataset;
+package org.n52.prosecco.web.sos;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.queryParam;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -18,54 +17,69 @@ import org.n52.prosecco.ConfigurationContainer;
 import org.n52.prosecco.filter.RequestFilterEngine;
 import org.n52.prosecco.policy.PolicyConfig;
 import org.n52.prosecco.policy.ValueRestriction;
+import org.n52.prosecco.web.sos.xml.SosResponseFilterEngine;
+import org.n52.prosecco.web.sos.xml.XPathConfig;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
+import org.xmlunit.assertj.XmlAssert;
 
-public class DatasetFilteringRequestControllerTest {
+public class SosFilteringRequestControllerTest {
 
-    private static final String SERVER_ENDPOINT = "http://somewhere.net/api";
+    private static final String SERVER_ENDPOINT = "http://somewhere.net/sos";
 
     @Test
     public void given_policyWithOfferings_when_queryWithOfferings_then_allowedOfferingsAreDelegated() throws Exception {
-        ValueRestriction restriction = ValueRestriction.of("offering", "off1", "off2");
+        ValueRestriction restriction = ValueRestriction.of("phenomenon", "p1", "p2");
         PolicyConfig config = PolicyConfig.createSimple("allow", "role", restriction);
-        ControllerSeam seam = ControllerSeam.of(config, Collections.singleton("role"));
-        
+        ControllerSeam seam = ControllerSeam.of(config, null, "role");
+
         MockRestServiceServer server = seam.getServer();
         server.expect(method(HttpMethod.GET))
-              .andExpect(queryParam("offerings", "off1,off2"))
+              .andExpect(queryParam("observedProperty", "p1,p2"))
               .andRespond(withSuccess());
 
-        MockHttpServletRequest request = new MockHttpServletRequest("GET", "/ds");
-        request.addParameter("offerings", "off1", "off2", "restricted");
+        MockHttpServletRequest request = new MockHttpServletRequest("GET", "/sos");
+        request.addParameter("observedProperty", "p1", "p2", "restricted");
         seam.filterGet(request, HttpMethod.GET);
 
         server.verify();
     }
-    
+
     @Test
     public void given_emptyOfferings_when_queryOnlyRestrictedValues_then_exception() throws Exception {
-        ControllerSeam seam = ControllerSeam.of(new PolicyConfig(), Collections.singleton("role"));
-        MockHttpServletRequest request = new MockHttpServletRequest("GET", "/ds");
-        request.addParameter("offerings", "off1");
+        ControllerSeam seam = ControllerSeam.of(new PolicyConfig(), null, "role");
+        MockHttpServletRequest request = new MockHttpServletRequest("GET", "/sos");
+        request.addParameter("observedProperty", "p1");
         ResponseEntity<String> response = seam.filterGet(request, HttpMethod.GET);
-        assertThat(response.getBody()).isEqualTo("[]");
+        XmlAssert.assertThat(response.getBody())
+                 .withNamespaceContext(Collections.singletonMap("ows", "http://www.opengis.net/ows/1.1"))
+                 .hasXPath("//ows:ExceptionReport")
+                 .exist();
     }
 
-    private static class ControllerSeam extends DatasetFilteringRequestController {
+    private static class ControllerSeam extends SosFilteringRequestController {
 
-        static ControllerSeam of(PolicyConfig policyConfig, Set<String> roles) throws URISyntaxException {
+        static ControllerSeam of(PolicyConfig policyConfig, XPathConfig xpathConfig, String role)
+                throws URISyntaxException {
+            return of(policyConfig, xpathConfig, Collections.singleton(role));
+        }
+
+        static ControllerSeam of(PolicyConfig policyConfig, XPathConfig xpathConfig, Set<String> roles)
+                throws URISyntaxException {
             String contextPath = "/";
             URI endpoint = new URI(SERVER_ENDPOINT);
             AuthenticationContext authContext = AuthenticationContextBuilder.withRoles(roles);
-            ConfigurationContainer config = new ConfigurationContainer("ds", policyConfig);
-            RequestFilterEngine engine = new RequestFilterEngine(config);
-            
-            DatasetFilterRequestService requestService = new DatasetFilterRequestService(engine, authContext);
-            DatasetFilterResponseService responseService = new DatasetFilterResponseService();
+            ConfigurationContainer config = new ConfigurationContainer("sos", policyConfig);
+            RequestFilterEngine requestFilterEngine = new RequestFilterEngine(config);
+            SosResponseFilterEngine responseFilterEngine = new SosResponseFilterEngine(policyConfig,
+                                                                                       xpathConfig,
+                                                                                       authContext);
+
+            SosFilterRequestService requestService = new SosFilterRequestService(requestFilterEngine, authContext);
+            SosFilterResponseService responseService = new SosFilterResponseService(responseFilterEngine);
             return new ControllerSeam(endpoint, contextPath, requestService, responseService);
         }
 
@@ -73,8 +87,8 @@ public class DatasetFilteringRequestControllerTest {
 
         private ControllerSeam(URI endpoint,
                                String contextPath,
-                               DatasetFilterRequestService requestService,
-                               DatasetFilterResponseService responseService) {
+                               SosFilterRequestService requestService,
+                               SosFilterResponseService responseService) {
             super(endpoint, contextPath, requestService, responseService);
             this.server = createServer(this);
         }

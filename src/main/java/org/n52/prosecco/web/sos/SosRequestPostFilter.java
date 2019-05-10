@@ -13,13 +13,13 @@ import org.n52.prosecco.web.request.FilterContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class SosFilterPostRequestService {
+public final class SosRequestPostFilter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SosFilterPostRequestService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SosRequestPostFilter.class);
 
     private final RequestFilterEngine filterEngine;
 
-    public SosFilterPostRequestService(RequestFilterEngine filterEngine) {
+    public SosRequestPostFilter(RequestFilterEngine filterEngine) {
         this.filterEngine = filterEngine;
     }
 

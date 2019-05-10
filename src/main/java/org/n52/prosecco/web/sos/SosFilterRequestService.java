@@ -14,9 +14,11 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import org.n52.prosecco.AuthenticationContext;
+import org.n52.prosecco.filter.DroppedQueryConditionException;
 import org.n52.prosecco.filter.RequestFilterEngine;
 import org.n52.prosecco.web.FilterException;
 import org.n52.prosecco.web.FilterRequestService;
+import org.n52.prosecco.web.GetRequestFilter;
 import org.n52.prosecco.web.request.FilterContext;
 import org.n52.prosecco.web.request.Timespan;
 import org.n52.prosecco.web.request.TimespanParser;
@@ -29,20 +31,20 @@ public final class SosFilterRequestService implements FilterRequestService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SosFilterRequestService.class);
     
-    private final SosFilterGetRequestService filterGetService;
+    private final GetRequestFilter filterGetService;
 
-    private final SosFilterPostRequestService filterPostService;
+    private final SosRequestPostFilter filterPostService;
 
     private final AuthenticationContext authContext;
     
     public SosFilterRequestService(RequestFilterEngine filterEngine, AuthenticationContext authContext) {
-        this.filterGetService = new SosFilterGetRequestService(filterEngine);
-        this.filterPostService = new SosFilterPostRequestService(filterEngine);
+        this.filterGetService = new SosRequestGetFilter(filterEngine);
+        this.filterPostService = new SosRequestPostFilter(filterEngine);
         this.authContext = authContext;
     }
 
     @Override
-    public String filterGET(HttpServletRequest request) throws FilterException {
+    public String filterGET(HttpServletRequest request) throws FilterException, DroppedQueryConditionException {
         FilterContext context = createFilterContext(request, authContext.getRoles());
         return filterGetService.filter(request, context);
     }

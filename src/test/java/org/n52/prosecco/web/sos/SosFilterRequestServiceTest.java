@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.n52.prosecco.AuthenticationContext;
 import org.n52.prosecco.ConfigurationContainer;
 import org.n52.prosecco.AuthenticationContext.AuthenticationContextBuilder;
+import org.n52.prosecco.filter.DroppedQueryConditionException;
 import org.n52.prosecco.filter.RequestFilterEngine;
 import org.n52.prosecco.policy.Policy;
 import org.n52.prosecco.policy.PolicyConfig;
@@ -22,15 +23,15 @@ public class SosFilterRequestServiceTest {
 
     @Test
     public void given_requestWithNonFilterableParameters_when_filterRequest_then_nonFilterableParametersRemain()
-            throws FilterException {
+            throws FilterException, DroppedQueryConditionException {
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.addParameter("other", "x,y");
         request.addParameter("other", "z");
 
         AuthenticationContext authenticationContext = AuthenticationContextBuilder.empty();
-        ConfigurationContainer config = ConfigurationContainer.create("sos", new PolicyConfig());
+        ConfigurationContainer config = new ConfigurationContainer("sos", new PolicyConfig());
         RequestFilterEngine engine = new RequestFilterEngine(config);
-        
+
         SosFilterRequestService service = new SosFilterRequestService(engine, authenticationContext);
         String queryString = service.filterGET(request);
 
@@ -39,15 +40,15 @@ public class SosFilterRequestServiceTest {
 
     @Test
     public void given_policyConfig_when_requestGetCapabilities_then_noFilteringTakesPlace()
-            throws FilterException {
+            throws FilterException, DroppedQueryConditionException {
         ValueRestriction valueRestriction = ValueRestriction.of("phenomenon", "allow", "value1");
         List<Policy> policies = Arrays.asList(Policy.of("policy1", valueRestriction));
         PolicyConfig policyConfig = new PolicyConfig(policies, Rule.of("foo1", "role", "policy1"));
 
         AuthenticationContext authenticationContext = AuthenticationContextBuilder.empty();
-        ConfigurationContainer config = ConfigurationContainer.create("sos", policyConfig);
+        ConfigurationContainer config = new ConfigurationContainer("sos", policyConfig);
         RequestFilterEngine engine = new RequestFilterEngine(config);
-        
+
         SosFilterRequestService service = new SosFilterRequestService(engine, authenticationContext);
         MockHttpServletRequest request = createServletRequest("GetCapabilities");
         String queryString = service.filterGET(request);

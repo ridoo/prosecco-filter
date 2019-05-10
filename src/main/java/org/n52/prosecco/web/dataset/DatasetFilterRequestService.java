@@ -12,6 +12,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import org.n52.prosecco.AuthenticationContext;
+import org.n52.prosecco.filter.DroppedQueryConditionException;
 import org.n52.prosecco.filter.RequestFilterEngine;
 import org.n52.prosecco.web.FilterException;
 import org.n52.prosecco.web.FilterRequestService;
@@ -33,20 +34,20 @@ public class DatasetFilterRequestService implements FilterRequestService {
         return new DatasetFilterRequestService(filterEngine, emptyAuthenticationContext);
     }
 
-    private final DatasetFilterGetRequestService filterGetService;
+    private final DatasetRequestGetFilter filterGetService;
     
-    private final DatasetFilterPostRequestService filterPostService;
+    private final DatasetRequestPostFilter filterPostService;
     
     private final AuthenticationContext authContext;
     
     public DatasetFilterRequestService(RequestFilterEngine filterEngine, AuthenticationContext authContext) {
-        this.filterGetService = new DatasetFilterGetRequestService(filterEngine);
-        this.filterPostService = new DatasetFilterPostRequestService(filterEngine);
+        this.filterGetService = new DatasetRequestGetFilter(filterEngine);
+        this.filterPostService = new DatasetRequestPostFilter(filterEngine);
         this.authContext = authContext;
     }
 
     @Override
-    public String filterGET(HttpServletRequest request) throws FilterException {
+    public String filterGET(HttpServletRequest request) throws FilterException, DroppedQueryConditionException {
         FilterContext context = createFilterContext(request, authContext.getRoles());
         return filterGetService.filter(request, context);
     }
