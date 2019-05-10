@@ -18,7 +18,7 @@ import org.n52.prosecco.web.request.FilterContext;
 import org.n52.prosecco.web.request.Timespan;
 import org.n52.prosecco.web.request.TimespanParser;
 
-final class TimeFloatingFilter implements RequestFilter<Timespan> {
+class TimeFloatingFilter implements RequestFilter<Timespan> {
 
     private final FilterContext context;
 
@@ -106,17 +106,25 @@ final class TimeFloatingFilter implements RequestFilter<Timespan> {
                 return Collections.emptySet();
             }
 
-            TimespanParser parser = new TimespanParser();
-            Timespan restriction = parser.parseTimeRestriction(firstRestriction.get());
+            Timespan restriction = parseFloatingRestriction(firstRestriction);
 
-            if (restriction.isOverlapping(value) && !allowed) {
+            if (restriction.includes(value)) {
                 return wrapAsSet(Timespan.before(restriction.getStart()));
+            }
+            
+            if (restriction.isOverlapping(value) && !allowed) {
+                return wrapAsSet(Timespan.between(value.getStart(), restriction.getStart()));
             }
             
             // TODO allowed restriction does not overlap value --> split
 
             return wrapAsSet(value);
         };
+    }
+
+    protected Timespan parseFloatingRestriction(Optional<String> firstRestriction) {
+        TimespanParser parser = new TimespanParser();
+        return parser.parseTimeRestriction(firstRestriction.get());
     }
 
     private Set<Optional<Timespan>> wrapAsSet(Timespan alignedValue) {

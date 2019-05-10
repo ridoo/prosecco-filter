@@ -96,7 +96,18 @@ public final class Timespan {
         return false;
     }
     
+    public boolean includes(Timespan timespan) {
+//        if (relation == TimespanRelation.BETWEEN) {
+            return isWithin(timespan.getStart()) && isWithin(timespan.getEnd()); 
+//        } else if (relation == TimespanRelation.BEFORE) {
+            
+//        }
+    }
+    
     public boolean isWithin(TemporalAccessor pointInTime) {
+        if (pointInTime == null) {
+            return true;
+        }
         Instant pit = asInstant(pointInTime);
         if (relation == TimespanRelation.BETWEEN) {
             return asInstant(start).isBefore(pit)
