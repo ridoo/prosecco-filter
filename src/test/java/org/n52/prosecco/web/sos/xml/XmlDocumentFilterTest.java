@@ -41,7 +41,7 @@ public class XmlDocumentFilterTest {
                  .and(Input.fromString("<baz:foo xmlns:baz=\"http://baz.net\" />"))
                  .areSimilar();
     }
-
+    
     @Test
     public void given_xml_when_allElementsMatchRemove_then_emptyElement() throws Exception {
         String xml = ""

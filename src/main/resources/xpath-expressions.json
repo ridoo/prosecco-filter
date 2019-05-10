@@ -1,21 +1,21 @@
 {
   "capabilities": {
     "procedure": [
-      "/*[local-name()=\"Capabilities\"]/*/*/*[local-name()=\"Parameter\" and @name=\"procedure\"]/*/*[local-name()=\"Value\" and text()=\"{0}\"]",
-      "/*[local-name()=\"Capabilities\"]/*/*/*/*[local-name()=\"ObservationOffering\" and *[local-name()=\"procedure\" and text()=\"{0}\"]]"
+      "/*[local-name()=\"Capabilities\"]/*/*/*[local-name()=\"Parameter\" and @name=\"procedure\"]/*/*[local-name()=\"Value\" and text()!=\"{0}\"]",
+      "/*[local-name()=\"Capabilities\"]/*/*/*/*[local-name()=\"ObservationOffering\" and *[local-name()=\"procedure\" and text()!=\"{0}\"]]"
     ],
     "phenomenon": [
-      "/*[local-name()=\"Capabilities\"]/*/*/*[local-name()=\"Parameter\" and @name=\"observedProperty\"]/*/*[local-name()=\"Value\" and text()=\"{0}\"]",
-      "/*[local-name()=\"Capabilities\"]/*/*/*/*[local-name()=\"ObservationOffering\" and *[local-name()=\"observedProperty\" and text()=\"{0}\"]]",
-      "/*[local-name()=\"Capabilities\"]/*/*/*/*[local-name()=\"ObservationOffering\" and *[local-name()=\"observableProperty\" and text()=\"{0}\"]]"
+      "/*[local-name()=\"Capabilities\"]/*/*/*[local-name()=\"Parameter\" and @name=\"observedProperty\"]/*/*[local-name()=\"Value\" and text()!=\"{0}\"]",
+      "/*[local-name()=\"Capabilities\"]/*/*/*/*[local-name()=\"ObservationOffering\" and *[local-name()=\"observedProperty\" and text()!=\"{0}\"]]",
+      "/*[local-name()=\"Capabilities\"]/*/*/*/*[local-name()=\"ObservationOffering\" and *[local-name()=\"observableProperty\" and text()!=\"{0}\"]]"
     ],
     "feature": [
-      "/*[local-name()=\"Capabilities\"]/*/*/*[local-name()=\"Parameter\" and @name=\"featureOfInterest\"]/*/*[local-name()=\"Value\" and text()=\"{0}\"]",
-      "/*[local-name()=\"Capabilities\"]/*/*/*/*[local-name()=\"ObservationOffering\" and *[local-name()=\"featureOfInterest\" and text()=\"{0}\"]]"
+      "/*[local-name()=\"Capabilities\"]/*/*/*[local-name()=\"Parameter\" and @name=\"featureOfInterest\"]/*/*[local-name()=\"Value\" and text()!=\"{0}\"]",
+      "/*[local-name()=\"Capabilities\"]/*/*/*/*[local-name()=\"ObservationOffering\" and *[local-name()=\"featureOfInterest\" and text()!=\"{0}\"]]"
     ],
     "offering": [
-      "/*[local-name()=\"Capabilities\"]/*/*/*[local-name()=\"Parameter\" and @name=\"offering\"]/*/*[local-name()=\"Value\" and text()=\"{0}\"]",
-      "/*[local-name()=\"Capabilities\"]/*/*/*/*[local-name()=\"ObservationOffering\" and @identifier=\"{0}\"]"
+      "/*[local-name()=\"Capabilities\"]/*/*/*[local-name()=\"Parameter\" and @name=\"offering\"]/*/*[local-name()=\"Value\" and text()!=\"{0}\"]",
+      "/*[local-name()=\"Capabilities\"]/*/*/*/*[local-name()=\"ObservationOffering\" and @identifier!=\"{0}\"]"
     ]
   }
 }
