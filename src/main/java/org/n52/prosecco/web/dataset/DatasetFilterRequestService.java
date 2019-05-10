@@ -67,7 +67,7 @@ public class DatasetFilterRequestService implements FilterRequestService {
                             .withParameters("phenomenon", valuesByParameter.get(PHENOMENON.filterName))
                             .withParameters("procedures", valuesByParameter.get(PROCEDURE.filterName))
                             .withParameters("offering", valuesByParameter.get(OFFERING.filterName))
-                            // TODO .withServiceParameters(serviceParameters)
+                            // TODO .withAllowedParameters(allowedParameters)
                             .andRemainingFrom(valuesByParameter, e -> !DatasetFilterParameter.isKnown(e.getKey()))
                             .build();
     }

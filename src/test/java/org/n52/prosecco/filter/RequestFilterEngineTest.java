@@ -16,14 +16,14 @@ import org.n52.prosecco.policy.Policy;
 import org.n52.prosecco.policy.PolicyConfig;
 import org.n52.prosecco.policy.Rule;
 import org.n52.prosecco.policy.ValueRestriction;
-import org.n52.prosecco.web.ServiceParameters;
+import org.n52.prosecco.web.AllowedParameters;
 import org.n52.prosecco.web.request.FilterContext;
 import org.n52.prosecco.web.request.Timespan;
 import org.n52.prosecco.web.request.TimespanRelation;
 
 public final class RequestFilterEngineTest {
 
-    // TODO test with empty parameters --> serviceParameters
+    // TODO test with empty parameters --> allowedParameters
 
     @Test
     public void given_allowingValueRestriction_when_contextWithAllowedValues_then_allowedValuesKept() {
@@ -95,7 +95,7 @@ public final class RequestFilterEngineTest {
     }
 
     @Test
-    public void given_cachedServiceParameters_when_contextIsEmpty_then_allowedValuesAddedOnly() {
+    public void given_allowedParameters_when_contextIsEmpty_then_allowedValuesAddedOnly() {
         ValueRestriction valueRestriction1 = ValueRestriction.of("phenomenon", "value1", "value2");
         ValueRestriction valueRestriction2 = ValueRestriction.of("phenomenon", "restricted");
         Policy allowingPolicy = Policy.of("allowing-policy", "allow", valueRestriction1);
@@ -111,9 +111,9 @@ public final class RequestFilterEngineTest {
         RequestFilterEngine engine = new RequestFilterEngine(config);
 
         // simulate an empty request and having cached service parameters
-        ServiceParameters serviceParameters = new ServiceParameters("phenomenon", "value1", "value2", "restricted");
+        AllowedParameters allowedParameters = new AllowedParameters("phenomenon", "value1", "value2", "restricted");
         FilterContext initialContext = FilterContext.create("sos", "role")
-                                                    .withServiceParameters(serviceParameters)
+                                                    .withAllowedParameters(allowedParameters)
                                                     .build();
 
         FilterContext evaluatedContext = engine.evaluate(initialContext);

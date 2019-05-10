@@ -69,8 +69,8 @@ final class ThematicFilter implements RequestFilter<String> {
                                                      List<Policy> denyingPolicies) {
         return value -> {
             boolean allowed = matchesThematicRestriction(parameter, value, allowingPolicies);
-            boolean denied = !matchesThematicRestriction(parameter, value, denyingPolicies);
-            return allowed || denied;
+            boolean notDenied = !matchesThematicRestriction(parameter, value, denyingPolicies);
+            return allowed || notDenied;
         };
     }
 

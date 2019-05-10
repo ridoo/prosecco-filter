@@ -42,7 +42,7 @@ public final class RequestFilterEngine {
         PolicyConfig config = configuration.getConfig(context.getEndpoint());
         ThematicFilter evaluator = new ThematicFilter(context, config);
         Set<String> values = !context.hasParameter(parameter)
-                ? context.getServiceParameterValues(parameter)
+                ? context.getAllowedValues(parameter)
                 : context.getValues(parameter);
         return evaluator.evaluate(parameter, values);
     }

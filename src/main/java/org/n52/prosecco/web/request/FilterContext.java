@@ -15,7 +15,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.n52.prosecco.web.ServiceParameters;
+import org.n52.prosecco.web.AllowedParameters;
 
 /**
  * Context containing filter parameters of a request.
@@ -27,7 +27,7 @@ public final class FilterContext {
         private Set<String> roles;
         private Map<String, Set<String>> parameters;
         private Map<String, Set<String>> remainingQuery;
-        private ServiceParameters serviceParameters;
+        private AllowedParameters allowedParameters;
         private Set<Timespan> timespans;
 
         private FilterContextBuilder(String endpoint) {
@@ -66,8 +66,8 @@ public final class FilterContext {
             return this;
         }
 
-        public FilterContextBuilder withServiceParameters(ServiceParameters serviceParameters) {
-            this.serviceParameters = serviceParameters;
+        public FilterContextBuilder withAllowedParameters(AllowedParameters allowedParameters) {
+            this.allowedParameters = allowedParameters;
             return this;
         }
 
@@ -117,7 +117,7 @@ public final class FilterContext {
                                      roles,
                                      parameters,
                                      remainingQuery,
-                                     serviceParameters,
+                                     allowedParameters,
                                      timespans);
         }
 
@@ -131,7 +131,7 @@ public final class FilterContext {
 
     private final Map<String, Set<String>> remainingQuery;
 
-    private final ServiceParameters serviceParameters;
+    private final AllowedParameters allowedParameters;
 
     private final Set<Timespan> timespans;
 
@@ -143,7 +143,7 @@ public final class FilterContext {
 
     public static FilterContextBuilder fromContext(FilterContext context) {
         FilterContextBuilder builder = create(context.getEndpoint(), context.getRoles());
-        return builder.withServiceParameters(context.getServiceParameters())
+        return builder.withAllowedParameters(context.getAllowedParameters())
                       .andRemainingFrom(context.getRemainingQuery());
     }
 
@@ -159,13 +159,13 @@ public final class FilterContext {
                           Set<String> roles,
                           Map<String, Set<String>> parameters,
                           Map<String, Set<String>> remainingQuery,
-                          ServiceParameters serviceParameters,
+                          AllowedParameters allowedParameters,
                           Set<Timespan> timespans) {
         this.endpoint = endpoint;
         this.roles = roles;
         this.parameters = parameters;
         this.remainingQuery = remainingQuery;
-        this.serviceParameters = serviceParameters;
+        this.allowedParameters = allowedParameters;
         this.timespans = timespans;
     }
 
@@ -183,14 +183,14 @@ public final class FilterContext {
                 : remainingQuery;
     }
 
-    public ServiceParameters getServiceParameters() {
-        return serviceParameters == null
-                ? new ServiceParameters()
-                : serviceParameters;
+    public AllowedParameters getAllowedParameters() {
+        return allowedParameters == null
+                ? new AllowedParameters()
+                : allowedParameters;
     }
 
-    public Set<String> getServiceParameterValues(String parameter) {
-        ServiceParameters parameters = getServiceParameters();
+    public Set<String> getAllowedValues(String parameter) {
+        AllowedParameters parameters = getAllowedParameters();
         return parameters.getValues(parameter);
     }
 
@@ -205,14 +205,14 @@ public final class FilterContext {
     }
 
     public Set<String> getThematicParameterNames() {
-        ServiceParameters serviceParameterNames = getServiceParameters();
-        Set<String> serviceParameters = serviceParameterNames.getThematicParameterNames();
-        Set<String> queryParameters = parameters != null
+        AllowedParameters allowedParameters = getAllowedParameters();
+        Set<String> allowedParameterNames = allowedParameters.getParameterNames();
+        Set<String> queryParameterNames = parameters != null
                 ? Collections.unmodifiableSet(parameters.keySet())
                 : Collections.emptySet();
         Set<String> availableParameters = new HashSet<>();
-        availableParameters.addAll(serviceParameters);
-        availableParameters.addAll(queryParameters);
+        availableParameters.addAll(allowedParameterNames);
+        availableParameters.addAll(queryParameterNames);
         return availableParameters;
     }
 

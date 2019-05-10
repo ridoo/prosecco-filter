@@ -74,7 +74,7 @@ public final class SosFilterRequestService implements FilterRequestService {
                             .withParameters("phenomenon", valuesByParameter.get(PHENOMENON.filterName))
                             .withParameters("procedure", valuesByParameter.get(PROCEDURE.filterName))
                             .withParameters("offering", valuesByParameter.get(OFFERING.filterName))
-                            // TODO .withServiceParameters(serviceParameters)
+                            // TODO .withAllowedParameters(allowedParameters)
                             .andRemainingFrom(valuesByParameter, e -> !SosFilterParameter.isKnown(e.getKey()))
                             .build();
     }
