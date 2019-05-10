@@ -40,11 +40,11 @@ public final class RequestFilterEngine {
 
     private Set<String> evaluate(String parameter, FilterContext context) {
         PolicyConfig config = configuration.getConfig(context.getEndpoint());
-        ThematicFilter evaluator = new ThematicFilter(parameter, config);
+        ThematicFilter evaluator = new ThematicFilter(context, config);
         Set<String> values = !context.hasParameter(parameter)
                 ? context.getServiceParameterValues(parameter)
                 : context.getValues(parameter);
-        return evaluator.evaluate(values, context);
+        return evaluator.evaluate(parameter, values);
     }
 
     private Set<Timespan> evaluateTimespans(FilterContext context) {
@@ -54,8 +54,8 @@ public final class RequestFilterEngine {
 
     private Set<Timespan> evaluateTimeFloating(String string, Set<Timespan> timespans, FilterContext context) {
         PolicyConfig config = configuration.getConfig(context.getEndpoint());
-        TimeFloatingFilter evaluator = new TimeFloatingFilter("timespan", config);
-        return evaluator.evaluate(timespans, context);
+        TimeFloatingFilter evaluator = new TimeFloatingFilter(context, config);
+        return evaluator.evaluate("timespan", timespans);
     }
 
 };

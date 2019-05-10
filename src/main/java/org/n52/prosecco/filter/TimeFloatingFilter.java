@@ -19,38 +19,38 @@ import org.n52.prosecco.web.request.TimespanParser;
 
 final class TimeFloatingFilter implements RequestFilter<Timespan> {
 
-    private final String parameter;
+    private final FilterContext context;
 
     private final PolicyConfig config;
 
-    public TimeFloatingFilter(String parameter, PolicyConfig config) {
-        this.parameter = parameter;
+    public TimeFloatingFilter(FilterContext context, PolicyConfig config) {
+        this.context = context;
         this.config = config;
     }
 
     @Override
-    public Set<Timespan> evaluate(Set<Timespan> values, FilterContext context) {
-        return getRelevantRules(context).stream()
-                                        .map(rule -> applyPolicies(rule, values))
-                                        .flatMap(Set::stream)
-                                        .collect(Collectors.toSet());
+    public Set<Timespan> evaluate(String parameter, Set<Timespan> values) {
+        return getRelevantRules().stream()
+                                 .map(rule -> applyPolicies(rule, parameter, values))
+                                 .flatMap(Set::stream)
+                                 .collect(Collectors.toSet());
     }
 
-    private Collection<Rule> getRelevantRules(FilterContext context) {
+    private Collection<Rule> getRelevantRules() {
         return config.getRulesForRole(context.getRoles());
     }
 
-    private Set<Timespan> applyPolicies(Rule rule, Set<Timespan> values) {
+    private Set<Timespan> applyPolicies(Rule rule, String parameter, Set<Timespan> values) {
         List<Policy> policies = config.getReferencedPolicies(rule);
         return values.stream()
-                     .map(value -> applyFilter(value, policies))
+                     .map(value -> applyFilter(parameter, value, policies))
                      .flatMap(Collection::stream)
                      .collect(Collectors.toSet());
     }
 
-    private Set<Timespan> applyFilter(Timespan timespan, List<Policy> policies) {
+    private Set<Timespan> applyFilter(String parameter, Timespan timespan, List<Policy> policies) {
         return policies.stream()
-                       .map(p -> this.alignWithTemporalRestriction(timespan, p))
+                       .map(applyFilter(parameter, timespan))
                        .flatMap(Collection::stream)
                        .collect(Collectors.toSet());
 
@@ -61,11 +61,15 @@ final class TimeFloatingFilter implements RequestFilter<Timespan> {
         // TODO all allowed may have to be adjusted to match restriction interval
     }
 
-    private Set<Timespan> alignWithTemporalRestriction(Timespan value, Policy policy) {
+    private Function<Policy, Set<Timespan>> applyFilter(String parameter, Timespan timespan) {
+        return policy -> this.alignWithTemporalRestriction(parameter, timespan, policy);
+    }
+
+    private Set<Timespan> alignWithTemporalRestriction(String parameter, Timespan value, Policy policy) {
         List<ValueRestriction> restrictions = policy.getValueRestriction();
         boolean allowed = policy.isAllowed();
         return restrictions.stream()
-                           .filter(this::matchesValueRestriction)
+                           .filter(r -> matchesValueRestriction(parameter, r))
                            .map(ValueRestriction::getValues)
                            .map(adjustIfRestricted(value, allowed))
                            .flatMap(Collection::stream)
@@ -74,40 +78,40 @@ final class TimeFloatingFilter implements RequestFilter<Timespan> {
                            .collect(Collectors.toSet());
     }
 
-
-    private boolean matchesValueRestriction(ValueRestriction restriction) {
+    private boolean matchesValueRestriction(String parameter, ValueRestriction restriction) {
         String restrictionName = restriction.getName();
         return restrictionName.equalsIgnoreCase(parameter);
     }
 
     private Function<Set<String>, Set<Optional<Timespan>>> adjustIfRestricted(Timespan value, boolean allowed) {
         return restrictedValues -> {
-            
+
             if (restrictedValues.size() > 1) {
 
                 // TODO check outputs (open ends) against further restrictions
-                // 
-                // ---------------[  query  ]----------------------------->
-                // ------------[  restricted1  ]-------------------------->
-                // (---split1--]               [--split2-----------------)> after 1st recursion
-                // ---------------------------------[  restricted2  ]-----> split2 to be splitted
-                //                                
-                
+                //
+                // ---------------[ query ]----------------------------->
+                // ------------[ restricted1 ]-------------------------->
+                // (---split1--] [--split2-----------------)> after 1st recursion
+                // ---------------------------------[ restricted2 ]-----> split2 to be splitted
+                //
+
                 throw new IllegalStateException("Multiple floating restrictions not supported right now!");
             }
 
-            Optional<String> firstRestriction = restrictedValues.stream().findFirst();
+            Optional<String> firstRestriction = restrictedValues.stream()
+                                                                .findFirst();
             if (firstRestriction.isEmpty()) {
                 return Collections.emptySet();
             }
-            
+
             TimespanParser parser = new TimespanParser();
             Timespan restriction = parser.parseTimeRestriction(firstRestriction.get());
-            
+
             if (restriction.isOverlapping(value) && !allowed) {
                 return wrapAsSet(Timespan.before(restriction.getStart()));
             }
-            
+
             return wrapAsSet(value);
         };
     }
@@ -115,5 +119,5 @@ final class TimeFloatingFilter implements RequestFilter<Timespan> {
     private Set<Optional<Timespan>> wrapAsSet(Timespan alignedValue) {
         return Collections.singleton(Optional.of(alignedValue));
     }
-    
+
 }
